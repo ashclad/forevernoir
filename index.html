@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="shop,store,clothes,clothing,fashion,art">
+    <!-- placeholder; fill content attribute in through database -->
+    <meta name="description" content="Noir clothing store.">
+    <!-- placeholder; fill content attribute in through database -->
+    <link rel="stylesheet" type="text/css" href="master.css">
+    <title>Forever Noir</title>
+    <!-- placeholder; fill title element with database content -->
+  </head>
+  <body>
+    <!-- remember to keep navigation menus hidden save the one at the end of, or a 
+			sheet above the horizontal scroll div element of, the long comic strip -->
+    <nav id="bodymenu" class="indexmenu primarynav">
+      <div id="mainopts">
+        <ul id="topmenu" class="menu">
+          <li id="indexitem" class="fullleft opt"> <a id="indexlnk" href="_index.html">
+              <header><img id="logo" class="imglnk" src="#"></header>
+            </a> </li>
+          <li id="cartitem" class="fullright opt"> <a id="cartlnk" href="_cart.html">
+              <img id="cartimg" class="imglnk" src="#"> </a> </li>
+        </ul>
+      </div>
+      <div id="extraopts" class="hidden">
+        <ul id="bottommenu" class="menu">
+          <li id="shopitem" class="fullright opt"> <a id="shoplnk" href="_inventory.html">Shop</a>
+          </li>
+          <li id="regitem" class="left opt"> <a href="_registration.html">Register</a>
+          </li>
+          <li id="loginitem" class="left opt"> <a id="loginlnk" href="_login.html">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main id="home">
+      <div id="gallery" class="about horizontalscroll"> <img id="comic" src="#">
+        <div id="incomicnav"> <a href="_index.html">Home</a> <a href="_inventory.html">Shop</a>
+          <a href="_cart.html">Cart</a> <a href="_affil.html">Affiliates</a> <a
+            href="_legal.html">Legal</a> <a href="_contact.html">Contact Us</a>
+        </div>
+      </div>
+      <!-- if comic strip very long, div element scrolls horizontally --> <img
+        id="walkcycle" class="animatedimg" src="#">
+      <!-- possible idea: a gif image that runs on scroll --> </main>
+    <footer>
+      <nav id="footermenu" class="indexmenu secondarynav hidden">
+        <ul class="menu">
+          <li id="contactitem" class="opt"> <a id="contactlnk" href="_contact.html">Contact
+              Us</a> </li>
+          <li id="affilitem" class="opt"> <a id="affillnk" href="_affil.html">Affiliates</a>
+          </li>
+          <li id="legalitem" class="opt"> <a id="legallnk" href="legal.html">Legal</a>
+          </li>
+        </ul>
+      </nav>
+      <p class="legaldeclaration"> <span id="copyright">© 2020</span> </p>
+    </footer>
+  </body>
+</html>
