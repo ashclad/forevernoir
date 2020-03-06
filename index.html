@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="shop,store,clothes,clothing,fashion,art">
     <meta name="description" content="Noir clothing store.">
-    <link rel="stylesheet" type="text/css" href="_css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
     <title>Forever Noir</title>
   </head>
   <body>
@@ -14,17 +14,20 @@
     navigation bar height, all while the logo also shrinks to appropriate
     size -->
     <header class="home">
-      <img id="mainlogo" class="logo" src="#">
+      <a href="index.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
     </header>
     <main class="home">
       <!-- the horizontallscroll element class is what will have the
       relevant properties to enable side-scrolling -->
       <div id="gallery" class="about horizontalscroll">
-        <img id="seqart" class="gallhanger" src="#">
+        <img id="seqart" class="gallhanger" src="assets/comic.jpg">
         <nav id="seqartmenu" class="indexmenu primarynav">
           <ul class="menu">
-            <li id="indexitem" class="opt">
-              <a id="indexlnk" href="_index.html">Home</a>
+            <li id="indexitem" class="opt hidden">
+              <a id="indexlnk" href="index.html">Home</a>
+            </li>
+            <li id="shopitem" class="opt">
+              <a id="shoplnk" href="_inventory.html">Shop</a>
             </li>
             <li id="cartitem" class="opt">
               <a id="cartlnk" href="_cart.html">Cart</a>
@@ -42,7 +45,7 @@
         </nav>
       </div>
       <!-- if comic strip very long, div element scrolls horizontally -->
-      <img id="walkcycle" class="animatedimg" src="#">
+      <img id="walkcycle" class="animatedimg" src="assets/walkcycle.gif">
       <!-- possible idea: a gif image that runs on scroll -->
     </main>
     <footer class="home">
