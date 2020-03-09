@@ -63,22 +63,14 @@ img.gallhanger {
 }
 
 .menu {
+  float: left;
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
   list-style-type: none;
-}
-
-li.opt {
-  display: block;
   position: relative;
-  left: 12.5em; /* adjust to have consistency with comic panels
-  in comic image */
-  top: 8em;
-}
-
-li.hidden {
-  display: none;
+  left: 20em;
+  top: 20em;
 }
 
 footer.home {
@@ -93,22 +85,34 @@ footer.home {
   margin-right: auto;
 }
 
+#gallery.about {
+  background-color: var(--basel);
+  color: var(--based);
+}
+
+#gallery.about a {
+  color: var(--based);
+}
+
 #gallery::after {
   content: "";
   clear: both;
-  display: table;
+  display: block;
 }
 
+/*#indexitem {
+  position: relative;
+} */
+
 #seqart {
-  max-height: 33%;
-  max-width: 66%; /* adjust max here depending on
-  comic size; comic overflow is preferable for side-scrolling
-  purposes */
+  float: left;
+  max-width: auto;
+  max-height: 66%;
 }
 
 #walkcycle {
-  width: 13%; /* provisional fixed values */
-  height: 13%; /* provisional fixed values */
+  width: 7%; /* provisional fixed values */
+  height: 7%; /* provisional fixed values */
   position: relative;
   bottom: 3.75em; /* may have to be adjusted depending on art asset */
   left: 1.33em; /* may have to be adjusted depending on art asset */
@@ -118,23 +122,9 @@ footer.home {
 
 /* Media Queries Based on Size */
 
-@media only screen and (min-width: 1344px) {
-  .logo {
-    width: 17%;
-    height: 13%;
-  }
-
-  #seqart {
-    max-width: 55%;
-    max-height: 60%; /* adjust max here depending on
-  comic size; comic overflow is preferable for side-scrolling
-  purposes */
-  }
-}
+/*@media only screen and (min-width: 1344px) {} */
 
 /* Media Queries Based on Ratio */
 
 /* remember: aspect ratios are w/h */
-/*@media only screen and (min-aspect-ratio: 5/4) {
-  whatever
-}*/
+/*@media only screen and (min-aspect-ratio: 5/4) {}*/
