@@ -64,7 +64,7 @@ main.home {
 }
 
 img.gallhanger {
-  float: left;
+  max-height: 75%;
 }
 
 .menu {
@@ -72,6 +72,7 @@ img.gallhanger {
   margin: 6% 13% 4% 13%;
   padding-left: 0;
   list-style-type: none;
+  position: relative;
 }
 
 footer.home {
@@ -86,15 +87,30 @@ footer.home {
   margin-right: auto;
 }
 
+#gallery {
+  box-shadow: 0 0 15px 3px var(--based) inset;
+  padding: 1% 1% 1% 0;
+}
+
+#gallery img {
+  margin: 0 0 0 1%;
+}
+
 #gallery.about {
   background-color: var(--basel);
   color: var(--based);
   overflow: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
   white-space: nowrap;
 }
 
 #gallery.about a {
   color: var(--based);
+}
+
+#gallery.about::-webkit-scrollbar {
+  display: none;
 }
 
 /* #gallery::after {
@@ -108,7 +124,10 @@ footer.home {
 } */
 
 #seqart {
+  float: left;
   display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #walkcycle {
@@ -119,26 +138,132 @@ footer.home {
 
 /* Media Queries */
 
-/* Media Queries Based on Size */
-
-/*@media only screen and (min-width: 1344px) {} */
-
 /* Media Queries Based on Ratio */
 
 /* remember: aspect ratios are w/h */
-@media only screen and (min-aspect-ratio: 16/9) {
+@media only screen and (min-aspect-ratio: 4/3) {
+  #gallery {
+    padding: 1% 1% 1% 0;
+  }
+
+  #gallery img {
+    margin: 0 0 0 1%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 7%;
+    height: 7%;
+  }
+}
+
+@media only screen and (min-aspect-ratio: 5/4) {
+  #gallery {
+    padding: 1% 1% 1% 0;
+  }
+
+  #gallery img {
+    margin: 0 0 0 1%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 7%;
+    height: 7%;
+  }
+}
+
+@media only screen and (min-aspect-ratio: 3/2) {
   .logo {
     width: 17%;
     height: 13%;
   }
 
-  #gallery.about {
-    height: 33%;
+  #walkcycle {
+    /* provisional fixed values */
+    width: 4%;
+    height: 4%;
+  }
+}
+
+@media only screen and (min-aspect-ratio: 8/5) {
+  .logo {
+    width: 17%;
+    height: 13%;
   }
 
   #walkcycle {
     /* provisional fixed values */
     width: 6%;
     height: 6%;
+  }
+}
+
+@media only screen and (min-aspect-ratio: 23/10) {
+  .logo {
+    width: 9%;
+    height: 7%;
+  }
+
+  .menu {
+    margin: 3% 13% 3% 13%;
+  }
+
+  #gallery {
+    padding: 0.75% 0.75% 0.75% 0;
+  }
+
+  #gallery img {
+    margin: 0 0 0 0.75%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 3%;
+    height: 3%;
+  }
+}
+
+@media only screen and (min-aspect-ratio: 7/2) {
+  #walkcycle {
+    /* provisional fixed values */
+    width: 3%;
+    height: 3%;
+  }
+}
+
+/* Media Queries Based on Size */
+
+@media only screen and (min-width: 1389px) {
+  .logo {
+    width: 17%;
+    height: 13%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 6%;
+    height: 6%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .logo {
+    width: 17%;
+    height: 13%;
+  }
+
+  #gallery {
+    padding: 3% 1% 3% 0;
+  }
+
+  #gallery img {
+    margin: 0 0 0 3%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 9%;
+    height: 9%;
   }
 }
