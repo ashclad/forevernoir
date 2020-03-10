@@ -58,19 +58,20 @@ header.home {
   height: 25%;
 }
 
+main.home {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 img.gallhanger {
   float: left;
 }
 
 .menu {
-  float: left;
-  margin-top: 0;
-  margin-bottom: 0;
+  display: inline-block;
+  margin: 6% 13% 4% 13%;
   padding-left: 0;
   list-style-type: none;
-  position: relative;
-  left: 20em;
-  top: 20em;
 }
 
 footer.home {
@@ -88,31 +89,29 @@ footer.home {
 #gallery.about {
   background-color: var(--basel);
   color: var(--based);
+  overflow: auto;
+  white-space: nowrap;
 }
 
 #gallery.about a {
   color: var(--based);
 }
 
-#gallery::after {
+/* #gallery::after {
   content: "";
   clear: both;
-  display: block;
-}
+  display: inline-block;
+} */
 
 /*#indexitem {
   position: relative;
 } */
 
 #seqart {
-  float: left;
-  max-width: auto;
-  max-height: 66%;
+  display: inline-block;
 }
 
 #walkcycle {
-  width: 7%; /* provisional fixed values */
-  height: 7%; /* provisional fixed values */
   position: relative;
   bottom: 3.75em; /* may have to be adjusted depending on art asset */
   left: 1.33em; /* may have to be adjusted depending on art asset */
@@ -127,4 +126,19 @@ footer.home {
 /* Media Queries Based on Ratio */
 
 /* remember: aspect ratios are w/h */
-/*@media only screen and (min-aspect-ratio: 5/4) {}*/
+@media only screen and (min-aspect-ratio: 16/9) {
+  .logo {
+    width: 17%;
+    height: 13%;
+  }
+
+  #gallery.about {
+    height: 33%;
+  }
+
+  #walkcycle {
+    /* provisional fixed values */
+    width: 6%;
+    height: 6%;
+  }
+}
