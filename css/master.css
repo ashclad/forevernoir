@@ -113,16 +113,6 @@ footer.home {
   display: none;
 }
 
-/* #gallery::after {
-  content: "";
-  clear: both;
-  display: inline-block;
-} */
-
-/*#indexitem {
-  position: relative;
-} */
-
 #seqart {
   float: left;
   display: inline-block;
