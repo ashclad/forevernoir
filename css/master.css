@@ -57,16 +57,17 @@ header.home {
   animation: headertransit 4s forwards;
 }
 
-@keyframes headertransit {
-  0% {top: 25em; z-index: 12;}
-  3% {top: 25em; z-index: 9;}
-  100% {top: 0em; z-index: 0;}
+header.inventory {
+  padding: 1% 15% 1% 15%;
+  top: 25em;
 }
 
-/* header.home {
-  padding: 1% 15% 1% 15%;
-  z-index: 0;
-} */
+@keyframes headertransit {
+  0% {top: 25em; z-index: 12;}
+  33% {top: 25em; z-index: 12;}
+  75% {z-index: 9;}
+  100% {top: 0em; z-index: 0;}
+}
 
 .logo {
   width: 17%;
@@ -78,16 +79,47 @@ main.home {
   margin-right: 0;
 }
 
-img.gallhanger {
-  max-height: 75%;
+/*main.home #gallery {
+  height: 50em;
+} */
+
+.horizontalscroll {
+  overflow: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
 }
 
-.menu {
-  display: inline-block;
-  margin: 4% 13% 0 13%;
+/*main.home .containimage {
+  display: flex;
+  justify-content: space-between;
+} */
+
+ul.menu {
+  margin: 0.1% 0 0.1% 0;
   padding-left: 0;
   list-style-type: none;
+}
+
+.primarynav ul.menu {
+  text-align: center;
+}
+
+.indexmenu .menu {
+  display: inline-block;
+  padding: 5% 7% 5% 7%;
+  list-style-type: none;
   position: relative;
+  /* border: var(--ext) 2px solid; */
+}
+
+li.opt {
+  display: inline;
+  padding: 1% 2.5% 1% 2.5%;
+}
+
+.indexmenu li.opt {
+  display: list-item;
 }
 
 footer.home {
@@ -110,14 +142,14 @@ footer.home {
   visibility: visible;
   opacity: 1.0;
   z-index: 5;
-  animation: overlaydisappear 2s forwards;
+  animation: overlaydisappear 4s forwards;
 }
 
 @keyframes overlaydisappear {
   0% {opacity: 1.0; z-index: 5; height: 100%; visibility: visible;}
   33% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
-  75% {opacity: 1.0; z-index: 2; height: 75%; visibility: visible;}
-  85% {opacity: 0.85; z-index: 0; height: 25%; visibility: visible;}
+  75% {opacity: 1.0; z-index: 2; height: 65%; visibility: visible;}
+  85% {opacity: 0.5; z-index: 1; height: 65%; visibility: visible;}
   100% {opacity: 0.0; z-index: -1; height: 0%; visibility: invisible;}
 }
 
@@ -133,31 +165,36 @@ footer.home {
 #gallery.about {
   background-color: var(--basel);
   color: var(--based);
-  overflow: auto;
-  overflow: -moz-scrollbars-none;
-  -ms-overflow-style: none;
-  white-space: nowrap;
 }
 
 #gallery.about a {
   color: var(--based);
 }
 
+#gallery.about a:hover {
+  color: var(--red);
+}
+
 #gallery.about::-webkit-scrollbar {
   display: none;
 }
 
+/*main.home .containimage #seqart {
+  flex-shrink: 0;
+  min-width: 50%;
+  min-height: 50%;
+} */
+
 #seqart {
   float: left;
   display: inline-block;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 #walkcycle {
   position: relative;
   bottom: 3.75em; /* may have to be adjusted depending on art asset */
   left: 1.33em; /* may have to be adjusted depending on art asset */
+  visibility: invisible;
   opacity: 0;
   animation: fadeinrunner 5s forwards;
 }
@@ -196,8 +233,8 @@ footer.home {
 }
 
 @media only screen and (min-width: 1410px) {
-  .menu {
-    margin-top: 6%;
+  .indexmenu .menu {
+    padding-top: 6%;
   }
 
   #walkcycle {
@@ -216,8 +253,8 @@ footer.home {
 }
 
 @media only screen and (min-width: 1855px) {
-  .menu {
-    margin-top: 4%;
+  .indexmenu .menu {
+    padding-top: 4%;
   }
 
   #walkcycle {
@@ -246,8 +283,8 @@ footer.home {
 }
 
 @media only screen and (min-width: 3000px) {
-  .menu {
-    margin-top: 3%;
+  .indexmenu .menu {
+    padding-top: 3%;
   }
 
   #walkcycle {
@@ -258,8 +295,8 @@ footer.home {
 }
 
 @media only screen and (min-width: 4500px) {
-  .menu {
-    margin-top: 2%;
+  .indexmenu .menu {
+    padding-top: 2%;
   }
 
   #walkcycle {
