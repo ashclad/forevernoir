@@ -185,6 +185,10 @@ footer.home {
   min-height: 50%;
 } */
 
+#skippara {
+  text-align: center;
+}
+
 #seqart {
   float: left;
   display: inline-block;
