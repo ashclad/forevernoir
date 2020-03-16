@@ -98,6 +98,8 @@ ul.menu {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
+  align-items: baseline;
+  height: 3em;
   position: relative;
   right: 1em;
 }
@@ -105,6 +107,37 @@ ul.menu {
 li.opt {
   display: inline-block;
   padding: 1% 2.5% 1% 2.5%;
+}
+
+.inventorymenu.primarynav li.opt a {
+  border-bottom: 1px solid var(--altgreen);
+  box-shadow: 0 10px 10px -10px var(--altgreen);
+}
+
+.inventorymenu.primarynav li.opt a:hover::before {
+  content: "$ exec ./";
+  display: inline;
+  color: var(--altgreen);
+  font-weight: bold;
+}
+
+.inventorymenu.primarynav li.opt a:hover::after {
+  content: ".py";
+  display: inline;
+  color: var(--altgreen);
+  font-weight: bold;
+}
+
+.inventorymenu.primarynav li.opt a {
+  padding: 2em 2.5em 2em 2.5em;
+}
+
+.inventorymenu.secondarynav li.opt img {
+  border-top: 4px solid var(--red);
+  border-bottom: 2px solid var(--red);
+  border-left: 1px solid var(--red);
+  border-right: 1px solid var(--red);
+  filter: none; /* temporary, for untoggling provisional grayscale for all images */
 }
 
 .inventorymenu.tertiarynav li.opt {
@@ -118,6 +151,7 @@ li.opt {
 
 .indexmenu li.opt {
   display: list-item;
+  text-align: center;
 }
 
 footer.home {
@@ -167,11 +201,11 @@ footer.home {
 }
 
 #gallery.about a {
-  color: var(--based);
+  color: var(--basel);
 }
 
 #gallery.about li.opt {
-  background-color: #cccccc;
+  background-color: var(--ext);
   margin-bottom: 2%;
   margin-top: 1%;
 }
@@ -226,10 +260,35 @@ footer.home {
   100% {opacity: 1; visibility: visible;}
 }
 
+#triangle {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  z-index: 1;
+  border-top: 100px solid var(--basel);
+  border-right: 100px solid transparent;
+}
+
 #botreact {
   float: left;
   position: relative;
   left: 2em;
+  top: 0em;
+}
+
+#botreact::after {
+  content: "";
+  clear: both;
+  display: inline-block;
+}
+
+#factorymenu {
+  display: flex;
+  align-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ext);
+  height: 50em;
 }
 
 /* Media Queries */

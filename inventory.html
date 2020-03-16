@@ -11,26 +11,29 @@
   </head>
   <body>
     <header class="inventory">
+      <div id="triangle" class="decor"></div>
       <a href="index.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
     </header>
     <main class="inventory">
       <nav class="inventorymenu primarynav hidden">
         <img id="botreact" width="21px" height="21px" class="mascot" src="assets/bot.png">
         <ul class="menu">
-          <li id="indexitem" class="opt">
+          <li id="indexitem first" class="opt">
             <a id="indexlnk" href="index.html">Home</a>
           </li>
           <li id="shopitem" class="opt">
             <a id="shoplnk" href="inventory.html">Shop</a>
           </li>
-          <li id="cartitem" class="opt">
+          <li id="cartitem last" class="opt">
             <a id="cartlnk" href="_cart.html">Cart</a>
           </li>
         </ul>
       </nav>
       <nav id="factorymenu" class="inventorymenu secondarynav">
         <ul class="menu">
-          <!-- insert list > link items here based on clothing categories -->
+          <li id="mensitem" class="opt">
+            <a id="menslnk" class="catlnk" href="_category.php"><img class="pattern" src="assets/factory_pattern.jpg"></a>
+          </li>
         </ul>
       </nav>
     </main>
