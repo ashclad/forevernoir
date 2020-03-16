@@ -94,13 +94,26 @@ ul.menu {
   list-style-type: none;
 }
 
-.primarynav ul.menu {
-  text-align: center;
+.inventorymenu.primarynav ul.menu {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  position: relative;
+  right: 1em;
 }
 
 li.opt {
-  display: inline;
+  display: inline-block;
   padding: 1% 2.5% 1% 2.5%;
+}
+
+.inventorymenu.tertiarynav li.opt {
+  float: left;
+  padding: 0 1% 0 1%;
+}
+
+.inventorymenu.tertiarynav li.opt a {
+  display: block;
 }
 
 .indexmenu li.opt {
@@ -211,6 +224,12 @@ footer.home {
   0% {opacity: 0; visibility: invisible;}
   33% {opacity: 0.25; visibility: invisible;}
   100% {opacity: 1; visibility: visible;}
+}
+
+#botreact {
+  float: left;
+  position: relative;
+  left: 2em;
 }
 
 /* Media Queries */
