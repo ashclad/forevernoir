@@ -58,16 +58,16 @@ header.home {
   animation: headertransit 4s forwards;
 }
 
-header.inventory {
-  padding: 1% 15% 1% 15%;
-  top: 25em;
-}
-
 @keyframes headertransit {
   0% {top: 25em; z-index: 12;}
   33% {top: 25em; z-index: 12;}
   75% {z-index: 9;}
   100% {top: 0em; z-index: 0;}
+}
+
+header.inventory, header.category, header.cart, header.session {
+  padding: 1% 15% 1% 15%;
+  top: 25em;
 }
 
 .logo {
@@ -84,52 +84,77 @@ main.home {
   overflow: auto;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  display: flex;
-  align-items: stretch;
+  white-space: nowrap;
+  /* display: flex;
+  align-items: stretch;*/
 }
 
-ul.menu {
+.indexmenu.primarynav ul.menu {
   margin: 1% 0 1% 0;
   padding-left: 0;
   list-style-type: none;
+  display: block;
+  height: auto;
+  position: initial;
 }
 
-.inventorymenu.primarynav ul.menu {
+.primarynav ul.menu {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
   align-items: baseline;
   height: 3em;
   position: relative;
-  right: 1em;
+  right: -3em;
 }
 
 li.opt {
   display: inline-block;
+}
+
+.indexmenu.primarynav li.opt {
+  display: block;
+  white-space: normal;
+  text-align: center;
   padding: 1% 2.5% 1% 2.5%;
 }
 
-.inventorymenu.primarynav li.opt a {
-  border-bottom: 1px solid var(--altgreen);
-  box-shadow: 0 10px 10px -10px var(--altgreen);
-}
-
-.inventorymenu.primarynav li.opt a:hover::before {
+.primarynav li.opt a:hover::before {
   content: "$ exec ./";
   display: inline;
-  color: var(--altgreen);
+  color: var(--red);
   font-weight: bold;
 }
 
-.inventorymenu.primarynav li.opt a:hover::after {
+.indexmenu.primarynav li.opt a:hover::before {
+  content: none;
+  display: inline-block;
+  font-weight: auto;
+}
+
+.primarynav li.opt a:hover::after {
   content: ".py";
   display: inline;
-  color: var(--altgreen);
+  color: var(--red);
   font-weight: bold;
 }
 
-.inventorymenu.primarynav li.opt a {
+.indexmenu.primarynav li.opt a:hover::after {
+  content: none;
+  display: none;
+  font-weight: auto;
+}
+
+.primarynav li.opt a {
+  border-bottom: 1px solid var(--red);
+  box-shadow: 0 10px 10px -10px var(--red);
   padding: 2em 2.5em 2em 2.5em;
+}
+
+.indexmenu.primarynav li.opt a {
+  border: none;
+  box-shadow: 0 0 0 0 none;
+  padding: 0 0 0 0;
 }
 
 .inventorymenu.secondarynav li.opt img {
@@ -140,18 +165,13 @@ li.opt {
   filter: none; /* temporary, for untoggling provisional grayscale for all images */
 }
 
-.inventorymenu.tertiarynav li.opt {
+.tertiarynav li.opt {
   float: left;
   padding: 0 1% 0 1%;
 }
 
-.inventorymenu.tertiarynav li.opt a {
+.tertiarynav li.opt a {
   display: block;
-}
-
-.indexmenu li.opt {
-  display: list-item;
-  text-align: center;
 }
 
 footer.home {
@@ -188,7 +208,7 @@ footer.home {
 #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
   padding: 1% 1% 1% 0;
-  height: 45em;
+  /* height: 70%; */
 }
 
 #gallery img {
@@ -219,24 +239,28 @@ footer.home {
   display: none;
 }
 
+#seqart {
+  /* some things (i.e. top positionality) may
+  vary according to original comic image dimensions */
+  float: left;
+  display: inline-block;
+  padding: 2em 0 1em 2em;
+}
+
 #seqartmenu {
   /* some things (i.e., height and top padding) may
   vary according to original comic image dimensions */
-  position: relative;
-  top: 5.5em;
-  left: 2.25em;
+  display: inline-block;
+  margin: 2em 0 1em 0;
   padding: 75px 125px 0 125px;
   height: 285px;
   border: var(--based) 2px solid;
 }
 
-#seqart {
-  /* some things (i.e. top positionality) may
-  vary according to original comic image dimensions */
-  margin: 0;
-  position: relative;
-  top: 5.5em;
-  left: 1.25em;
+#seqartmenu::after {
+  content: "";
+  display: inline-block;
+  clear: both;
 }
 
 #skippara {
@@ -258,6 +282,16 @@ footer.home {
   0% {opacity: 0; visibility: invisible;}
   33% {opacity: 0.25; visibility: invisible;}
   100% {opacity: 1; visibility: visible;}
+}
+
+footer #copyright {
+  float: right;
+  margin-right: 1em;
+}
+
+footer.home #copyright {
+  float: none;
+  margin-right: 0;
 }
 
 #triangle {
@@ -288,7 +322,7 @@ footer.home {
   align-items: center;
   justify-content: center;
   background-color: var(--ext);
-  height: 50em;
+  height: 40em;
 }
 
 /* Media Queries */
@@ -304,14 +338,6 @@ footer.home {
 
   #gallery {
     padding: 3% 1% 3% 0;
-  }
-
-  #seqart {
-    top: 7.5em;
-  }
-
-  #seqartmenu {
-    top: 7.5em;
   }
 
   #walkcycle {
@@ -339,14 +365,6 @@ footer.home {
     padding-top: 6%;
   }
 
-  #seqart {
-    top: 7.25em;
-  }
-
-  #seqartmenu {
-    top: 7.25em;
-  }
-
   #walkcycle {
     /* provisional fixed values */
     width: 5%;
@@ -358,14 +376,6 @@ footer.home {
   .logo {
     width: 20%;
     height: 16%;
-  }
-
-  #seqart {
-    top: 6.75em;
-  }
-
-  #seqartmenu {
-    top: 6.75em;
   }
 
   #walkcycle {
@@ -385,14 +395,6 @@ footer.home {
     padding-top: 4%;
   }
 
-  #seqart {
-    top: 5.5em;
-  }
-
-  #seqartmenu {
-    top: 5.5em;
-  }
-
   #walkcycle {
     /* provisional fixed values */
     width: 4%;
@@ -401,14 +403,6 @@ footer.home {
 }
 
 @media only screen and (min-width: 2130px) {
-  #seqart {
-    top: 8.5em;
-  }
-
-  #seqartmenu {
-    top: 8.5em;
-  }
-
   #gallery {
     padding: 0.75% 0.75% 0.75% 0;
   }
@@ -441,14 +435,6 @@ footer.home {
 @media only screen and (min-width: 4500px) {
   .indexmenu .menu {
     padding-top: 2%;
-  }
-
-  #seqart {
-    top: 8em;
-  }
-
-  #seqartmenu {
-    top: 8em;
   }
 
   #walkcycle {
