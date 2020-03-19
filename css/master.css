@@ -51,12 +51,14 @@ img {
 /* class-based elements and their class-based sub-elements */
 
 header {
-  position: relative;
+  position: initial;
   padding: 1% 15% 1% 15%;
-  top: 25em;
+  z-index: initial;
 }
 
 header.home {
+  position: relative;
+  top: 25em;
   z-index: 10;
   animation: headertransit 4s forwards;
 }
@@ -69,8 +71,8 @@ header.home {
 }
 
 .logo {
-  width: 17%;
-  height: 13%;
+  max-width: 12%;
+  max-height: auto;
 }
 
 main.home {
@@ -326,6 +328,10 @@ footer.home {
   position: relative;
   z-index: 11;
   text-align: center;
+}
+
+#skippara span {
+  text-decoration: underline;
 }
 
 /*#walkcycle {
