@@ -43,6 +43,11 @@ a {
   text-decoration: none;
 }
 
+body#indexinverse a {
+  color: var(--based);
+  text-decoration: none;
+}
+
 /* provisional--for testing purposes */
 img {
   filter: grayscale(100%);
@@ -94,7 +99,7 @@ main.home {
   align-items: baseline;
   height: 3em;
   position: relative;
-  right: -3em;
+  right: -1.75em;
 }
 
 .indexmenu.primarynav ul.menu {
@@ -189,7 +194,7 @@ li.opt {
 }
 
 .indexmenu.primarynav li.opt.short a {
-  color: var(--basel);
+  color: var(--based);
 }
 
 .primarynav li.opt a:hover::before {
@@ -242,6 +247,23 @@ li.opt {
   filter: none; /* temporary, for untoggling provisional grayscale for all images */
 }
 
+.pseudonav {
+  margin: 2em 2em 1em 2em;
+  padding: 1px 125px 0 125px;
+  height: 285px;
+  border: var(--basel) 2px solid;
+}
+
+.pseudonav li {
+  display: block;
+  background-color: var(--basel);
+  text-align: center;
+}
+
+footer.home {
+  text-align: center;
+}
+
 .tertiarynav li.opt {
   float: left;
   padding: 0 1% 0 1%;
@@ -251,11 +273,12 @@ li.opt {
   display: block;
 }
 
-footer.home {
-  text-align: center;
-}
-
 /* id-based elements and their id-based sub-elements */
+
+body#indexinverse {
+  background-color: var(--basel);
+  color: var(--based);
+}
 
 #mainlogo {
   display: block;
@@ -349,6 +372,10 @@ footer.home {
   100% {opacity: 1; visibility: visible;}
 }*/
 
+#pseudofooter {
+  float: left;
+}
+
 footer #copyright {
   float: right;
   margin-right: 1em;
@@ -364,11 +391,27 @@ footer.home #copyright {
   top: 0em;
   left: 0em;
   z-index: 1;
-  border-top: 100px solid var(--basel);
+  border-top: 100px solid var(--based);
   border-right: 100px solid transparent;
 }
 
-#botreact {
+#cartlnk {
+ position: absolute;
+ top: 2em;
+ right: 2em;
+ z-index: 1;
+}
+
+#cartlnk img {
+  max-width: 52px;
+  max-height: auto;
+}
+
+header.index #cartlnk {
+  position: initial;
+}
+
+/*#botreact {
   float: left;
   position: relative;
   left: 2em;
@@ -379,14 +422,14 @@ footer.home #copyright {
   content: "";
   clear: both;
   display: inline-block;
-}
+}*/
 
 #factorymenu {
   display: flex;
   align-content: space-evenly;
   align-items: center;
   justify-content: center;
-  background-color: var(--ext);
+  background-color: var(--based);
   height: 40em;
 }
 

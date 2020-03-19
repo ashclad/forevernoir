@@ -9,14 +9,15 @@
     <link rel="icon" href="assets/logo.ico">
     <title>Forever Noir</title>
   </head>
-  <body>
+  <body id="indexinverse">
     <header class="inventory">
       <div id="triangle" class="decor"></div>
+      <a id="cartlnk" href="_cart.html"><img src="assets/cart.png"></a>
       <a href="index.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
     </header>
     <main class="inventory">
       <nav class="inventorymenu primarynav hidden">
-        <img id="botreact" width="21px" height="21px" class="mascot" src="assets/bot.png">
+        <!-- <img id="botreact" width="21px" height="21px" class="mascot" src="assets/bot.png"> -->
         <ul class="menu">
           <li id="indexitem first" class="opt">
             <a id="indexlnk" href="index.html">Home</a>
@@ -24,16 +25,24 @@
           <li id="shopitem" class="opt">
             <a id="shoplnk" href="inventory.html">Shop</a>
           </li>
-          <li id="cartitem" class="opt">
-            <a id="cartlnk" href="_cart.html">Cart</a>
-          </li>
           <li id="sessionitem last" class="opt">
-            <a id="sessionlnk" href="_session.html">Login or Register</a>
+            <a id="sessionlnk" href="session.html">Login or Register</a>
           </li>
         </ul>
       </nav>
       <nav id="factorymenu" class="inventorymenu secondarynav">
         <ul class="menu">
+          <div id="pseudofooter" class="pseudonav">
+            <li id="affilitem" class="opt">
+              <a id="affillnk" href="_credits.html">Affiliates</a>
+            </li>
+            <li id="legalitem" class="opt">
+              <a id="legallnk" href="_legal.html">Legal</a>
+            </li>
+            <li id="contactitem" class="opt">
+              <a id="contactlnk" href="_contact.html">Contact Us</a>
+            </li>
+          </div>
           <li id="mensitem" class="opt">
             <a id="menslnk" class="catlnk" href="_category.php"><img class="pattern" src="assets/factory_pattern.jpg"></a>
           </li>
@@ -41,19 +50,6 @@
       </nav>
     </main>
     <footer class="inventory">
-      <nav class="inventorymenu tertiarynav">
-        <ul class="menu">
-          <li id="affilitem" class="opt">
-            <a id="affillnk" href="_affil.html">Affiliates</a>
-          </li>
-          <li id="legalitem" class="opt">
-            <a id="legallnk" href="_legal.html">Legal</a>
-          </li>
-          <li id="contactitem" class="opt">
-            <a id="contactlnk" href="_contact.html">Contact Us</a>
-          </li>
-        </ul>
-      </nav>
       <span id="copyright">&copy; 2020</span>
     </footer>
   </body>
