@@ -113,6 +113,7 @@ li.opt {
 }
 
 .indexmenu .linkgrouping li.opt {
+  overflow: hidden;
   width: 8em;
   height: 2.75em;
   display: block;
@@ -120,6 +121,11 @@ li.opt {
   text-align: center;
   margin-bottom: 8%;
   margin-top: 4%;
+}
+
+.indexmenu .linkgrouping li.opt a {
+  position: relative;
+  top: 25%;
 }
 
 .indexmenu .linkgrouping li.opt.short {
@@ -133,7 +139,7 @@ li.opt {
 }
 
 .indexmenu .linkgrouping:hover > .short {
-  animation: widthcompenz 1s linear forwards;
+  animation: widthcompenz 0.5s linear forwards;
 }
 
 @keyframes widthcompenz {
@@ -142,13 +148,23 @@ li.opt {
   100% { width: 8em; background-color: var(--red); height: 2.75em; }
 }
 
+.indexmenu .linkgrouping:hover > .long {
+  animation: widthdim 0.5s linear forwards;
+}
+
+@keyframes widthdim {
+  0% { width: 8em; }
+  50% { width: 4em;}
+  100% { width: 0em; }
+}
+
 .indexmenu.primarynav li.opt.short > * {
   display: block;
   opacity: 0.0;
 }
 
 .indexmenu.primarynav li.opt.short:hover > * {
-  animation: texton 0.5s ease-in forwards;
+  animation: texton 0.25s ease-in forwards;
 }
 
 @keyframes texton {
@@ -162,7 +178,7 @@ li.opt {
 }
 
 .indexmenu.primarynav li.opt.short:hover ~ * a {
-  animation: textoff 0.01s ease-in forwards;
+  animation: textoff 0.01s linear forwards;
 }
 
 @keyframes textoff {
@@ -295,7 +311,7 @@ footer.home {
   vary according to original comic image dimensions */
   display: inline-block;
   margin: 2em 0 1em 0;
-  padding: 40px 125px 0 125px;
+  padding: 1px 125px 0 125px;
   height: 285px;
   border: var(--based) 2px solid;
 }
