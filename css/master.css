@@ -50,11 +50,14 @@ img {
 
 /* class-based elements and their class-based sub-elements */
 
-header.home {
+header {
   position: relative;
   padding: 1% 15% 1% 15%;
   top: 25em;
-  z-index: 12;
+}
+
+header.home {
+  z-index: 10;
   animation: headertransit 4s forwards;
 }
 
@@ -63,11 +66,6 @@ header.home {
   33% {top: 25em; z-index: 12;}
   75% {z-index: 9;}
   100% {top: 0em; z-index: 0;}
-}
-
-header.inventory, header.category, header.cart, header.session {
-  padding: 1% 15% 1% 15%;
-  top: 25em;
 }
 
 .logo {
@@ -85,17 +83,6 @@ main.home {
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   white-space: nowrap;
-  /* display: flex;
-  align-items: stretch;*/
-}
-
-.indexmenu.primarynav ul.menu {
-  margin: 1% 0 1% 0;
-  padding-left: 0;
-  list-style-type: none;
-  display: block;
-  height: auto;
-  position: initial;
 }
 
 .primarynav ul.menu {
@@ -108,15 +95,83 @@ main.home {
   right: -3em;
 }
 
+.indexmenu.primarynav ul.menu {
+  margin: 1% 0 1% 0;
+  padding-left: 0;
+  list-style-type: none;
+  display: block;
+  height: auto;
+  position: initial;
+}
+
 li.opt {
   display: inline-block;
 }
 
-.indexmenu.primarynav li.opt {
+.indexmenu .linkgrouping {
+  background-color: var(--ext);
+}
+
+.indexmenu .linkgrouping li.opt {
+  width: 8em;
+  height: 2.75em;
   display: block;
   white-space: normal;
   text-align: center;
-  padding: 1% 2.5% 1% 2.5%;
+  margin-bottom: 8%;
+  margin-top: 4%;
+}
+
+.indexmenu .linkgrouping li.opt.short {
+  width: 0em;
+  height: 0em;
+  display: block;
+  white-space: normal;
+  text-align: center;
+  float: left;
+  margin: 0;
+}
+
+.indexmenu .linkgrouping:hover > .short {
+  animation: widthcompenz 1s linear forwards;
+}
+
+@keyframes widthcompenz {
+  0% { width: 0em; background-color: var(--ext); height: 2.75em; }
+  50% { width: 4em;}
+  100% { width: 8em; background-color: var(--red); height: 2.75em; }
+}
+
+.indexmenu.primarynav li.opt.short > * {
+  display: block;
+  opacity: 0.0;
+}
+
+.indexmenu.primarynav li.opt.short:hover > * {
+  animation: texton 0.5s ease-in forwards;
+}
+
+@keyframes texton {
+  0% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+.indexmenu.primarynav li.opt {
+  display: block;
+  opacity: 1.0;
+}
+
+.indexmenu.primarynav li.opt.short:hover ~ * a {
+  animation: textoff 0.01s ease-in forwards;
+}
+
+@keyframes textoff {
+  0% { opacity: 1.0; }
+  100% { opacity: 0.0; }
+}
+
+.indexmenu.primarynav li.opt.short a {
+  color: var(--basel);
 }
 
 .primarynav li.opt a:hover::before {
@@ -126,17 +181,21 @@ li.opt {
   font-weight: bold;
 }
 
-.indexmenu.primarynav li.opt a:hover::before {
-  content: none;
-  display: inline-block;
-  font-weight: auto;
-}
-
 .primarynav li.opt a:hover::after {
   content: ".py";
   display: inline;
   color: var(--red);
   font-weight: bold;
+}
+
+.indexmenu.primarynav li.opt a {
+  color: var(--basel);
+}
+
+.indexmenu.primarynav li.opt a:hover::before {
+  content: none;
+  display: inline-block;
+  font-weight: auto;
 }
 
 .indexmenu.primarynav li.opt a:hover::after {
@@ -152,9 +211,9 @@ li.opt {
 }
 
 .indexmenu.primarynav li.opt a {
-  border: none;
-  box-shadow: 0 0 0 0 none;
-  padding: 0 0 0 0;
+  border: initial;
+  box-shadow: initial;
+  padding: initial;
 }
 
 .inventorymenu.secondarynav li.opt img {
@@ -208,7 +267,6 @@ footer.home {
 #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
   padding: 1% 1% 1% 0;
-  /* height: 70%; */
 }
 
 #gallery img {
@@ -218,21 +276,6 @@ footer.home {
 #gallery.about {
   background-color: var(--basel);
   color: var(--based);
-}
-
-#gallery.about a {
-  color: var(--basel);
-}
-
-#gallery.about li.opt {
-  background-color: var(--ext);
-  margin-bottom: 2%;
-  margin-top: 1%;
-}
-
-#gallery.about li:hover {
-  background-color: var(--red);
-  color: var(--basel);
 }
 
 #gallery.about::-webkit-scrollbar {
@@ -252,7 +295,7 @@ footer.home {
   vary according to original comic image dimensions */
   display: inline-block;
   margin: 2em 0 1em 0;
-  padding: 75px 125px 0 125px;
+  padding: 40px 125px 0 125px;
   height: 285px;
   border: var(--based) 2px solid;
 }
@@ -264,12 +307,12 @@ footer.home {
 }
 
 #skippara {
+  position: relative;
+  z-index: 11;
   text-align: center;
 }
 
-#walkcycle {
-  /* bottom and left may have to be adjusted
-  depending on art asset */
+/*#walkcycle {
   position: relative;
   bottom: 3.75em;
   left: 1.33em;
@@ -282,7 +325,7 @@ footer.home {
   0% {opacity: 0; visibility: invisible;}
   33% {opacity: 0.25; visibility: invisible;}
   100% {opacity: 1; visibility: visible;}
-}
+}*/
 
 footer #copyright {
   float: right;
