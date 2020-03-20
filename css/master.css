@@ -48,11 +48,6 @@ body#indexinverse a {
   text-decoration: none;
 }
 
-/* provisional--for testing purposes */
-img {
-  filter: grayscale(100%);
-}
-
 /* class-based elements and their class-based sub-elements */
 
 header {
@@ -86,7 +81,10 @@ main.home {
 }
 
 .horizontalscroll {
-  overflow: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  align-items: center;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   white-space: nowrap;
@@ -96,19 +94,23 @@ main.home {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
-  align-items: baseline;
-  height: 3em;
+  align-items: center;
+  height: 4em;
   position: relative;
   right: -1.75em;
 }
 
 .indexmenu.primarynav ul.menu {
-  margin: 1% 0 1% 0;
-  padding-left: 0;
+  margin: 10% 0 10% 0;
+  padding: 0;
   list-style-type: none;
   display: block;
   height: auto;
   position: initial;
+}
+
+.inventorymenu.primarynav ul.menu > * {
+  float: left;
 }
 
 li.opt {
@@ -124,7 +126,7 @@ li.opt {
   width: 8em;
   height: 2.75em;
   display: block;
-  white-space: normal;
+  white-space: nowrap;
   text-align: center;
   margin-bottom: 8%;
   margin-top: 4%;
@@ -139,7 +141,6 @@ li.opt {
   width: 0em;
   height: 0em;
   display: block;
-  white-space: normal;
   text-align: center;
   float: left;
   margin: 0;
@@ -167,6 +168,7 @@ li.opt {
 
 .indexmenu.primarynav li.opt.short > * {
   display: block;
+  color: var(--based);
   opacity: 0.0;
 }
 
@@ -175,8 +177,8 @@ li.opt {
 }
 
 @keyframes texton {
-  0% { opacity: 0.0; }
-  100% { opacity: 1.0; }
+  0% { opacity: 0.0; color: var(--based); }
+  100% { opacity: 1.0; color: var(--basel); }
 }
 
 .indexmenu.primarynav li.opt {
@@ -239,25 +241,92 @@ li.opt {
   padding: initial;
 }
 
+.secondarynav ul.menu {
+  margin: 10% 0 10% 0;
+  display: block;
+  height: auto;
+  padding: 0;
+  list-style-type: none;
+}
+
+.inventorymenu .linkgrouping {
+  background-color: var(--basel);
+}
+
+.inventorymenu .linkgrouping li.opt {
+  overflow: hidden;
+  width: 8em;
+  height: 2.75em;
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: 8%;
+  margin-top: 4%;
+}
+
+.inventorymenu .linkgrouping li.opt a {
+  position: relative;
+  top: 25%;
+}
+
+.inventorymenu .linkgrouping li.opt.short {
+  width: 0em;
+  height: 0em;
+  display: block;
+  text-align: center;
+  float: left;
+  margin: 0;
+}
+
+.inventorymenu .linkgrouping:hover > .short {
+  animation: widthcompenz 0.5s linear forwards;
+}
+
+.inventorymenu .linkgrouping:hover > .long {
+  animation: widthdim 0.5s linear forwards;
+}
+
+.inventorymenu.secondarynav li.opt.short > * {
+  display: block;
+  color: var(--ext);
+  opacity: 0.0;
+}
+
+.inventorymenu.secondarynav li.opt.short:hover > * {
+  animation: textontwo 0.25s ease-in forwards;
+}
+
+@keyframes textontwo {
+  0% { opacity: 0.0; color: var(--ext); }
+  100% { opacity: 1.0; color: var(--basel); }
+}
+
+.inventorymenu.secondarynav li.opt {
+  display: block;
+  opacity: 1.0;
+}
+
+.inventorymenu.secondarynav li.opt.short:hover ~ * a {
+  animation: textoff 0.01s linear forwards;
+}
+
+.inventorymenu.secondarynav li.opt a {
+  color: var(--ext);
+}
+
 .inventorymenu.secondarynav li.opt img {
   border-top: 4px solid var(--red);
   border-bottom: 2px solid var(--red);
   border-left: 1px solid var(--red);
   border-right: 1px solid var(--red);
-  filter: none; /* temporary, for untoggling provisional grayscale for all images */
 }
 
-.pseudonav {
-  margin: 2em 2em 1em 2em;
-  padding: 1px 125px 0 125px;
-  height: 285px;
-  border: var(--basel) 2px solid;
-}
-
-.pseudonav li {
-  display: block;
-  background-color: var(--basel);
-  text-align: center;
+.catlnk {
+  /* some things (i.e. top positionality) may
+  vary according to original comic image dimensions */
+  float: left;
+  display: inline-block;
+  padding: 2em 0 1em 2em;
 }
 
 footer.home {
@@ -306,8 +375,11 @@ body#indexinverse {
 }
 
 #gallery {
-  box-shadow: 0 0 15px 3px var(--based) inset;
   padding: 1% 1% 1% 0;
+}
+
+main.home #gallery {
+  box-shadow: 0 0 15px 3px var(--based) inset;
 }
 
 #gallery img {
@@ -319,7 +391,16 @@ body#indexinverse {
   color: var(--based);
 }
 
+#gallery.categories {
+  background-color: var(--based);
+  color: var(--basel);
+}
+
 #gallery.about::-webkit-scrollbar {
+  display: none;
+}
+
+#gallery.categories::-webkit-scrollbar {
   display: none;
 }
 
@@ -335,10 +416,8 @@ body#indexinverse {
   /* some things (i.e., height and top padding) may
   vary according to original comic image dimensions */
   display: inline-block;
-  margin: 2em 0 1em 0;
-  padding: 1px 125px 0 125px;
-  height: 285px;
-  border: var(--based) 2px solid;
+  margin: 2em 0 1em 1em;
+  padding: 0 9.6em 0 9.6em;
 }
 
 #seqartmenu::after {
@@ -355,25 +434,6 @@ body#indexinverse {
 
 #skippara span {
   text-decoration: underline;
-}
-
-/*#walkcycle {
-  position: relative;
-  bottom: 3.75em;
-  left: 1.33em;
-  visibility: invisible;
-  opacity: 0;
-  animation: fadeinrunner 5s forwards;
-}
-
-@keyframes fadeinrunner {
-  0% {opacity: 0; visibility: invisible;}
-  33% {opacity: 0.25; visibility: invisible;}
-  100% {opacity: 1; visibility: visible;}
-}*/
-
-#pseudofooter {
-  float: left;
 }
 
 footer #copyright {
@@ -411,26 +471,13 @@ header.index #cartlnk {
   position: initial;
 }
 
-/*#botreact {
-  float: left;
-  position: relative;
-  left: 2em;
-  top: 0em;
-}
-
-#botreact::after {
-  content: "";
-  clear: both;
-  display: inline-block;
-}*/
-
 #factorymenu {
-  display: flex;
-  align-content: space-evenly;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--based);
-  height: 40em;
+   /* some things (i.e., height and top padding) may
+  vary according to original comic image dimensions */
+  display: inline-block;
+  margin: 5em 0 4em 1em;
+  padding: 0 9.6em 0 9.6em;
+  color: var(--ext);
 }
 
 /* Media Queries */
@@ -448,10 +495,8 @@ header.index #cartlnk {
     padding: 3% 1% 3% 0;
   }
 
-  #walkcycle {
-    /* provisional fixed values */
-    width: 9%;
-    height: 9%;
+  #cartlnk img {
+    max-width: 32px;
   }
 }
 
@@ -460,23 +505,11 @@ header.index #cartlnk {
     width: 23%;
     height: 19%;
   }
-
-  #walkcycle {
-    /* provisional fixed values */
-    width: 6%;
-    height: 6%;
-  }
 }
 
 @media only screen and (min-width: 1410px) {
   .indexmenu .menu {
     padding-top: 6%;
-  }
-
-  #walkcycle {
-    /* provisional fixed values */
-    width: 5%;
-    height: 5%;
   }
 }
 
@@ -484,12 +517,6 @@ header.index #cartlnk {
   .logo {
     width: 20%;
     height: 16%;
-  }
-
-  #walkcycle {
-    /* provisional fixed values */
-    width: 5%;
-    height: 5%;
   }
 }
 
@@ -501,12 +528,6 @@ header.index #cartlnk {
 
   .indexmenu .menu {
     padding-top: 4%;
-  }
-
-  #walkcycle {
-    /* provisional fixed values */
-    width: 4%;
-    height: 4%;
   }
 }
 
@@ -521,22 +542,14 @@ header.index #cartlnk {
 }
 
 @media only screen and (min-width: 2160px) {
-  #walkcycle {
-    /* provisional fixed values */
-    width: 3%;
-    height: 3%;
+  #cartlnk img {
+    max-width: 52px;
   }
 }
 
 @media only screen and (min-width: 3000px) {
   .indexmenu .menu {
     padding-top: 3%;
-  }
-
-  #walkcycle {
-    /* provisional fixed values */
-    width: 2%;
-    height: 2%;
   }
 }
 
@@ -545,9 +558,7 @@ header.index #cartlnk {
     padding-top: 2%;
   }
 
-  #walkcycle {
-    /* provisional fixed values */
-    width: 1.75%;
-    height: 1.75%;
+  #cartlnk img {
+    max-width: 64px;
   }
 }
