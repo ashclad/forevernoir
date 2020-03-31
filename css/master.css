@@ -342,6 +342,12 @@ footer.home {
   display: block;
 }
 
+.footergifs {
+  margin-top: 1em;
+  max-width: 32px;
+  filter: grayscale(1);
+}
+
 /* id-based elements and their id-based sub-elements */
 
 body#indexinverse {
@@ -439,6 +445,7 @@ main.home #gallery {
 footer #copyright {
   float: right;
   margin-right: 1em;
+  margin-top: 2em;
 }
 
 footer.home #copyright {
