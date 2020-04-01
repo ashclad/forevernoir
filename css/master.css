@@ -23,6 +23,10 @@ by [class*="<class name>"] or [id*="<class id>"] */
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: var(--based);
   color: var(--basel);
@@ -81,10 +85,7 @@ main.home {
 }
 
 .horizontalscroll {
-  display: flex;
-  flex-wrap: nowrap;
   overflow-x: auto;
-  align-items: center;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   white-space: nowrap;
@@ -249,6 +250,16 @@ li.opt {
   list-style-type: none;
 }
 
+main.home .gallhanger {
+  /* some things (i.e. top positionality) may
+  vary according to original comic image dimensions */
+  float: left;
+  display: inline-block;
+  padding: 2em 0 1em 2em;
+  max-height: 100%;
+  max-width: auto;
+}
+
 .inventorymenu .linkgrouping {
   background-color: var(--basel);
 }
@@ -386,6 +397,7 @@ body#indexinverse {
 
 main.home #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
+  height: 45em;
 }
 
 #gallery img {
@@ -408,14 +420,6 @@ main.home #gallery {
 
 #gallery.categories::-webkit-scrollbar {
   display: none;
-}
-
-#seqart {
-  /* some things (i.e. top positionality) may
-  vary according to original comic image dimensions */
-  float: left;
-  display: inline-block;
-  padding: 2em 0 1em 2em;
 }
 
 #seqartmenu {
@@ -489,7 +493,7 @@ header.index #cartlnk {
 
 /* Media Queries */
 
-/* Media Queries Based on Size */
+/* Media Queries Based on Width Size of Screen */
 /*@media only screen and (min-width: 360px) {} */
 
 @media only screen and (min-width: 768px) {
@@ -567,5 +571,37 @@ header.index #cartlnk {
 
   #cartlnk img {
     max-width: 64px;
+  }
+}
+
+/* Media Queries Based on Height Size of Screen */
+
+@media only screen and (min-height: 784px) {
+  main.home #gallery {
+    height: 30em;
+  }
+}
+
+@media only screen and (min-height: 1080px) {
+  main.home #gallery {
+    height: 45em;
+  }
+}
+
+@media only screen and (min-height: 1260px) {
+  main.home #gallery {
+    height: 55em;
+  }
+}
+
+@media only screen and (min-height: 1440px) {
+  main.home #gallery {
+    height: 65em;
+  }
+}
+
+@media only screen and (min-height: 1700px) {
+  main.home #gallery {
+    height: 80em;
   }
 }
