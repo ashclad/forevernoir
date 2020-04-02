@@ -266,8 +266,8 @@ main.home .gallhanger {
   display: inline-block;
   margin: 1em 0 0.5em 1em;
   border: solid 2px var(--ext);
-  max-height: 100%;
-  max-width: auto;
+  max-height: 90%;
+  width: auto;
 }
 
 .inventorymenu .linkgrouping {
@@ -415,7 +415,7 @@ main.home #gallery {
 }
 
 #gallery img.first {
-  margin: 0 0 0 3%;
+  margin-left: 3%;
 }
 
 #gallery.about {
