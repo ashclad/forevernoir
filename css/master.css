@@ -23,6 +23,11 @@ by [class*="<class name>"] or [id*="<class id>"] */
   box-sizing: border-box;
 }
 
+/*html, body {
+  height: 100%;
+  overflow: hidden;
+}*/
+
 body {
   background-color: var(--based);
   color: var(--basel);
@@ -82,12 +87,19 @@ main.home {
 
 .horizontalscroll {
   display: flex;
-  flew-wrap: nowrap;
+  display: -moz-box;
+  flex-wrap: nowrap;
+  flex-flow: row;
   align-items: center;
-  overflow-x: auto;
-  overflow: -moz-scrollbars-none;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  /*overflow: -moz-scrollbars-none;*/
   -ms-overflow-style: none;
   /*white-space: nowrap;*/
+}
+
+.horizontalscroll * {
+  flex: none;
 }
 
 .primarynav ul.menu {
@@ -100,13 +112,30 @@ main.home {
   right: -1.75em;
 }
 
+#gallery {
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.indexmenu.primarynav {
+  display: inline-block;
+  margin: 2em 0 1em 1em;
+  padding: 0 9.6em 0 9.6em;
+}
+
 .indexmenu.primarynav ul.menu {
   margin: 10% 0 10% 0;
   padding: 0;
   list-style-type: none;
   display: block;
-  height: auto;
+  height: initial;
   position: initial;
+}
+
+.inventorymenu.primarynav {
+  display: inline-block;
+  margin: 5em 0 4em 1em;
+  padding: 0 9.6em 0 9.6em;
 }
 
 .inventorymenu.primarynav ul.menu > * {
@@ -258,11 +287,10 @@ main.home .containimage {
 main.home .gallhanger {
   /* some things (i.e. top positionality) may
   vary according to original comic image dimensions */
-  float: left;
   display: inline-block;
-  margin: 1em 0 0.5em 1em;
+  margin: 0 0.5em 0 0.5em;
   border: solid 2px var(--ext);
-  max-height: 90%;
+  height: 85%;
   width: auto;
 }
 
@@ -397,21 +425,9 @@ body#indexinverse {
   100% {opacity: 0.0; z-index: -1; height: 0%; visibility: invisible;}
 }
 
-#gallery {
-  padding: 1% 1% 1% 0;
-}
-
 main.home #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
   height: 45em;
-}
-
-#gallery img {
-  margin: 0 0 0 1%;
-}
-
-#gallery img.first {
-  margin-left: 3%;
 }
 
 #gallery.about {
@@ -430,20 +446,6 @@ main.home #gallery {
 
 #gallery.categories::-webkit-scrollbar {
   display: none;
-}
-
-#seqartmenu {
-  /* some things (i.e., height and top padding) may
-  vary according to original comic image dimensions */
-  display: inline-block;
-  margin: 2em 0 1em 1em;
-  padding: 0 9.6em 0 9.6em;
-}
-
-#seqartmenu::after {
-  content: "";
-  display: inline-block;
-  clear: both;
 }
 
 #skippara {
@@ -495,13 +497,48 @@ header.index #cartlnk {
 #factorymenu {
    /* some things (i.e., height and top padding) may
   vary according to original comic image dimensions */
-  display: inline-block;
-  margin: 5em 0 4em 1em;
-  padding: 0 9.6em 0 9.6em;
   color: var(--ext);
 }
 
 /* Media Queries */
+
+/* Media Queries Based on Height Size of Screen */
+
+@media only screen and (min-height: 784px) {
+  main.home #gallery {
+    height: 30em;
+  }
+}
+
+@media only screen and (min-height: 1006px) {
+  main.home #gallery {
+    height: 45em;
+  }
+}
+
+@media only screen and (min-height: 1080px) {
+  main.home #gallery {
+    height: 50em;
+  }
+}
+
+@media only screen and (min-height: 1260px) {
+  main.home #gallery {
+    height: 55em;
+  }
+}
+
+@media only screen and (min-height: 1440px) {
+  main.home #gallery {
+    height: 65em;
+  }
+}
+
+@media only screen and (min-height: 1700px) {
+  main.home #gallery {
+    height: 80em;
+  }
+}
 
 /* Media Queries Based on Width Size of Screen */
 /*@media only screen and (min-width: 360px) {} */
@@ -510,10 +547,6 @@ header.index #cartlnk {
   .logo {
     width: 26%;
     height: 22%;
-  }
-
-  #gallery {
-    padding: 3% 1% 3% 0;
   }
 
   #cartlnk img {
@@ -556,10 +589,6 @@ header.index #cartlnk {
   #gallery {
     padding: 0.75% 0.75% 0.75% 0;
   }
-
-  #gallery img {
-    margin-left: 1%;
-  }
 }
 
 @media only screen and (min-width: 2160px) {
@@ -581,37 +610,5 @@ header.index #cartlnk {
 
   #cartlnk img {
     max-width: 64px;
-  }
-}
-
-/* Media Queries Based on Height Size of Screen */
-
-@media only screen and (min-height: 784px) {
-  main.home #gallery {
-    height: 30em;
-  }
-}
-
-@media only screen and (min-height: 1080px) {
-  main.home #gallery {
-    height: 45em;
-  }
-}
-
-@media only screen and (min-height: 1260px) {
-  main.home #gallery {
-    height: 55em;
-  }
-}
-
-@media only screen and (min-height: 1440px) {
-  main.home #gallery {
-    height: 65em;
-  }
-}
-
-@media only screen and (min-height: 1700px) {
-  main.home #gallery {
-    height: 80em;
   }
 }
