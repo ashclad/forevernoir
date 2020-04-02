@@ -23,10 +23,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   background-color: var(--based);
   color: var(--basel);
