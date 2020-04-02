@@ -87,15 +87,13 @@ main.home {
 
 .horizontalscroll {
   display: flex;
-  display: -moz-box;
   flex-wrap: nowrap;
   flex-flow: row;
   align-items: center;
   overflow-x: auto !important;
   overflow-y: hidden;
-  /*overflow: -moz-scrollbars-none;*/
   -ms-overflow-style: none;
-  /*white-space: nowrap;*/
+  scrollbar-width: none;
 }
 
 .horizontalscroll * {
@@ -105,11 +103,30 @@ main.home {
 .primarynav ul.menu {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 4em;
   position: relative;
-  right: -1.75em;
+  left: 1.25em;
+}
+
+.primarynav li.opt a:hover::before {
+  content: "$ exec ./";
+  display: inline;
+  color: var(--red);
+  font-weight: bold;
+}
+
+.primarynav li.opt a:hover::after {
+  content: ".py";
+  display: inline;
+  color: var(--red);
+  font-weight: bold;
+}
+
+.primarynav li.opt a {
+  border-bottom: 1px solid var(--red);
+  box-shadow: 0 10px 10px -10px var(--red);
+  padding: 2em 2.5em 2em 2.5em;
 }
 
 #gallery {
@@ -133,9 +150,9 @@ main.home {
 }
 
 .inventorymenu.primarynav {
-  display: inline-block;
-  margin: 5em 0 4em 1em;
-  padding: 0 9.6em 0 9.6em;
+  display: block;
+  margin: 2em auto 2em auto;
+  padding: 0 9.6em 1em 9.6em;
 }
 
 .inventorymenu.primarynav ul.menu > * {
@@ -228,20 +245,6 @@ li.opt {
   color: var(--based);
 }
 
-.primarynav li.opt a:hover::before {
-  content: "$ exec ./";
-  display: inline;
-  color: var(--red);
-  font-weight: bold;
-}
-
-.primarynav li.opt a:hover::after {
-  content: ".py";
-  display: inline;
-  color: var(--red);
-  font-weight: bold;
-}
-
 .indexmenu.primarynav li.opt a {
   color: var(--basel);
 }
@@ -256,12 +259,6 @@ li.opt {
   content: none;
   display: none;
   font-weight: auto;
-}
-
-.primarynav li.opt a {
-  border-bottom: 1px solid var(--red);
-  box-shadow: 0 10px 10px -10px var(--red);
-  padding: 2em 2.5em 2em 2.5em;
 }
 
 .indexmenu.primarynav li.opt a {
@@ -292,6 +289,12 @@ main.home .gallhanger {
   border: solid 2px var(--ext);
   height: 85%;
   width: auto;
+}
+
+.inventorymenu.secondarynav {
+  display: inline-block;
+  margin: 2em 0 1em 1em;
+  padding: 0 9.6em 0 9.6em;
 }
 
 .inventorymenu .linkgrouping {
@@ -369,7 +372,6 @@ main.home .gallhanger {
 .catlnk {
   /* some things (i.e. top positionality) may
   vary according to original comic image dimensions */
-  float: left;
   display: inline-block;
   padding: 2em 0 1em 2em;
 }
@@ -543,7 +545,19 @@ header.index #cartlnk {
 /* Media Queries Based on Width Size of Screen */
 /*@media only screen and (min-width: 360px) {} */
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 600px) {
+  .primarynav ul.menu {
+    left: 1em;
+  }
+
+  .primarynav li.opt a {
+    padding: 1em 2em 1em 2em;
+  }
+
+  .inventorymenu.primarynav {
+    padding: 0 6.3em 0 6.3em;
+  }
+
   .logo {
     width: 26%;
     height: 22%;
@@ -555,6 +569,18 @@ header.index #cartlnk {
 }
 
 @media only screen and (min-width: 1006px) {
+  .primarynav ul.menu {
+    left: 1.25em;
+  }
+
+  .primarynav li.opt a {
+    padding: 2em 2.5em 2em 2.5em;
+  }
+
+  .inventorymenu.primarynav {
+    padding: 0 9.6em 1em 9.6em;
+  }
+
   .logo {
     width: 23%;
     height: 19%;
