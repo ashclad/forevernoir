@@ -85,10 +85,13 @@ main.home {
 }
 
 .horizontalscroll {
+  display: flex;
+  flew-wrap: nowrap;
+  align-items: center;
   overflow-x: auto;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
 }
 
 .primarynav ul.menu {
@@ -250,12 +253,19 @@ li.opt {
   list-style-type: none;
 }
 
+main.home .containimage {
+  white-space: nowrap;
+  height: 100%;
+  width: auto;
+}
+
 main.home .gallhanger {
   /* some things (i.e. top positionality) may
   vary according to original comic image dimensions */
   float: left;
   display: inline-block;
-  padding: 2em 0 1em 2em;
+  margin: 1em 0 0.5em 1em;
+  border: solid 2px var(--ext);
   max-height: 100%;
   max-width: auto;
 }
@@ -402,6 +412,10 @@ main.home #gallery {
 
 #gallery img {
   margin: 0 0 0 1%;
+}
+
+#gallery img.first {
+  margin: 0 0 0 3%;
 }
 
 #gallery.about {
