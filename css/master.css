@@ -281,12 +281,31 @@ main.home .containimage {
   width: auto;
 }
 
+.gallhanger {
+  display: inline-block;
+  margin: 0 0.5em 0 0.5em;
+}
+
 main.home .gallhanger {
   /* some things (i.e. top positionality) may
   vary according to original comic image dimensions */
-  display: inline-block;
-  margin: 0 0.5em 0 0.5em;
   border: solid 2px var(--ext);
+  height: 85%;
+  width: auto;
+}
+
+main.inventory .catlnk {
+  /* some things (i.e. top positionality) may
+  vary according to original comic image dimensions */
+  display: flex;
+  align-items: center;
+  padding: 2em 0 1em 2em;
+  height: 100%;
+  width: auto;
+}
+
+main.inventory .gallhanger {
+  border: solid 2px var(--basel);
   height: 85%;
   width: auto;
 }
@@ -369,13 +388,6 @@ main.home .gallhanger {
   border-right: 1px solid var(--red);
 }
 
-.catlnk {
-  /* some things (i.e. top positionality) may
-  vary according to original comic image dimensions */
-  display: inline-block;
-  padding: 2em 0 1em 2em;
-}
-
 footer.home {
   text-align: center;
 }
@@ -429,6 +441,11 @@ body#indexinverse {
 
 main.home #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
+  height: 45em;
+}
+
+main.inventory #gallery {
+  box-shadow: 0 0 15px 3px var(--basel) inset;
   height: 45em;
 }
 
