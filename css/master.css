@@ -521,44 +521,6 @@ header.index #cartlnk {
 
 /* Media Queries */
 
-/* Media Queries Based on Height Size of Screen */
-
-@media only screen and (min-height: 784px) {
-  main.home #gallery {
-    height: 30em;
-  }
-}
-
-@media only screen and (min-height: 1006px) {
-  main.home #gallery {
-    height: 45em;
-  }
-}
-
-@media only screen and (min-height: 1080px) {
-  main.home #gallery {
-    height: 50em;
-  }
-}
-
-@media only screen and (min-height: 1260px) {
-  main.home #gallery {
-    height: 55em;
-  }
-}
-
-@media only screen and (min-height: 1440px) {
-  main.home #gallery {
-    height: 65em;
-  }
-}
-
-@media only screen and (min-height: 1700px) {
-  main.home #gallery {
-    height: 80em;
-  }
-}
-
 /* Media Queries Based on Width Size of Screen */
 /*@media only screen and (min-width: 360px) {} */
 
@@ -653,5 +615,43 @@ header.index #cartlnk {
 
   #cartlnk img {
     max-width: 64px;
+  }
+}
+
+/* Media Queries Based on Height Size of Screen */
+
+@media only screen and (min-height: 784px) {
+  main.home #gallery {
+    height: 35em;
+  }
+}
+
+@media only screen and (min-height: 1006px) {
+  main.home #gallery {
+    height: 45em;
+  }
+}
+
+@media only screen and (min-height: 1080px) {
+  main.home #gallery {
+    height: 50em;
+  }
+}
+
+@media only screen and (min-height: 1260px) {
+  main.home #gallery {
+    height: 55em;
+  }
+}
+
+@media only screen and (min-height: 1440px) {
+  main.home #gallery {
+    height: 65em;
+  }
+}
+
+@media only screen and (min-height: 1700px) {
+  main.home #gallery {
+    height: 80em;
   }
 }
