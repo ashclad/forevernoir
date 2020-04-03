@@ -538,7 +538,7 @@ header.index #cartlnk {
   }
 
   .logo {
-    width: 26%;
+    width: auto;
     height: 22%;
   }
 
@@ -561,7 +561,7 @@ header.index #cartlnk {
   }
 
   .logo {
-    width: 23%;
+    width: auto;
     height: 19%;
   }
 }
@@ -581,7 +581,7 @@ header.index #cartlnk {
 
 @media only screen and (min-width: 1855px) {
   .logo {
-    width: 17%;
+    width: auto;
     height: 13%;
   }
 
