@@ -100,6 +100,10 @@ main.home {
   flex: none;
 }
 
+main.home .horizontalscroll, main.inventory .horizontalscroll {
+  height: 45em;
+}
+
 .primarynav ul.menu {
   display: flex;
   flex-wrap: nowrap;
@@ -134,7 +138,7 @@ main.home {
   padding-left: 3%;
 }
 
-.indexmenu.primarynav {
+.indexmenu.primarynav, .inventorymenu.secondarynav {
   display: inline-block;
   margin: 2em 0 1em 1em;
   padding: 0 9.6em 0 9.6em;
@@ -310,12 +314,6 @@ main.inventory .gallhanger {
   width: auto;
 }
 
-.inventorymenu.secondarynav {
-  display: inline-block;
-  margin: 2em 0 1em 1em;
-  padding: 0 9.6em 0 9.6em;
-}
-
 .inventorymenu .linkgrouping {
   background-color: var(--basel);
 }
@@ -441,12 +439,10 @@ body#indexinverse {
 
 main.home #gallery {
   box-shadow: 0 0 15px 3px var(--based) inset;
-  height: 45em;
 }
 
 main.inventory #gallery {
   box-shadow: 0 0 15px 3px var(--basel) inset;
-  height: 45em;
 }
 
 #gallery.about {
@@ -621,7 +617,7 @@ header.index #cartlnk {
 /* Media Queries Based on Height Size of Screen */
 
 @media only screen and (min-height: 784px) {
-  main.home #gallery {
+  main.home .horizontalscroll {
     height: 35em;
   }
 }
