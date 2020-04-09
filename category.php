@@ -6,6 +6,8 @@
     <meta name="keywords" content="shop,store,clothes,clothing,fashion,art">
     <meta name="description" content="Noir clothing store.">
     <link rel="stylesheet" type="text/css" href="css/master.css">
+    <script type="text/javascript" src="scripts/fun.js" defer></script>
+    <script type="text/javascript" src="scripts/run.js" defer></script>
     <link rel="icon" href="assets/logo.ico">
     <title>Forever Noir</title>
   </head>
