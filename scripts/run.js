@@ -1,1 +1,1 @@
-$(document.documentElement).wheel = scrollVertoHoriz;
+document.documentElement.addEventListener("wheel", scrollVertoHoriz);
