@@ -1,51 +1,54 @@
 console.log("ROOT PROCESS");
 
 if (window.jQuery) {
-    console.log("> jQuery initialized.");
+  console.log("> jQuery initialized.");
 } else {
-    console.log("> W: JQuery not initialized.");
+  console.log("> W: JQuery not initialized.");
 }
 
 function scrollportion(elem, direction = "v", mode = "deci") {
-    console.log("Executing scrollportion().");
-    var elemheight = elem.scrollHeight;
-    var elemwidth = elem.scrollWidth;
-    var winheight = window.innerHeight;
-    var winwidth = window.innerWidth;
-    const scrollableY = elemheight - winheight;
-    const scrollableX = elemwidth - winwidth;
-    var scrolldeci;
-    var scrollperc;
-    var scrolled;
+  console.log("Executing scrollportion().");
+  var elemheight = elem.scrollHeight;
+  var elemwidth = elem.scrollWidth;
+  var winheight = window.innerHeight;
+  var winwidth = window.innerWidth;
+  const scrollableY = elemheight - winheight;
+  const scrollableX = elemwidth - winwidth;
+  var scrolldeci;
+  var scrollperc;
+  var scrolled;
 
-    if (direction == "h" || direction == "horizontal") {
-        scrolled = window.scrollX;
-        console.log("> Window has been horizontally scrolled... " + scrolled + " amount.");
-        scrolldeci = scrolled / scrollableX;
-        console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
-        scrollperc = scrolldeci * 100;
-        console.log("> or, " + scrollperc + "% of scroll capacity.");
-    } else if (direction == "v" || direction == "vertical") {
-        scrolled = window.scrollY;
-        console.log("> Window has been horizontally scrolled..." + scrolled + " amount.");
-        scrolldeci = scrolled / scrollableY;
-        console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
-        scrollperc = scrolldeci * 100;
-        console.log("> or, " + scrollperc + "% of scroll capacity.");
-    } else {
-        console.log("> E: Unargued parameter. Please specify scroll direction.");
-    }
+  if (direction == "h" || direction == "horizontal") {
+      scrolled = window.scrollX;
+      console.log("> Window has been horizontally scrolled... " + scrolled + " amount.");
+      scrolldeci = scrolled / scrollableX;
+      console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
+      scrollperc = scrolldeci * 100;
+      console.log("> or, " + scrollperc + "% of scroll capacity.");
+  } else if (direction == "v" || direction == "vertical") {
+      scrolled = window.scrollY;
+      console.log("> Window has been horizontally scrolled..." + scrolled + " amount.");
+      scrolldeci = scrolled / scrollableY;
+      console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
+      scrollperc = scrolldeci * 100;
+      console.log("> or, " + scrollperc + "% of scroll capacity.");
+  } else {
+      console.log("> E: Unargued parameter. Please specify scroll direction.");
+  }
 
-    if (mode == "decimal" || mode == "deci" || mode == "." || mode == ",") {
-        return scrolldeci;
-    } else if (mode == "percentage" || mode == "perc" || mode == "%") {
-        return scrollperc;
-    } else {
-        console.log("> E: Unargued parameter. Please specify if you want a decimal or percentage output.");
-    }
+  if (mode == "decimal" || mode == "deci" || mode == "." || mode == ",") {
+      return scrolldeci;
+  } else if (mode == "percentage" || mode == "perc" || mode == "%") {
+      return scrollperc;
+  } else {
+      console.log("> E: Unargued parameter. Please specify if you want a decimal or percentage output.");
+  }
 }
 
 function scrollVertoHoriz(e) {
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    console.log("!: Only touch events available; scrollVertoHoriz() cannot be run.")
+  } else {
     console.log("!: Detected mousewheel event.");
     console.log("Executing scrollVertoHoriz().");
     var horizontalscroll = document.getElementsByClassName("horizontalscroll")[0];
@@ -62,4 +65,12 @@ function scrollVertoHoriz(e) {
         console.log("> Scroll position changed to: " + horizontalscroll.scrollLeft);
     }
     e.preventDefault();
+  }
+}
+
+function slideR(e) {
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    console.log("!: Touch slide detected.");
+    console.log(e);
+  }
 }
