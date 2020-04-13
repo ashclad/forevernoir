@@ -33,7 +33,7 @@ function scrollportion(elem, direction = "v", mode = "deci") {
         scrollperc = scrolldeci * 100;
         console.log("> or, " + scrollperc + "% of scroll capacity.");
     } else {
-        console.log("> Error: Unargued parameter. Please specify scroll direction.");
+        console.log("> E: Unargued parameter. Please specify scroll direction.");
     }
 
     if (mode == "decimal" || mode == "deci" || mode == "." || mode == ",") {
@@ -58,7 +58,7 @@ function scrollVertoHoriz(e) {
     console.log("> Ideal scroll steps: " + step);
     if (e.deltaY != 0) {
         console.log("> !: Wheeling detected to deviate from original value.");
-        horizontalscroll.scrollTo(horizontalscroll.scrollLeft + e.deltaY * step, horizontalscroll.scrollTop);
+        horizontalscroll.scrollTo(horizontalscroll.scrollLeft + e.deltaY + step * Math.sign(e.deltaY), horizontalscroll.scrollTop);
         console.log("> Scroll position changed to: " + horizontalscroll.scrollLeft);
     }
     e.preventDefault();

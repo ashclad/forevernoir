@@ -48,7 +48,7 @@ a {
   text-decoration: none;
 }
 
-body#indexinverse a {
+#indexinverse a {
   color: var(--based);
   text-decoration: none;
 }
@@ -86,22 +86,19 @@ main.home {
 }
 
 .horizontalscroll {
+  align-items: center;
   display: flex;
   flex-wrap: nowrap;
   flex-flow: row;
-  align-items: center;
   overflow-x: auto !important;
   overflow-y: hidden;
-  -ms-overflow-style: none;
   scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 45em;
 }
 
 .horizontalscroll * {
   flex: none;
-}
-
-main.home .horizontalscroll, main.inventory .horizontalscroll {
-  height: 45em;
 }
 
 .primarynav ul.menu {
@@ -110,7 +107,7 @@ main.home .horizontalscroll, main.inventory .horizontalscroll {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  left: 1.25em;
+  padding-left: 0;
 }
 
 .primarynav li.opt a:hover::before {
@@ -121,9 +118,9 @@ main.home .horizontalscroll, main.inventory .horizontalscroll {
 }
 
 .primarynav li.opt a:hover::after {
+  color: var(--red);
   content: ".py";
   display: inline;
-  color: var(--red);
   font-weight: bold;
 }
 
@@ -502,7 +499,7 @@ footer.home #copyright {
 
 #cartlnk img {
   max-width: 52px;
-  max-height: auto;
+  height: auto;
 }
 
 header.index #cartlnk {
@@ -519,10 +516,39 @@ header.index #cartlnk {
 
 /* Media Queries Based on Width Size of Screen */
 /*@media only screen and (min-width: 360px) {} */
+@media only screen and (min-width: 300px) {
+  .primarynav li.opt a {
+    padding: 1em 2em 1em 2em;
+  }
+
+  .inventorymenu.primarynav {
+    padding: 0 1em 0 1em;
+    margin: 0 auto 1em auto;
+  }
+
+  #triangle {
+    border-top: 50px solid var(--based);
+    border-right: 50px solid transparent;
+  }
+
+  .logo {
+    width: auto;
+    max-height: 250px;
+  }
+
+  #cartlnk {
+    top: 1em;
+    right: 1em;
+  }
+
+  #cartlnk img {
+    max-width: 25px;
+  }
+}
 
 @media only screen and (min-width: 600px) {
   .primarynav ul.menu {
-    left: 1em;
+    left: 2em;
   }
 
   .primarynav li.opt a {
@@ -530,12 +556,23 @@ header.index #cartlnk {
   }
 
   .inventorymenu.primarynav {
-    padding: 0 6.3em 0 6.3em;
+    padding: 0 3em 0 3em;
+    margin: 1em auto 2em auto;
+  }
+
+  #triangle {
+    border-top: 100px solid var(--based);
+    border-right: 100px solid transparent;
   }
 
   .logo {
     width: auto;
-    height: 22%;
+    max-height: 225px;
+  }
+
+  #cartlnk {
+    top: 2em;
+    right: 2em;
   }
 
   #cartlnk img {
@@ -544,10 +581,6 @@ header.index #cartlnk {
 }
 
 @media only screen and (min-width: 1006px) {
-  .primarynav ul.menu {
-    left: 1.25em;
-  }
-
   .primarynav li.opt a {
     padding: 2em 2.5em 2em 2.5em;
   }
@@ -558,7 +591,7 @@ header.index #cartlnk {
 
   .logo {
     width: auto;
-    height: 19%;
+    max-height: 150px;
   }
 }
 
@@ -568,21 +601,18 @@ header.index #cartlnk {
   }
 }
 
-@media only screen and (min-width: 1460px) {
-  .logo {
-    width: 20%;
-    height: 16%;
-  }
-}
+/*@media only screen and (min-width: 1460px) {
+
+}*/
 
 @media only screen and (min-width: 1855px) {
-  .logo {
-    width: auto;
-    height: 13%;
-  }
-
   .indexmenu .menu {
     padding-top: 4%;
+  }
+
+  .logo {
+    width: auto;
+    max-height: 125px;
   }
 }
 
@@ -616,38 +646,58 @@ header.index #cartlnk {
 
 /* Media Queries Based on Height Size of Screen */
 
+@media only screen and (min-height: 600px) {
+  header {
+    padding: 5% 15% 5% 15%;
+  }
+
+  .horizontalscroll {
+    height: 28em;
+  }
+}
+
+@media only screen and (min-height: 768px) {
+  header {
+    padding: 1% 15% 1% 15%;
+  }
+
+  .horizontalscroll {
+    height: 30em;
+  }
+}
+
 @media only screen and (min-height: 784px) {
-  main.home .horizontalscroll {
-    height: 35em;
+  .horizontalscroll {
+    height: 32em;
   }
 }
 
 @media only screen and (min-height: 1006px) {
-  main.home #gallery {
+  .horizontalscroll {
     height: 45em;
   }
 }
 
 @media only screen and (min-height: 1080px) {
-  main.home #gallery {
+  .horizontalscroll {
     height: 50em;
   }
 }
 
 @media only screen and (min-height: 1260px) {
-  main.home #gallery {
+  .horizontalscroll {
     height: 55em;
   }
 }
 
 @media only screen and (min-height: 1440px) {
-  main.home #gallery {
+  .horizontalscroll {
     height: 65em;
   }
 }
 
 @media only screen and (min-height: 1700px) {
-  main.home #gallery {
+  .horizontalscroll {
     height: 80em;
   }
 }
