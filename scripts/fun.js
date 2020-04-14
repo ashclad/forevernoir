@@ -97,28 +97,41 @@ function slider(e) {
     var shown = new Array();
     var notshown = new Array();
 
+    // pokecX and pokecY are coming up as NaN
+    /* please check https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android */
+
     var xDiff = pokecX - cX;
     var yDiff = pokecY - cY;
 
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
-      // ltr swipe
-    } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
       // rtl swipe
-    }
-
-    for (var i = 0; i < slide.length; i++) {
-      var slideClasses = slide[i].className.split(" ");
-      if (slideClasses.includes("show")) {
-        shown.push(i);
-        shown.push(i + 1);
-      } else {
-        notshown.push(i);
+      for (var i = 0; i < slide.length; i++) {
+        var slideClasses = slide[i].className.split(" ");
+        if (slideClasses.includes("show")) {
+          shown.push(i);
+          shown.push(i + 1);
+        } else {
+          notshown.push(i);
+        }
+        notshown.splice(0, 1);
       }
-      notshown.splice(0, 1);
+      shownnum = shown[0];
+      nextnum = shown[1];
+    } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
+      // ltr swipe
+      for (var i = 0; i < slide.length; i++) {
+        var slideClasses = slide[i].className.split(" ");
+        if (slideClasses.includes("show")) {
+          shown.push(i - 1);
+          shown.push(i);
+        } else {
+          notshown.push(i);
+        }
+        notshown.splice(slide.length - 1, 1);
+      }
+      shownnum = shown[0];
+      nextnum = shown[1];
     }
-
-    var shownnum = shown[0];
-    var nextnum = shown[1];
 
     if (typeof slide[nextnum] !== "undefined") {
       console.log("Iteratively altering element visibility for current and next element.");
@@ -136,4 +149,9 @@ function slider(e) {
   } else {
     console.warn("Only mouse or stylus events available; slider() cannot be run.");
   }
+
+  var pokecX = null;
+  var pokecY = null;
+  var pokeXY = null;
+  var poke = null;
 }
