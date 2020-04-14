@@ -6,6 +6,11 @@ if (window.jQuery) {
   console.warn("JQuery not initialized.");
 }
 
+var pokecX = null;
+var pokecY = null;
+var pokeXY = null;
+var poke = null;
+
 function scrollportion(elem, direction = "v", mode = "deci") {
   console.log("Executing scrollportion().");
   var elemheight = elem.scrollHeight;
@@ -76,7 +81,10 @@ function scrollVertoHoriz(e) {
 }
 
 function grabTouchPosition(e) {
-  console.warn("Function block empty.");
+  pokecX = e.touches[0].clientX;
+  pokecY = e.touches[0].clientY;
+  pokeXY = pokecX/pokecY;
+  poke = [pokecX, pokecY, pokeXY];
 }
 
 function slider(e) {
@@ -89,6 +97,15 @@ function slider(e) {
     var shown = new Array();
     var notshown = new Array();
 
+    var xDiff = pokecX - cX;
+    var yDiff = pokecY - cY;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
+      // ltr swipe
+    } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
+      // rtl swipe
+    }
+
     for (var i = 0; i < slide.length; i++) {
       var slideClasses = slide[i].className.split(" ");
       if (slideClasses.includes("show")) {
@@ -100,14 +117,20 @@ function slider(e) {
       notshown.splice(0, 1);
     }
 
-    console.log("Iteratively altering element visibility for current and next element.");
     var shownnum = shown[0];
-    var nextnum = shown[1]; // create a conditional for cases where nextnum would be undefined
-    slide[shownnum].className = "slide";
-    slide[nextnum].className = "slide show";
-    var nolonger = slide.findIndex(slide[shownnum]);
-    var now = slide.findIndex(slide[nextnum]);
-    console.info("Now, last element visible was number " + String(nolonger + 1) + ", while current visible element is number " + String(now + 1));
+    var nextnum = shown[1];
+
+    if (typeof slide[nextnum] !== "undefined") {
+      console.log("Iteratively altering element visibility for current and next element.");
+      slide[shownnum].className = "slide";
+      slide[nextnum].className = "slide show";
+      console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
+    } else {
+      var shownnum = shown[0];
+      var prevnum = shown[0] - 1;
+      console.info("Last element visible is number " + String(prevnum + 1) + ", while current visible element is number " + String(shownnum + 1));
+      console.info("No more elements available to alter visibility of.");
+    }
 
     e.preventDefault();
   } else {
