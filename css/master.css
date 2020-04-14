@@ -56,13 +56,13 @@ a {
   text-decoration: none;
 }
 
-/* class-based elements and their class-based sub-elements */
-
 header {
   position: initial;
   padding: 1% 15% 1% 15%;
   z-index: initial;
 }
+
+/* class-based elements and their class-based sub-elements */
 
 header.home {
   position: relative;
