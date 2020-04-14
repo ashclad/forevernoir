@@ -1,3 +1,6 @@
+/* make slideshow id element display as flex element and its children be stretch
+elements */
+
 /* identify class or id to be changed under media query
 by [class*="<class name>"] or [id*="<class id>"] */
 :root {
@@ -518,10 +521,6 @@ header.index #cartlnk {
 
 /* Media Queries */
 @media (hover: none) and (pointer: coarse) {
-  /* header.home {
-    margin-top: 15%;
-  } */
-
   main.home .horizontalscroll {
     display: none;
   }
@@ -540,10 +539,6 @@ header.index #cartlnk {
     max-width: 100%;
     height: auto;
   }
-
-  /* #skippara {
-    margin-top: 33%;
-  } */
 }
 
 /* Media Queries Based on Width Size of Screen */

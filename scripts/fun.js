@@ -3,7 +3,7 @@ console.log("ROOT PROCESS");
 if (window.jQuery) {
   console.log("> jQuery initialized.");
 } else {
-  console.log("> W: JQuery not initialized.");
+  console.warn("JQuery not initialized.");
 }
 
 function scrollportion(elem, direction = "v", mode = "deci") {
@@ -17,60 +17,98 @@ function scrollportion(elem, direction = "v", mode = "deci") {
   var scrolldeci;
   var scrollperc;
   var scrolled;
+  var err;
 
   if (direction == "h" || direction == "horizontal") {
-      scrolled = window.scrollX;
-      console.log("> Window has been horizontally scrolled... " + scrolled + " amount.");
-      scrolldeci = scrolled / scrollableX;
-      console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
-      scrollperc = scrolldeci * 100;
-      console.log("> or, " + scrollperc + "% of scroll capacity.");
+    scrolled = window.scrollX;
+    console.info("Window has been horizontally scrolled... " + scrolled + " amount.");
+    scrolldeci = scrolled / scrollableX;
+    console.info("As a portion, this is " + scrolldeci + " of full capacity...");
+    scrollperc = scrolldeci * 100;
+    console.info("...or, " + scrollperc + "% of scroll capacity.");
   } else if (direction == "v" || direction == "vertical") {
-      scrolled = window.scrollY;
-      console.log("> Window has been horizontally scrolled..." + scrolled + " amount.");
-      scrolldeci = scrolled / scrollableY;
-      console.log("> As a portion, this is " + scrolldeci + " of full capacity...");
-      scrollperc = scrolldeci * 100;
-      console.log("> or, " + scrollperc + "% of scroll capacity.");
+    scrolled = window.scrollY;
+    console.info("Window has been horizontally scrolled..." + scrolled + " amount.");
+    scrolldeci = scrolled / scrollableY;
+    console.info("As a portion, this is " + scrolldeci + " of full capacity...");
+    scrollperc = scrolldeci * 100;
+    console.info("...or, " + scrollperc + "% of scroll capacity.");
   } else {
-      console.log("> E: Unargued parameter. Please specify scroll direction.");
+    err = new Error("Unargued parameter. Please specify scroll direction.");
+    console.error(err);
   }
 
   if (mode == "decimal" || mode == "deci" || mode == "." || mode == ",") {
-      return scrolldeci;
+    return scrolldeci;
   } else if (mode == "percentage" || mode == "perc" || mode == "%") {
-      return scrollperc;
+    return scrollperc;
   } else {
-      console.log("> E: Unargued parameter. Please specify if you want a decimal or percentage output.");
+    var err = new Error("Unargued parameter. Please specify if you want a decimal or percentage output.")
+    console.error(err);
   }
 }
 
 function scrollVertoHoriz(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    console.log("!: Only touch events available; scrollVertoHoriz() cannot be run.")
+    console.info("Only touch events available; scrollVertoHoriz() cannot be run.")
   } else {
-    console.log("!: Detected mousewheel event.");
+    console.info("Detected mousewheel event.");
     console.log("Executing scrollVertoHoriz().");
-    var horizontalscroll = document.getElementsByClassName("horizontalscroll")[0];
-    console.log("> The width that can be scrolled for .horizontallscroll: " + horizontalscroll.scrollWidth);
-    var childnum = horizontalscroll.children.length;
-    console.log("> Number of .horizontallscroll child elements: " + childnum);
-    var widthperchild = horizontalscroll.scrollWidth / childnum;
-    console.log("> Scroll width per child: " + widthperchild);
-    var step = widthperchild / 4;
-    console.log("> Ideal scroll steps: " + step);
-    if (e.deltaY != 0) {
-        console.log("> !: Wheeling detected to deviate from original value.");
-        horizontalscroll.scrollTo(horizontalscroll.scrollLeft + e.deltaY + step * Math.sign(e.deltaY), horizontalscroll.scrollTop);
-        console.log("> Scroll position changed to: " + horizontalscroll.scrollLeft);
+    var horizontalscroll = document.getElementsByClassName("horizontalscroll");
+
+    for (var i = 0; i < horizontalscroll.length; i++) {
+      console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
+      var childnum = horizontalscroll[i].children.length;
+      console.info("Number of .horizontallscroll child elements: " + childnum);
+      var widthperchild = horizontalscroll[i].scrollWidth / childnum;
+      console.info("Scroll width per child: " + widthperchild);
+      var step = widthperchild / 4;
+      console.info("Ideal scroll steps: " + step);
+
+      if (e.deltaY != 0) {
+          console.info("Wheeling detected to deviate from original value.");
+          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * Math.sign(e.deltaY), horizontalscroll[i].scrollTop);
+          console.info("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+      }
     }
     e.preventDefault();
   }
 }
 
-function slideR(e) {
+function grabTouchPosition(e) {
+  console.warn("Function block empty.");
+}
+
+function slider(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    console.log("!: Touch slide detected.");
-    console.log(e);
+    var cX = e.touches[0].clientX;
+    var cY = e.touches[0].clientY;
+    console.info("Touch deviation detected in viewport: " + (cX/cY))
+    console.log("Executing slideR().");
+    var slide = document.getElementsByClassName("slide");
+    var shown = new Array();
+    var notshown = new Array();
+
+    for (var i = 0; i < slide.length; i++) {
+      var slideClasses = slide[i].className.split(" ");
+      if (slideClasses.includes("show")) {
+        shown.push(i);
+        shown.push(i + 1);
+      } else {
+        notshown.push(i);
+      }
+      notshown.splice(0, 1);
+    }
+
+    console.log("Iteratively altering element visibility for current and next element.");
+    var shownnum = shown[0];
+    var nextnum = shown[1]; // create a conditional for cases where nextnum would be undefined
+    slide[shownnum].className = "slide";
+    slide[nextnum].className = "slide show";
+    var nolonger = slide.findIndex(slide[shownnum]);
+    var now = slide.findIndex(slide[nextnum]);
+    console.info("Now, last element visible was number " + String(nolonger + 1) + ", while current visible element is number " + String(now + 1));
+
+    e.preventDefault();
   }
 }
