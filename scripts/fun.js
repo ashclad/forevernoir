@@ -97,15 +97,6 @@ function slider(e) {
     var shown = new Array();
     var notshown = new Array();
 
-    var xDiff = pokecX - cX;
-    var yDiff = pokecY - cY;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
-      // ltr swipe
-    } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
-      // rtl swipe
-    }
-
     for (var i = 0; i < slide.length; i++) {
       var slideClasses = slide[i].className.split(" ");
       if (slideClasses.includes("show")) {
