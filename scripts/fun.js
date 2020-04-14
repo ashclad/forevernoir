@@ -50,7 +50,7 @@ function scrollportion(elem, direction = "v", mode = "deci") {
 
 function scrollVertoHoriz(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    console.info("Only touch events available; scrollVertoHoriz() cannot be run.")
+    console.warn("Only touch events available; scrollVertoHoriz() cannot be run.")
   } else {
     console.info("Detected mousewheel event.");
     console.log("Executing scrollVertoHoriz().");
@@ -110,5 +110,7 @@ function slider(e) {
     console.info("Now, last element visible was number " + String(nolonger + 1) + ", while current visible element is number " + String(now + 1));
 
     e.preventDefault();
+  } else {
+    console.warn("Only mouse or stylus events available; slider() cannot be run.");
   }
 }
