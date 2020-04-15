@@ -1,3 +1,3 @@
 document.documentElement.addEventListener("wheel", scrollVertoHoriz, {passive: false});
-document.getElementById("slideshow").addEventListener("touchstart", grabTouchPosition);
-document.getElementById("slideshow").addEventListener("touchmove", slider);
+document.documentElement.addEventListener("touchstart", grabTouchPosition);
+document.documentElement.addEventListener("touchmove", slider, {passive: false});

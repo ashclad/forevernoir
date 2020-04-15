@@ -88,7 +88,7 @@ function grabTouchPosition(e) {
 }
 
 function slider(e) {
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY !== null) {
     var cX = e.touches[0].clientX;
     var cY = e.touches[0].clientY;
     console.info("Touch deviation detected in viewport: " + (cX/cY))
@@ -96,15 +96,18 @@ function slider(e) {
     var slide = document.getElementsByClassName("slide");
     var shown = new Array();
     var notshown = new Array();
-
-    // pokecX and pokecY are coming up as NaN
-    /* please check https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android */
+    var shownnum = null;
+    var nextnum = null;
+    var prevnum = null;
 
     var xDiff = pokecX - cX;
     var yDiff = pokecY - cY;
 
+    /* either make a function containing this conditional, to be used here, or
+    create a class-- in either case, make sure name is related to finger-swiping */
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
       // rtl swipe
+
       for (var i = 0; i < slide.length; i++) {
         var slideClasses = slide[i].className.split(" ");
         if (slideClasses.includes("show")) {
@@ -115,10 +118,25 @@ function slider(e) {
         }
         notshown.splice(0, 1);
       }
+
       shownnum = shown[0];
       nextnum = shown[1];
+
+      if (typeof slide[nextnum] !== "undefined") {
+        console.log("Iteratively altering element visibility for current and next element.");
+        slide[shownnum].className = "slide";
+        slide[nextnum].className = "slide show";
+        console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
+      } else {
+        prevnum = shownnum;
+        newshownnum = prevnum + 1;
+        console.info("Last element visible is number " + String(prevnum) + ", while current visible element is number " + String(newshownnum));
+        console.info("No more elements available to alter visibility of.");
+      }
+
     } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
       // ltr swipe
+
       for (var i = 0; i < slide.length; i++) {
         var slideClasses = slide[i].className.split(" ");
         if (slideClasses.includes("show")) {
@@ -127,31 +145,35 @@ function slider(e) {
         } else {
           notshown.push(i);
         }
-        notshown.splice(slide.length - 1, 1);
+        // notshown.splice(0, 1);
       }
-      shownnum = shown[0];
-      nextnum = shown[1];
-    }
 
-    if (typeof slide[nextnum] !== "undefined") {
-      console.log("Iteratively altering element visibility for current and next element.");
-      slide[shownnum].className = "slide";
-      slide[nextnum].className = "slide show";
-      console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
-    } else {
-      var shownnum = shown[0];
-      var prevnum = shown[0] - 1;
-      console.info("Last element visible is number " + String(prevnum + 1) + ", while current visible element is number " + String(shownnum + 1));
-      console.info("No more elements available to alter visibility of.");
+      prevnum = shown[0];
+      shownnum = shown[1];
+
+      if (typeof slide[prevnum] !== "undefined") {
+        console.log("Iteratively altering element visibility for current and next element.");
+        slide[shownnum].className = "slide";
+        slide[prevnum].className = "slide show";
+        console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(prevnum + 1));
+      } else {
+        prevnum = shown[0] + 2;
+        console.info("Current element visible is number " + String(shownnum) + ", while last element is number " + String(prevnum));
+        console.info("No more elements available to alter visibility of.");
+      }
+
     }
 
     e.preventDefault();
+
+  } else if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY === null) {
+    console.info("Waiting for screen touch.");
   } else {
     console.warn("Only mouse or stylus events available; slider() cannot be run.");
   }
 
-  var pokecX = null;
-  var pokecY = null;
-  var pokeXY = null;
-  var poke = null;
+  pokecX = null;
+  pokecY = null;
+  pokeXY = null;
+  poke = null;
 }
