@@ -6,11 +6,6 @@ if (window.jQuery) {
   console.warn("JQuery not initialized.");
 }
 
-var pokecX = null;
-var pokecY = null;
-var pokeXY = null;
-var poke = null;
-
 function scrollportion(elem, direction = "v", mode = "deci") {
   console.log("Executing scrollportion().");
   var elemheight = elem.scrollHeight;
@@ -122,7 +117,6 @@ function slider(e) {
       console.info("Last element visible is number " + String(prevnum + 1) + ", while current visible element is number " + String(shownnum + 1));
       console.info("No more elements available to alter visibility of.");
     }
-
     e.preventDefault();
   } else {
     console.warn("Only mouse or stylus events available; slider() cannot be run.");
