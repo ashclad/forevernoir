@@ -6,11 +6,108 @@ if (window.jQuery) {
   console.warn("JQuery not initialized.");
 }
 
+/* global variables */
 var pokecX = null;
 var pokecY = null;
 var pokeXY = null;
 var poke = null;
 
+/* class definitions */
+class Swipe {
+  constructor(xarray, yarray) {
+    console.info("Please prevent default touchmove event behavior either before or after full use of Swipe object.");
+    this.xchange = xarray[0] - xarray[1];
+    this.ychange = yarray[0] - yarray[1];
+  }
+
+  reinitialize (pokeX, pokeY) {
+    if (!pokeX && !pokeY) {
+      console.log("Unargued parameters for initial touch state with touchstart event.");
+    } else if (pokeX == "undefined" && pokeY == "undefined") {
+      console.log("Unargued parameters for initial touch state with touchstart event.");
+    } else {
+      pokeX = null;
+      pokeY = null;
+    }
+  }
+
+  rtl(elem, visibleclass) {
+    var shown = new Array();
+    var notshown = new Array();
+
+    if (Math.abs(this.xchange) > Math.abs(this.ychange) && this.xchange > 0) {
+      // rtl swipe
+
+      for (var i = 0; i < elem.length; i++) {
+        var elemClasses = elem[i].className.split(" ");
+        if (elemClasses.includes(visibleclass)) {
+          shown.push(i);
+          shown.push(i + 1);
+        } else {
+          notshown.push(i);
+        }
+        notshown.splice(0, 1);
+      }
+
+      shownnum = shown[0];
+      nextnum = shown[1];
+
+      if (typeof elem[nextnum] !== "undefined") {
+        console.log("Iteratively altering element visibility for current and next element.");
+        elem[shownnum].className = "slide";
+        elem[nextnum].className = "slide show";
+        console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
+      } else {
+        prevnum = shownnum;
+        newshownnum = prevnum + 1;
+        console.info("Last element visible is number " + String(prevnum) + ", while current visible element is number " + String(newshownnum));
+        console.info("No more elements available to alter visibility of.");
+      }
+    }
+
+    xarray = null;
+    yarray = null;
+  }
+
+  ltr(elem, visibleclass) {
+    var shown = new Array();
+    var notshown = new Array();
+
+    if (Math.abs(this.xchange) > Math.abs(this.ychange) && this.xchange < 0) {
+      // ltr swipe
+
+      for (var i = 0; i < elem.length; i++) {
+        var elemClasses = elem[i].className.split(" ");
+        if (elemClasses.includes(visibleclass)) {
+          shown.push(i - 1);
+          shown.push(i);
+        } else {
+          notshown.push(i);
+        }
+        // notshown.splice(0, 1);
+      }
+
+      prevnum = shown[0];
+      shownnum = shown[1];
+
+      if (typeof elem[prevnum] !== "undefined") {
+        console.log("Iteratively altering element visibility for current and next element.");
+        elem[shownnum].className = "slide";
+        elem[prevnum].className = "slide show";
+        console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(prevnum + 1));
+      } else {
+        prevnum = shown[0] + 2;
+        console.info("Current element visible is number " + String(shownnum) + ", while last element is number " + String(prevnum));
+        console.info("No more elements available to alter visibility of.");
+      }
+    }
+
+    xarray = null;
+    yarray = null;
+  }
+}
+
+/* function definitions */
 function scrollportion(elem, direction = "v", mode = "deci") {
   console.log("Executing scrollportion().");
   var elemheight = elem.scrollHeight;
@@ -53,6 +150,13 @@ function scrollportion(elem, direction = "v", mode = "deci") {
   }
 }
 
+function grabTouchPosition(e) {
+  pokecX = e.touches[0].clientX;
+  pokecY = e.touches[0].clientY;
+  pokeXY = pokecX/pokecY;
+  poke = [pokecX, pokecY, pokeXY];
+}
+
 function scrollVertoHoriz(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
     console.warn("Only touch events available; scrollVertoHoriz() cannot be run.")
@@ -78,13 +182,6 @@ function scrollVertoHoriz(e) {
     }
     e.preventDefault();
   }
-}
-
-function grabTouchPosition(e) {
-  pokecX = e.touches[0].clientX;
-  pokecY = e.touches[0].clientY;
-  pokeXY = pokecX/pokecY;
-  poke = [pokecX, pokecY, pokeXY];
 }
 
 function slider(e) {
