@@ -15,49 +15,8 @@ var poke = null;
 /* class definitions */
 
 /* function definitions */
-function scrollportion(elem, direction = "v", mode = "deci") {
-  console.log("Executing scrollportion().");
-  var elemheight = elem.scrollHeight;
-  var elemwidth = elem.scrollWidth;
-  var winheight = window.innerHeight;
-  var winwidth = window.innerWidth;
-  const scrollableY = elemheight - winheight;
-  const scrollableX = elemwidth - winwidth;
-  var scrolldeci;
-  var scrollperc;
-  var scrolled;
-  var err;
-
-  if (direction == "h" || direction == "horizontal") {
-    scrolled = window.scrollX;
-    console.info("Window has been horizontally scrolled... " + scrolled + " amount.");
-    scrolldeci = scrolled / scrollableX;
-    console.info("As a portion, this is " + scrolldeci + " of full capacity...");
-    scrollperc = scrolldeci * 100;
-    console.info("...or, " + scrollperc + "% of scroll capacity.");
-  } else if (direction == "v" || direction == "vertical") {
-    scrolled = window.scrollY;
-    console.info("Window has been horizontally scrolled..." + scrolled + " amount.");
-    scrolldeci = scrolled / scrollableY;
-    console.info("As a portion, this is " + scrolldeci + " of full capacity...");
-    scrollperc = scrolldeci * 100;
-    console.info("...or, " + scrollperc + "% of scroll capacity.");
-  } else {
-    err = new Error("Unargued parameter. Please specify scroll direction.");
-    console.error(err);
-  }
-
-  if (mode == "decimal" || mode == "deci" || mode == "." || mode == ",") {
-    return scrolldeci;
-  } else if (mode == "percentage" || mode == "perc" || mode == "%") {
-    return scrollperc;
-  } else {
-    var err = new Error("Unargued parameter. Please specify if you want a decimal or percentage output.")
-    console.error(err);
-  }
-}
-
 function grabTouchPosition(e) {
+  console.info("Screen has been touched.");
   pokecX = e.touches[0].clientX;
   pokecY = e.touches[0].clientY;
   pokeXY = pokecX/pokecY;
@@ -100,9 +59,6 @@ function slider(e) {
     var slide = document.getElementsByClassName("slide");
     var shown = new Array();
     var notshown = new Array();
-    var shownnum = null;
-    var nextnum = null;
-    var prevnum = null;
 
     var xDiff = pokecX - cX;
     var yDiff = pokecY - cY;
@@ -123,17 +79,17 @@ function slider(e) {
         notshown.splice(0, 1);
       }
 
-      shownnum = shown[0];
-      nextnum = shown[1];
+      var shownnum = shown[0];
+      var nextnum = shown[1];
 
       if (typeof slide[nextnum] !== "undefined") {
-        console.log("Iteratively altering element visibility for current and next element.");
+        console.log("> Iteratively altering element visibility for current and next element.");
         slide[shownnum].className = "slide";
         slide[nextnum].className = "slide show";
         console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
       } else {
-        prevnum = shownnum;
-        newshownnum = prevnum + 1;
+        var prevnum = shownnum;
+        var newshownnum = prevnum + 1;
         console.info("Last element visible is number " + String(prevnum) + ", while current visible element is number " + String(newshownnum));
         console.info("No more elements available to alter visibility of.");
       }
@@ -152,11 +108,11 @@ function slider(e) {
         // notshown.splice(0, 1);
       }
 
-      prevnum = shown[0];
-      shownnum = shown[1];
+      var prevnum = shown[0];
+      var shownnum = shown[1];
 
       if (typeof slide[prevnum] !== "undefined") {
-        console.log("Iteratively altering element visibility for current and next element.");
+        console.log("> Iteratively altering element visibility for current and next element.");
         slide[shownnum].className = "slide";
         slide[prevnum].className = "slide show";
         console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(prevnum + 1));
@@ -170,7 +126,7 @@ function slider(e) {
     e.preventDefault();
 
   } else if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY === null) {
-    console.info("Waiting for screen touch.");
+    console.info("Screen not yet touched.");
   } else {
     console.warn("Only mouse or stylus events available; slider() cannot be run.");
   }
