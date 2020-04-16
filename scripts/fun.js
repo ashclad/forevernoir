@@ -67,7 +67,6 @@ function slider(e) {
     create a class-- in either case, make sure name is related to finger-swiping */
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
       // rtl swipe
-
       for (var i = 0; i < slide.length; i++) {
         var slideClasses = slide[i].className.split(" ");
         if (slideClasses.includes("show")) {
@@ -93,10 +92,8 @@ function slider(e) {
         console.info("Last element visible is number " + String(prevnum) + ", while current visible element is number " + String(newshownnum));
         console.info("No more elements available to alter visibility of.");
       }
-
     } else if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff < 0) {
       // ltr swipe
-
       for (var i = 0; i < slide.length; i++) {
         var slideClasses = slide[i].className.split(" ");
         if (slideClasses.includes("show")) {
@@ -121,10 +118,8 @@ function slider(e) {
         console.info("Current element visible is number " + String(shownnum) + ", while last element is number " + String(prevnum));
         console.info("No more elements available to alter visibility of.");
       }
-
     }
     e.preventDefault();
-
   } else if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY === null) {
     console.info("Screen not yet touched.");
   } else {
