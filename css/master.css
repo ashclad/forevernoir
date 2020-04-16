@@ -292,7 +292,7 @@ main.home .containimage {
 main.home .gallhanger {
   /* some things (i.e. top positionality) may
   vary according to original comic image dimensions */
-  border: solid 2px var(--ext);
+  /* border: solid 2px var(--ext); */
   height: 85%;
   width: auto;
 }
