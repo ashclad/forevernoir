@@ -6,8 +6,6 @@ if (window.jQuery) {
   console.warn("JQuery not initialized.");
 }
 
-<<<<<<< HEAD
-=======
 /* global variables */
 var pokecX = null;
 var pokecY = null;
@@ -110,7 +108,6 @@ class Swipe {
 }
 
 /* function definitions */
->>>>>>> swipedetection
 function scrollportion(elem, direction = "v", mode = "deci") {
   console.log("Executing scrollportion().");
   var elemheight = elem.scrollHeight;
@@ -200,13 +197,6 @@ function slider(e) {
     var nextnum = null;
     var prevnum = null;
 
-<<<<<<< HEAD
-    for (var i = 0; i < slide.length; i++) {
-      var slideClasses = slide[i].className.split(" ");
-      if (slideClasses.includes("show")) {
-        shown.push(i);
-        shown.push(i + 1);
-=======
     var xDiff = pokecX - cX;
     var yDiff = pokecY - cY;
 
@@ -234,7 +224,6 @@ function slider(e) {
         slide[shownnum].className = "slide";
         slide[nextnum].className = "slide show";
         console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
->>>>>>> swipedetection
       } else {
         prevnum = shownnum;
         newshownnum = prevnum + 1;
