@@ -43,7 +43,42 @@ function scrollVertoHoriz(e) {
       if (e.deltaY != 0) {
           console.info("Wheeling detected to deviate from original value.");
           horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * Math.sign(e.deltaY), horizontalscroll[i].scrollTop);
-          console.info("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+      }
+    }
+    e.preventDefault();
+  }
+}
+
+function arrowNav(e) {
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    console.warn("No physical keyboard likely to be in use; arrowNav() cannot be run.");
+  } else {
+    var horizontalscroll = document.getElementsByClassName("horizontalscroll");
+
+    for (var i = 0; i < horizontalscroll.length; i++) {
+      console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
+      var childnum = horizontalscroll[i].children.length;
+      console.info("Number of .horizontallscroll child elements: " + childnum);
+      var widthperchild = horizontalscroll[i].scrollWidth / childnum;
+      console.info("Scroll width per child: " + widthperchild);
+      var step = widthperchild / 4;
+      console.info("Ideal scroll steps: " + step);
+
+      if (e.key == "ArrowRight" && horizontalscroll[i].scrollLeft >= 0 && horizontalscroll[i].scrollLeft < horizontalscroll[i].scrollWidth) {
+        console.info("Right arrow key press detected while rightward movement has not been exhausted.");
+        console.log("Initiating rightward scroll.");
+        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + step, horizontalscroll[i].scrollTop);
+      } else if (e.key == "ArrowLeft" && horizontalscroll[i].scrollLeft != 0) {
+        console.info("Left arrow key press detected while leftward movement has not been exhausted.");
+        console.log("Initiating leftward scroll.");
+        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + (step * -1), horizontalscroll[i].scrollTop);
+      } else if (e.key == "ArrowRight" && horizontalscroll[i].scrollLeft == horizontalscroll[i].scrollWidth) {
+        console.info("Right arrow key press detected while rightward movement has been exhausted.");
+        console.info("Cannot scroll further right.");
+      } else if (e.key == "ArrowLeft" && horizontalscroll[i].scrollLeft == 0) {
+        console.info("Left arrow key press detected while leftward movement has been exhausted.");
+        console.info("Cannot scroll further left.");
       }
     }
     e.preventDefault();
@@ -63,8 +98,6 @@ function slider(e) {
     var xDiff = pokecX - cX;
     var yDiff = pokecY - cY;
 
-    /* either make a function containing this conditional, to be used here, or
-    create a class-- in either case, make sure name is related to finger-swiping */
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
       // rtl swipe
       for (var i = 0; i < slide.length; i++) {
