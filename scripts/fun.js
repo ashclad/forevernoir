@@ -48,13 +48,27 @@ function scrollVertoHoriz(e) {
       if (e.deltaY != 0) {
         console.info("Wheeling detected to deviate from original value.");
         var direction = Math.sign(e.deltaY);
-        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
-        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+        // scrollLeft comparison to value rather than variable is temporary
+        if (direction == 1 && horizontalscroll[i].scrollLeft == 3189) {
+          console.info("Cannot scroll further right.");
+        } else if (direction == -1 && horizontalscroll[i].scrollLeft == 0) {
+          console.info("Cannot scroll further left.");
+        } else {
+          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
+          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+        }
       } else if (e.deltaX != 0) {
         console.info("Wheeling detected to deviate from original value.");
         var direction = Math.sign(e.deltaX);
-        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaX + step * direction, horizontalscroll[i].scrollTop);
-        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+        // scrollLeft comparison to value rather than variable is temporary
+        if (direction == 1 && horizontalscroll[i].scrollLeft == 3189) {
+          console.info("Cannot scroll further right.");
+        } else if (direction == -1 && horizontalscroll[i].scrollLeft == 0) {
+          console.info("Cannot scroll further left.");
+        } else {
+          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaX + step * direction, horizontalscroll[i].scrollTop);
+          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+        }
       }
     }
     e.preventDefault();
