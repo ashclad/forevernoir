@@ -30,10 +30,15 @@ function scrollVertoHoriz(e) {
     console.info("Detected mousewheel event.");
     console.log("Executing scrollVertoHoriz().");
     var horizontalscroll = document.getElementsByClassName("horizontalscroll");
+    var subelem;
+    var childnum;
 
     for (var i = 0; i < horizontalscroll.length; i++) {
       console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      var childnum = horizontalscroll[i].children.length;
+      subelem = document.getElementsByClassName("comic");
+      for (var f = 0; f < subelem.length; f++) {
+        childnum = subelem[f].children.length;
+      }
       console.info("Number of .horizontallscroll child elements: " + childnum);
       var widthperchild = horizontalscroll[i].scrollWidth / childnum;
       console.info("Scroll width per child: " + widthperchild);
@@ -41,9 +46,15 @@ function scrollVertoHoriz(e) {
       console.info("Ideal scroll steps: " + step);
 
       if (e.deltaY != 0) {
-          console.info("Wheeling detected to deviate from original value.");
-          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * Math.sign(e.deltaY), horizontalscroll[i].scrollTop);
-          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+        console.info("Wheeling detected to deviate from original value.");
+        var direction = Math.sign(e.deltaY);
+        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
+        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
+      } else if (e.deltaX != 0) {
+        console.info("Wheeling detected to deviate from original value.");
+        var direction = Math.sign(e.deltaX);
+        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaX + step * direction, horizontalscroll[i].scrollTop);
+        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
       }
     }
     e.preventDefault();
@@ -54,11 +65,17 @@ function arrowNav(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
     console.warn("No physical keyboard likely to be in use; arrowNav() cannot be run.");
   } else {
+    console.log(e);
     var horizontalscroll = document.getElementsByClassName("horizontalscroll");
+    var childnum;
+    var subelem;
 
     for (var i = 0; i < horizontalscroll.length; i++) {
       console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      var childnum = horizontalscroll[i].children.length;
+      subelem = document.getElementsByClassName("comic");
+      for (var f = 0; f < subelem.length; f++) {
+        childnum = subelem[f].children.length;
+      }
       console.info("Number of .horizontallscroll child elements: " + childnum);
       var widthperchild = horizontalscroll[i].scrollWidth / childnum;
       console.info("Scroll width per child: " + widthperchild);

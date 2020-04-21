@@ -13,7 +13,7 @@
     <script type="text/javascript" src="scripts/run.js" defer></script>
     <title>Forever Noir</title>
   </head>
-  <body>
+  <body id="inverse">
     <!-- the header should be animated such that it covers the entire page
     as a "layer," and begins to "fold" upward until reaching appropriate
     navigation bar height, all while the logo also shrinks to appropriate
@@ -25,7 +25,8 @@
     <main class="home">
       <!-- the horizontallscroll element class is what will have the
       relevant properties to enable side-scrolling -->
-      <div id="gallery" class="about horizontalscroll">
+      <div class="horizontalscroll">
+        <div id="gallery" class="about comic">
         <!-- for comic html size, multiply or divide original source dimensions by ~2.2 -->
         <img class="gallhanger" src="assets/comic_panel 1.png">
         <img class="gallhanger" src="assets/comic_panel 2.png">
@@ -74,6 +75,7 @@
             </div>
           </ul>
         </nav>
+      </div>
       </div>
       <div id="slideshow" class="about">
         <img class="slide show" src="assets/comic_panel 1.png">

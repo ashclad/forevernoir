@@ -20,42 +20,42 @@
   0% {top: 25em; z-index: 12;}
   33% {top: 25em; z-index: 12;}
   75% {z-index: 9;}
-  100% {top: 0em; z-index: 0;}
+  100% {top: 0; z-index: 0;}
 }
 
 @keyframes overlaydisappear {
-  0% {opacity: 1.0; z-index: 5; height: 100%; visibility: visible;}
-  33% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
-  75% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
+  0% {opacity: 1; z-index: 5; height: 100%; visibility: visible;}
+  33% {opacity: 1; z-index: 2; height: 100%; visibility: visible;}
+  75% {opacity: 1; z-index: 2; height: 100%; visibility: visible;}
   85% {opacity: 0.5; z-index: 1; height: 65%; visibility: visible;}
-  100% {opacity: 0.0; z-index: -1; height: 0%; visibility: invisible;}
+  100% {opacity: 0; z-index: -1; height: 0; visibility: invisible;}
 }
 
 @keyframes widthdim {
   0% { width: 8em; }
   50% { width: 4em;}
-  100% { width: 0em; }
+  100% { width: 0; }
 }
 
 @keyframes widthcompenz {
-  0% { width: 0em; background-color: var(--ext); height: 2.75em; }
+  0% { width: 0; background-color: var(--ext); height: 2.75em; }
   50% { width: 4em;}
   100% { width: 8em; background-color: var(--red); height: 2.75em; }
 }
 
 @keyframes texton {
-  0% { opacity: 0.0; color: var(--based); }
-  100% { opacity: 1.0; color: var(--basel); }
+  0% { opacity: 0; color: var(--based); }
+  100% { opacity: 1; color: var(--basel); }
 }
 
 @keyframes textontwo {
-  0% { opacity: 0.0; color: var(--ext); }
-  100% { opacity: 1.0; color: var(--basel); }
+  0% { opacity: 0; color: var(--ext); }
+  100% { opacity: 1; color: var(--basel); }
 }
 
 @keyframes textoff {
-  0% { opacity: 1.0; }
-  100% { opacity: 0.0; }
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes slidingleft {
@@ -81,8 +81,8 @@
   }*/
 
   body {
-    background-color: var(--based);
-    color: var(--basel);
+    background-color: var(--basel);
+    color: var(--based);
   }
 
   header {
@@ -115,14 +115,12 @@
 
   header.home {
     position: relative;
-    top: 25em;
-    z-index: 10;
     animation: headertransit 4s forwards;
   }
 
   .logo {
     max-width: 12%;
-    max-height: auto;
+    height: auto;
   }
 
   main.home {
@@ -130,22 +128,21 @@
     margin-right: 0;
   }
 
-  .horizontalscroll {
-    align-items: center;
+  .comic {
     display: inline-block;
     white-space: nowrap;
-    /* flex-wrap: nowrap;
-    flex-flow: row;
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none; */
-    height: 45em;
+    height: 100%;
   }
 
-  /* .horizontalscroll * {
-    flex: none;
-  } */
+  .horizontalscroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    height: 45em;
+    padding-bottom: 1%;
+    /* scroll-behavior: smooth; */
+    scrollbar-color: var(--basel) var(--based);
+  }
 
   .primarynav ul.menu {
     display: flex;
@@ -180,122 +177,6 @@
     padding: 2em 2.5em 2em 2.5em;
   }
 
-  #gallery {
-    padding-right: 3%;
-    padding-left: 3%;
-  }
-
-  .indexmenu.primarynav, .inventorymenu.secondarynav {
-    display: inline-block;
-    margin: 2em 0 1em 1em;
-    padding: 0 9.6em 0 9.6em;
-  }
-
-  .indexmenu.primarynav ul.menu {
-    margin: 10% 0 10% 0;
-    padding: 0;
-    list-style-type: none;
-    display: block;
-    height: initial;
-    position: initial;
-  }
-
-  .inventorymenu.primarynav {
-    display: block;
-    margin: 2em auto 2em auto;
-    padding: 0 9.6em 1em 9.6em;
-  }
-
-  /* .inventorymenu.primarynav ul.menu > * {
-    float: left;
-  } */
-
-  li.opt {
-    display: inline-block;
-  }
-
-  .indexmenu .linkgrouping {
-    background-color: var(--ext);
-  }
-
-  .indexmenu .linkgrouping li.opt {
-    overflow: hidden;
-    width: 8em;
-    height: 2.75em;
-    display: block;
-    white-space: nowrap;
-    text-align: center;
-    margin-bottom: 8%;
-    margin-top: 4%;
-  }
-
-  .indexmenu .linkgrouping li.opt a {
-    position: relative;
-    top: 25%;
-  }
-
-  .indexmenu .linkgrouping li.opt.short {
-    width: 0em;
-    height: 0em;
-    display: block;
-    text-align: center;
-    float: left;
-    margin: 0;
-  }
-
-  .indexmenu .linkgrouping:hover > .short {
-    animation: widthcompenz 0.5s linear forwards;
-  }
-
-  .indexmenu .linkgrouping:hover > .long {
-    animation: widthdim 0.5s linear forwards;
-  }
-
-  .indexmenu.primarynav li.opt.short > * {
-    display: block;
-    color: var(--based);
-    opacity: 0.0;
-  }
-
-  .indexmenu.primarynav li.opt.short:hover > * {
-    animation: texton 0.25s ease-in forwards;
-  }
-
-  .indexmenu.primarynav li.opt {
-    display: block;
-    opacity: 1.0;
-  }
-
-  .indexmenu.primarynav li.opt.short:hover ~ * a {
-    animation: textoff 0.01s linear forwards;
-  }
-
-  .indexmenu.primarynav li.opt.short a {
-    color: var(--based);
-  }
-
-  .indexmenu.primarynav li.opt a {
-    color: var(--basel);
-  }
-
-  .indexmenu.primarynav li.opt a:hover::before {
-    content: none;
-    display: inline-block;
-    font-weight: auto;
-  }
-
-  .indexmenu.primarynav li.opt a:hover::after {
-    content: none;
-    display: none;
-    font-weight: auto;
-  }
-
-  .indexmenu.primarynav li.opt a {
-    border: initial;
-    box-shadow: initial;
-    padding: initial;
-  }
-
   .secondarynav ul.menu {
     margin: 10% 0 10% 0;
     display: block;
@@ -304,22 +185,25 @@
     list-style-type: none;
   }
 
-  main.home .containimage {
-    white-space: nowrap;
-    height: 100%;
-    width: auto;
+  /* code indexmenu primarynav here */
+
+  .indexmenu.primarynav {
+    display: none;
   }
 
   .gallhanger {
     display: inline-block;
-    margin: 0 0.5em 0 0.5em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    vertical-align: middle;
+    padding: 1% 0 1% 0;
   }
 
   main.home .gallhanger {
     /* some things (i.e. top positionality) may
     vary according to original comic image dimensions */
     /* border: solid 2px var(--ext); */
-    height: 85%;
+    height: 100%;
     width: auto;
   }
 
@@ -431,9 +315,14 @@
 
   /* id-based elements and their id-based sub-elements */
 
-  body#indexinverse {
-    background-color: var(--basel);
-    color: var(--based);
+  #gallery {
+    padding-right: 3%;
+    padding-left: 3%;
+  }
+
+  body#inverse {
+    background-color: var(--based);
+    color: var(--basel);
   }
 
   #mainlogo {
@@ -455,6 +344,8 @@
 
   main.home #gallery {
     box-shadow: 0 0 15px 3px var(--based) inset;
+    position: relative;
+    left: 25%;
   }
 
   main.inventory #gallery {
