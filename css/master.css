@@ -1,7 +1,4 @@
-/* incorporate animation using css and javascript for when images slide in */
-
-/* identify class or id to be changed under media query
-by [class*="<class name>"] or [id*="<class id>"] */
+/* Definitions */
 :root {
   /* Base Colors */
   /* Main Dark Hues */
@@ -17,6 +14,58 @@ by [class*="<class name>"] or [id*="<class id>"] */
   --yellow: #f4f29d;
   --altgreen: #3aff99;
   --altblue: #5bffff;
+}
+
+@keyframes headertransit {
+  0% {top: 25em; z-index: 12;}
+  33% {top: 25em; z-index: 12;}
+  75% {z-index: 9;}
+  100% {top: 0em; z-index: 0;}
+}
+
+@keyframes overlaydisappear {
+  0% {opacity: 1.0; z-index: 5; height: 100%; visibility: visible;}
+  33% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
+  75% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
+  85% {opacity: 0.5; z-index: 1; height: 65%; visibility: visible;}
+  100% {opacity: 0.0; z-index: -1; height: 0%; visibility: invisible;}
+}
+
+@keyframes widthdim {
+  0% { width: 8em; }
+  50% { width: 4em;}
+  100% { width: 0em; }
+}
+
+@keyframes widthcompenz {
+  0% { width: 0em; background-color: var(--ext); height: 2.75em; }
+  50% { width: 4em;}
+  100% { width: 8em; background-color: var(--red); height: 2.75em; }
+}
+
+@keyframes texton {
+  0% { opacity: 0.0; color: var(--based); }
+  100% { opacity: 1.0; color: var(--basel); }
+}
+
+@keyframes textontwo {
+  0% { opacity: 0.0; color: var(--ext); }
+  100% { opacity: 1.0; color: var(--basel); }
+}
+
+@keyframes textoff {
+  0% { opacity: 1.0; }
+  100% { opacity: 0.0; }
+}
+
+@keyframes slidingleft {
+  0% {right: -105%;}
+  100% {right: 0;}
+}
+
+@keyframes slidingright {
+  0% {left: -105%;}
+  100% {left: 0;}
 }
 
 @media only screen {
@@ -71,13 +120,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
     animation: headertransit 4s forwards;
   }
 
-  @keyframes headertransit {
-    0% {top: 25em; z-index: 12;}
-    33% {top: 25em; z-index: 12;}
-    75% {z-index: 9;}
-    100% {top: 0em; z-index: 0;}
-  }
-
   .logo {
     max-width: 12%;
     max-height: auto;
@@ -90,23 +132,20 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   .horizontalscroll {
     align-items: center;
-    display: flex;
-    flex-wrap: nowrap;
+    display: inline-block;
+    white-space: nowrap;
+    /* flex-wrap: nowrap;
     flex-flow: row;
     overflow-x: auto !important;
     overflow-y: hidden;
     scrollbar-width: none;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; */
     height: 45em;
   }
 
-  .horizontalscroll * {
+  /* .horizontalscroll * {
     flex: none;
-  }
-
-  .primarynav {
-    vertical-align: middle;
-  }
+  } */
 
   .primarynav ul.menu {
     display: flex;
@@ -208,20 +247,8 @@ by [class*="<class name>"] or [id*="<class id>"] */
     animation: widthcompenz 0.5s linear forwards;
   }
 
-  @keyframes widthcompenz {
-    0% { width: 0em; background-color: var(--ext); height: 2.75em; }
-    50% { width: 4em;}
-    100% { width: 8em; background-color: var(--red); height: 2.75em; }
-  }
-
   .indexmenu .linkgrouping:hover > .long {
     animation: widthdim 0.5s linear forwards;
-  }
-
-  @keyframes widthdim {
-    0% { width: 8em; }
-    50% { width: 4em;}
-    100% { width: 0em; }
   }
 
   .indexmenu.primarynav li.opt.short > * {
@@ -234,11 +261,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
     animation: texton 0.25s ease-in forwards;
   }
 
-  @keyframes texton {
-    0% { opacity: 0.0; color: var(--based); }
-    100% { opacity: 1.0; color: var(--basel); }
-  }
-
   .indexmenu.primarynav li.opt {
     display: block;
     opacity: 1.0;
@@ -246,11 +268,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   .indexmenu.primarynav li.opt.short:hover ~ * a {
     animation: textoff 0.01s linear forwards;
-  }
-
-  @keyframes textoff {
-    0% { opacity: 1.0; }
-    100% { opacity: 0.0; }
   }
 
   .indexmenu.primarynav li.opt.short a {
@@ -369,11 +386,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
     animation: textontwo 0.25s ease-in forwards;
   }
 
-  @keyframes textontwo {
-    0% { opacity: 0.0; color: var(--ext); }
-    100% { opacity: 1.0; color: var(--basel); }
-  }
-
   .inventorymenu.secondarynav li.opt {
     display: block;
     opacity: 1.0;
@@ -439,14 +451,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
     opacity: 1.0;
     z-index: 5;
     animation: overlaydisappear 4s forwards;
-  }
-
-  @keyframes overlaydisappear {
-    0% {opacity: 1.0; z-index: 5; height: 100%; visibility: visible;}
-    33% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
-    75% {opacity: 1.0; z-index: 2; height: 100%; visibility: visible;}
-    85% {opacity: 0.5; z-index: 1; height: 65%; visibility: visible;}
-    100% {opacity: 0.0; z-index: -1; height: 0%; visibility: invisible;}
   }
 
   main.home #gallery {
@@ -573,16 +577,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
     main.home .slide.show {
       display: block;
       position: relative;
-    }
-
-    @keyframes slidingleft {
-      0% {right: -105%;}
-      100% {right: 0;}
-    }
-
-    @keyframes slidingright {
-      0% {left: -105%;}
-      100% {left: 0;}
     }
   }
 
