@@ -58,7 +58,7 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   header {
     position: initial;
-    padding: 1% 15% 1% 15%;
+    padding: 1% 1em 1% 1em;
     z-index: initial;
   }
 
@@ -104,13 +104,21 @@ by [class*="<class name>"] or [id*="<class id>"] */
     flex: none;
   }
 
+  .primarynav {
+    vertical-align: middle;
+  }
+
   .primarynav ul.menu {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    /* position: relative; */
     padding-left: 0;
+  }
+
+  .primarynav ul.menu * {
+    flex: none;
   }
 
   .primarynav li.opt a:hover::before {
@@ -159,9 +167,9 @@ by [class*="<class name>"] or [id*="<class id>"] */
     padding: 0 9.6em 1em 9.6em;
   }
 
-  .inventorymenu.primarynav ul.menu > * {
+  /* .inventorymenu.primarynav ul.menu > * {
     float: left;
-  }
+  } */
 
   li.opt {
     display: inline-block;
@@ -521,6 +529,11 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   /* Media Queries */
   @media (hover: none) and (pointer: coarse) {
+    header.home {
+      margin-top: 10%;
+      margin-bottom: 5%;
+    }
+
     main.home .horizontalscroll {
       display: none;
     }
@@ -529,7 +542,7 @@ by [class*="<class name>"] or [id*="<class id>"] */
       display: flex;
       align-items: center;
       justify-content: center;
-      /* margin-top: 15%; */
+      margin: 5% 0 10% 0;
     }
 
     main.home .slide {
@@ -541,21 +554,56 @@ by [class*="<class name>"] or [id*="<class id>"] */
       height: auto;
     }
 
+    main.home .slide .menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 0;
+      align-content: space-around;
+    }
+
+    main.home .slide .opt {
+      margin: 10% 0 10% 0;
+      text-align: center;
+      padding: 20% 20% 20% 20%;
+      background-color: var(--red);
+    }
+
     main.home .slide.show {
       display: block;
+      position: relative;
+    }
+
+    @keyframes slidingleft {
+      0% {right: -105%;}
+      100% {right: 0;}
+    }
+
+    @keyframes slidingright {
+      0% {left: -105%;}
+      100% {left: 0;}
     }
   }
 
   /* Media Queries Based on Width Size of Screen */
   /*@media only screen and (min-width: 360px) {} */
-  @media (min-width: 300px) {
+  @media (min-width: 250px) {
+    .primarynav ul.menu {
+      flex-direction: column;
+    }
+
+    .primarynav li.opt {
+      margin: 5% 0 5% 0;
+    }
+
     .primarynav li.opt a {
       padding: 1em 2em 1em 2em;
     }
 
     .inventorymenu.primarynav {
       padding: 0 1em 0 1em;
-      margin: 0 auto 1em auto;
+      margin: 0 auto 3em auto;
     }
 
     #triangle {
@@ -579,10 +627,6 @@ by [class*="<class name>"] or [id*="<class id>"] */
   }
 
   @media (min-width: 600px) {
-    .primarynav ul.menu {
-      left: 2em;
-    }
-
     .primarynav li.opt a {
       padding: 1em 2em 1em 2em;
     }
@@ -613,6 +657,14 @@ by [class*="<class name>"] or [id*="<class id>"] */
   }
 
   @media (min-width: 1006px) {
+    .primarynav ul.menu {
+      flex-direction: row;
+    }
+
+    .primarynav li.opt {
+      margin: initial;
+    }
+
     .primarynav li.opt a {
       padding: 2em 2.5em 2em 2.5em;
     }
@@ -680,7 +732,7 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   @media (min-height: 600px) {
     header {
-      padding: 5% 15% 5% 15%;
+      padding: 5% 1em 5% 1em;
     }
 
     .horizontalscroll {
@@ -694,7 +746,7 @@ by [class*="<class name>"] or [id*="<class id>"] */
 
   @media (min-height: 768px) {
     header {
-      padding: 1% 15% 1% 15%;
+      padding: 1% 1em 1% 1em;
     }
 
     .horizontalscroll {

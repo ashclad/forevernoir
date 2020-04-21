@@ -118,6 +118,7 @@ function slider(e) {
         console.log("> Iteratively altering element visibility for current and next element.");
         slide[shownnum].className = "slide";
         slide[nextnum].className = "slide show";
+        slide[nextnum].style.animation = "slidingleft 2s forwards";
         console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(nextnum + 1));
       } else {
         var prevnum = shownnum;
@@ -145,6 +146,7 @@ function slider(e) {
         console.log("> Iteratively altering element visibility for current and next element.");
         slide[shownnum].className = "slide";
         slide[prevnum].className = "slide show";
+        slide[prevnum].style.animation = "slidingright 2s forwards";
         console.info("Now, last element visible was number " + String(shownnum + 1) + ", while current visible element is number " + String(prevnum + 1));
       } else {
         prevnum = shown[0] + 2;
