@@ -187,8 +187,14 @@
 
   /* code indexmenu primarynav here */
 
-  .indexmenu.primarynav {
-    display: none;
+  .indexmenu.primarynav, .inventorymenu.secondarynav {
+    display: inline-block;
+  }
+
+  .indexmenu.primarynav ul.menu, .inventorymenu.secondarynav ul.menu {
+    display: block;
+    list-style-type: none;
+    text-align: center;
   }
 
   .gallhanger {
@@ -197,24 +203,22 @@
     margin-left: 0.5em;
     vertical-align: middle;
     padding: 1% 0 1% 0;
-  }
-
-  main.home .gallhanger {
-    /* some things (i.e. top positionality) may
-    vary according to original comic image dimensions */
-    /* border: solid 2px var(--ext); */
     height: 100%;
     width: auto;
   }
 
-  main.inventory .catlnk {
+  /* main.home .gallhanger {
+    border: solid 2px var(--ext);
+    height: 100%;
+    width: auto;
+  } */
+
+  .catlnk {
     /* some things (i.e. top positionality) may
     vary according to original comic image dimensions */
     display: flex;
     align-items: center;
     padding: 2em 0 1em 2em;
-    height: 100%;
-    width: auto;
   }
 
   main.inventory .gallhanger {
