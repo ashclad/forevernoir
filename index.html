@@ -1,116 +1,55 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="home">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="shop,store,clothes,clothing,fashion,art">
     <meta name="description" content="Noir clothing store.">
     <link rel="stylesheet" type="text/css" href="css/master.css">
-    <link rel="icon" href="assets/logo.ico">
-    <!-- <script type="text/javascript" src="scripts/jquery.min.js" defer></script>
-    <script type="text/javascript" src="scripts/jquery.mousewheel.min.js" defer></script> -->
     <script type="text/javascript" src="scripts/fun.js" defer></script>
     <script type="text/javascript" src="scripts/run.js" defer></script>
-    <title>Forever Noir</title>
+    <link rel="icon" href="assets/logo.ico">
+    <title>Forever Noir: Inventory</title>
   </head>
-  <body id="inverse">
-    <!-- the header should be animated such that it covers the entire page
-    as a "layer," and begins to "fold" upward until reaching appropriate
-    navigation bar height, all while the logo also shrinks to appropriate
-    size -->
-    <div id="overlay"></div>
-    <header class="home">
-     <img id="mainlogo" class="logo" src="assets/logol.png">
+  <body>
+    <header id="mainhead">
+      <a class="history back page" href="inventory.html"><div class="decor triangle"></div></a>
+      <a id="indexlnk" class="page" href="index.html"><img id="mainlogo" class="logo" src="assets/logol.png"></a>
     </header>
-    <main class="home">
-      <!-- the horizontallscroll element class is what will have the
-      relevant properties to enable side-scrolling -->
+    <main class="exposition introduction">
       <div class="horizontalscroll">
-        <div id="gallery" class="about comic">
-        <!-- for comic html size, multiply or divide original source dimensions by ~2.2 -->
-        <img class="gallhanger" src="assets/comic_panel 1.png">
-        <img class="gallhanger" src="assets/comic_panel 2.png">
-        <img class="gallhanger" src="assets/comic_panel 3.png">
-        <img class="gallhanger" src="assets/comic_panel 4.png">
-        <img class="gallhanger" src="assets/comic_panel 5.png">
-        <img class="gallhanger" src="assets/comic_panel 6.png">
-        <img class="gallhanger" src="assets/comic_panel 7.png">
-        <img class="gallhanger" src="assets/comic_panel 8.png">
-        <nav id="seqartmenu" class="indexmenu primarynav">
-          <ul class="menu">
-            <li id="indexitem" class="opt">
-              <a id="indexlnk" href="index.html">Home</a>
-            </li>
-            <div id="shopgroup" class="linkgrouping">
-              <li id="shopitem" class="opt">
-                <a id="shoplnk" href="inventory.html">Shop</a>
-              </li>
-              <li id="shopitem" class="opt long">
-                <a id="shoplnk" href="inventory.html">Shop</a>
-              </li>
+        <nav class="gallery artpieces comicstrip">
+          <img class="hanger comic panel" src="assets/comic_panel 1.png">
+          <img class="hanger comic panel" src="assets/comic_panel 2.png">
+          <img class="hanger comic panel" src="assets/comic_panel 3.png">
+          <img class="hanger comic panel" src="assets/comic_panel 4.png">
+          <img class="hanger comic panel" src="assets/comic_panel 5.png">
+          <img class="hanger comic panel" src="assets/comic_panel 6.png">
+          <img class="hanger comic panel" src="assets/comic_panel 7.png">
+          <img class="hanger comic panel" src="assets/comic_panel 8.png">
+          <nav class="menu primarynav">
+            <div id="inventorygroup" class="linkgrouping">
+              <a id="affilnk" class="opt page" href="_credits.php">Inventory</a>
+              <a id="affilnk" class="opt page" href="_credits.php">Inventory</a>
             </div>
-            <div id="affilgroup" class="linkgrouping">
-              <li id="affilitem" class="opt">
-                <a id="affillnk" href="_affil.html">Affiliates</a>
-              </li>
-              <li id="affilitem" class="opt long">
-                <a id="affillnk" href="_affil.html">Affiliates</a>
-              </li>
+            <div id="inventorygroup" class="linkgrouping">
+              <a id="affilnk" class="opt page" href="_credits.php">Affiliates</a>
+              <a id="affilnk" class="opt page" href="_credits.php">Affiliates</a>
             </div>
-            <div id="legalgroup" class="linkgrouping">
-              <li id="legalitem" class="opt">
-                <a id="legallnk" href="legal.html">Legal</a>
-              </li>
-              <li id="legalitem" class="opt long">
-                <a id="legallnk" href="legal.html">Legal</a>
-              </li>
+            <div id="inventorygroup" class="linkgrouping">
+              <a id="legalnk" class="opt page" href="_legal.html">Legal</a>
+              <a id="legalnk" class="opt page" href="_legal.html">Legal</a>
             </div>
-            <div id="contactgroup" class="linkgrouping">
-              <li id="contactitem" class="opt">
-                <a id="contactlnk" href="contact.html">Contact Us</a>
-              </li>
-              <li id="contactitem" class="opt long">
-                <a id="contactlnk" href="contact.html">Contact Us</a>
-              </li>
+            <div id="inventorygroup" class="linkgrouping">
+              <a id="contactlnk" class="opt page" href="_contact.html">Contact Us</a>
+              <a id="contactlnk" class="opt page" href="_contact.html">Contact Us</a>
             </div>
-          </ul>
+          </nav>
         </nav>
       </div>
-      </div>
-      <div id="slideshow" class="about">
-        <img class="slide show" src="assets/comic_panel 1.png">
-        <img class="slide" src="assets/comic_panel 2.png">
-        <img class="slide" src="assets/comic_panel 3.png">
-        <img class="slide" src="assets/comic_panel 4.png">
-        <img class="slide" src="assets/comic_panel 5.png">
-        <img class="slide" src="assets/comic_panel 6.png">
-        <img class="slide" src="assets/comic_panel 7.png">
-        <img class="slide" src="assets/comic_panel 8.png">
-        <nav id="seqartmenu" class="slide">
-          <ul class="menu">
-            <li id="indexitem" class="opt">
-              <a id="indexlnk" href="index.html">Home</a>
-            </li>
-            <li id="shopitem" class="opt">
-              <a id="shoplnk" href="inventory.html">Shop</a>
-            </li>
-            <li id="affilitem" class="opt">
-              <a id="affillnk" href="_affil.html">Affiliates</a>
-            </li>
-            <li id="legalitem" class="opt">
-              <a id="legallnk" href="legal.html">Legal</a>
-            </li>
-            <li id="contactitem" class="opt">
-              <a id="contactlnk" href="contact.html">Contact Us</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <!-- ><img id="walkcycle" class="animatedimg" src="assets/walkcycle.gif"> -->
-      <p id="skippara"><span><a id="skiplnk" href="inventory.html">Skip</a><span></p>
     </main>
-    <footer class="home">
-      <span id="copyright">&copy; 2020</span>
+    <footer id="mainfooter">
+      <span class="legal">&copy; 2020</span>
     </footer>
   </body>
 </html>
