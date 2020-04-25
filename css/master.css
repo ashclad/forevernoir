@@ -44,8 +44,8 @@
 
 @keyframes widthcompenz {
   0% { width: 0;}
-  50% { width: 4em;}
-  100% { width: 8em;}
+  50% { width: 50%;}
+  100% { width: 100%;}
 }
 
 @keyframes texton {
