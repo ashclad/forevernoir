@@ -35,40 +35,22 @@ function scrollVertoHoriz(e) {
 
     for (var i = 0; i < horizontalscroll.length; i++) {
       console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      subelem = document.getElementsByClassName("comic");
+      subelem = document.getElementsByClassName("comicstrip");
       for (var f = 0; f < subelem.length; f++) {
         childnum = subelem[f].children.length;
       }
       console.info("Number of .horizontallscroll child elements: " + childnum);
       var widthperchild = horizontalscroll[i].scrollWidth / childnum;
       console.info("Scroll width per child: " + widthperchild);
-      var step = widthperchild / 4;
+      var step = widthperchild / 5;
       console.info("Ideal scroll steps: " + step);
 
       if (e.deltaY != 0) {
         console.info("Wheeling detected to deviate from original value.");
         var direction = Math.sign(e.deltaY);
         // scrollLeft comparison to value rather than variable is temporary
-        if (direction == 1 && horizontalscroll[i].scrollLeft == 3189) {
-          console.info("Cannot scroll further right.");
-        } else if (direction == -1 && horizontalscroll[i].scrollLeft == 0) {
-          console.info("Cannot scroll further left.");
-        } else {
-          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
-          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
-        }
-      } else if (e.deltaX != 0) {
-        console.info("Wheeling detected to deviate from original value.");
-        var direction = Math.sign(e.deltaX);
-        // scrollLeft comparison to value rather than variable is temporary
-        if (direction == 1 && horizontalscroll[i].scrollLeft == 3189) {
-          console.info("Cannot scroll further right.");
-        } else if (direction == -1 && horizontalscroll[i].scrollLeft == 0) {
-          console.info("Cannot scroll further left.");
-        } else {
-          horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaX + step * direction, horizontalscroll[i].scrollTop);
-          console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
-        }
+        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
+        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
       }
     }
     e.preventDefault();
