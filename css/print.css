@@ -1,0 +1,256 @@
+@media only print and (orientation: portrait) {
+/* Styles Applicable Only When Displayed for Print in Portrait Mode */
+  /*tag-started */
+  nav {
+    display: none;
+  }
+
+  img {
+    filter: grayscale(0);
+  }
+
+  body header:first-child {
+    margin-bottom: 2%;
+  }
+
+  body header:first-child::before {
+    content: "FOREVER NOIR";
+    font-size: 42pt;
+    display: block;
+    text-align: center;
+    margin-bottom: 2%;
+  }
+
+  main > div {
+    background-color: var(--basel);
+    color: var(--based);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--ext);
+  }
+
+  footer > .legal {
+    float: none;
+  }
+
+  footer > span {
+    float: none;
+    font-size: 9pt;
+  }
+
+  /*class-started */
+  .home body {
+    color: var(--based);
+    background-color: var(--basel);
+  }
+
+  .overlay, .triangle {
+    display: none;
+  }
+
+  .horizontalscroll {
+    overflow-x: visible;
+    overflow-y: visible;
+    padding-bottom: initial;
+  }
+
+  .comicstrip {
+    page-break-before: avoid;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    width: 66%;
+    box-shadow: none;
+    border: 2px solid var(--mid);
+  }
+
+  .home .comicstrip {
+    position: initial;
+    left: 0;
+  }
+
+  .comicstrip .panel {
+    display: block;
+    margin: 1em auto;
+    border: 4px solid var(--ext);
+  }
+
+  .comicstrip > img {
+    max-width: 100%;
+    width: 100%;
+    max-height: none;
+    height: auto;
+  }
+
+  .collection > .menu {
+    flex-direction: column;
+  }
+
+  .collection > .menu > a {
+    max-width: 33%;
+    margin: 0 0 0.5% 0;
+  }
+
+  .collection > .menu > a:nth-child(1)::before {
+    color: var(--mid);
+    display: inline-block;
+    font-size: 12pt;
+    content: "Mens' Paraphernelia";
+    align-self: flex-start;
+    text-shadow: none;
+  }
+
+  .collection > .menu > a:nth-child(2)::before {
+    color: var(--mid);
+    display: inline-block;
+    font-size: 12pt;
+    content: "Womens' Paraphernelia";
+    align-self: flex-start;
+    text-shadow: none;
+  }
+
+  .collection > .menu > a:nth-child(3)::before {
+    color: var(--based);
+    display: inline-block;
+    font-size: 12pt;
+    content: "Childrens' Paraphernelia";
+    align-self: flex-start;
+    text-shadow: none;
+  }
+
+  .inventory .menu.patterns {
+    padding: initial;
+  }
+
+  /*id-started */
+  #mainhead .primarynav, #maincart, #skippage, #mainfooter .gallery {
+    display: none;
+  }
+
+  #mainlogo {
+    max-width: 10%;
+  }
+}
+
+@media only print and (orientation: landscape) {
+/* Styles Applicable Only When Displayed for Print in Landscape Mode */
+  /* tag-started */
+  nav {
+    display: none;
+  }
+
+  img {
+    filter: grayscale(0);
+  }
+
+  body header:first-child {
+    margin-bottom: 2%;
+  }
+
+  body header:first-child::before {
+    content: "FOREVER NOIR";
+    font-size: 42pt;
+    display: block;
+    text-align: center;
+    margin-bottom: 2%;
+  }
+
+  main > div {
+    background-color: var(--basel);
+    color: var(--based);
+  }
+
+  footer {
+    color: var(--ext);
+  }
+
+  /* class-started */
+  .home body {
+    color: var(--based);
+    background-color: var(--basel);
+  }
+
+  .home .triangle {
+    border-right: 2em solid var(--based);
+    border-top: 2em solid var(--based);
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .horizontalscroll {
+    overflow-x: visible;
+    overflow-y: visible;
+    padding-bottom: initial;
+  }
+
+  .comicstrip {
+    display: block;
+    height: auto;
+    box-shadow: none;
+    border: 2px solid var(--mid);
+    padding: 25px 25px;
+  }
+
+  .home .comicstrip {
+    position: initial;
+    left: 0;
+  }
+
+  .comicstrip .panel {
+    display: inline-block;
+    width: 25%;
+    vertical-align: middle;
+    position: relative;
+    left: 13%;
+    border: 4px solid var(--ext);
+    margin: 1% 0;
+  }
+
+  .collection > .menu > a {
+    max-width: none;
+  }
+
+  .collection > .menu > a:nth-child(1)::before {
+    color: var(--mid);
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 12pt;
+    content: "Mens' Paraphernelia";
+    text-shadow: none;
+  }
+
+  .collection > .menu > a:nth-child(2)::before {
+    color: var(--mid);
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 12pt;
+    content: "Womens' Paraphernelia";
+    text-shadow: none;
+  }
+
+  .collection > .menu > a:nth-child(3)::before {
+    color: var(--mid);
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 12pt;
+    content: "Childrens' Paraphernelia";
+    text-shadow: none;
+  }
+
+  .inventory .menu.patterns {
+    padding: initial;
+  }
+
+  /* id-started */
+  #mainhead .primarynav, #maincart, #skippage, #mainfooter .gallery {
+    display: none;
+  }
+
+  #mainlogo {
+    max-width: 10%;
+  }
+}
