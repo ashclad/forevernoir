@@ -68,7 +68,7 @@ function arrowNav(e) {
 
     for (var i = 0; i < horizontalscroll.length; i++) {
       console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      subelem = document.getElementsByClassName("comic");
+      subelem = document.getElementsByClassName("comicstrip");
       for (var f = 0; f < subelem.length; f++) {
         childnum = subelem[f].children.length;
       }

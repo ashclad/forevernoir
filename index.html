@@ -14,8 +14,10 @@
   <body>
     <header id="mainhead">
       <a class="history back page" href="inventory.html"><div class="decor triangle"></div></a>
+      <span id="skippage" class="label"><a href="inventory.html">skip</a></span>
       <a id="indexlnk" class="page" href="index.html"><img id="mainlogo" class="logo" src="assets/logol.png"></a>
     </header>
+    <div class="overlay"></div>
     <main class="exposition introduction">
       <div class="horizontalscroll">
         <div class="comicstrip">
@@ -29,8 +31,8 @@
           <img class="hanger comic panel" src="assets/comic_panel 8.png">
           <nav class="menu primarynav">
             <div id="inventorygroup" class="linkgrouping">
-              <a id="affilnk" class="opt page" href="_credits.php"><span>Inventory</span></a>
-              <a id="affilnk" class="opt page" href="_credits.php"><span>Inventory</span></a>
+              <a id="affilnk" class="opt page" href="inventory.html"><span>Inventory</span></a>
+              <a id="affilnk" class="opt page" href="inventory.html"><span>Inventory</span></a>
             </div>
             <div id="inventorygroup" class="linkgrouping">
               <a id="affilnk" class="opt page" href="_credits.php"><span>Affiliates<span></a>
@@ -46,6 +48,9 @@
             </div>
           </nav>
         </div>
+      </div>
+      <div class="slideshow" style="display: none;">
+        <!-- insert previous comicstrip children but changing class to slide here -->
       </div>
     </main>
     <footer id="mainfooter">
