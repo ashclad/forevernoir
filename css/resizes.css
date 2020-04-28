@@ -1,0 +1,33 @@
+/* For Landscape */
+@media only screen and (max-width: 479.98px) and (orientation: landscape) {
+  /**/
+}
+
+@media only screen and (max-width: 767.98px) and (orientation: landscape) {
+  /**/
+}
+
+@media only screen and (max-width: 991.98px) and (orientation: landscape) {
+  /**/
+}
+
+@media only screen and (max-width: 1119.98px) and (orientation: landscape) {
+  /**/
+}
+
+/* For Portrait */
+@media only screen and (max-width: 479.98px) and (orientation: portrait) {
+  /**/
+}
+
+@media only screen and (max-width: 767.98px) and (orientation: portrait) {
+  /**/
+}
+
+@media only screen and (max-width: 991.98px) and (orientation: portrait) {
+  /**/
+}
+
+@media only screen and (max-width: 1119.98px) and (orientation: portrait) {
+  /**/
+}
