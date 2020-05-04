@@ -13,6 +13,7 @@ var pokeXY = null;
 var poke = null;
 var epositionX = null;
 var epositionY = null;
+var offsetstatus = null;
 
 /* class definitions */
 
@@ -26,49 +27,47 @@ function grabTouchPosition(e) {
 }
 
 function grabElemPosition(elem) {
-  var location = elem.getBoundingClientRect();
-  console.log("Location for " + elem.className + " is " + location.left + " pixels from the left and " + location.top + " pixels from the top.");
-  epositionX = location.left;
-  epositionY = location.top;
+  if (epositionX === null || epositionY === null) {
+    var location = elem.getBoundingClientRect();
+    console.log("Location for " + elem.className + " is " + location.left + " pixels from the left and " + location.top + " pixels from the top.");
+    epositionX = location.left;
+    epositionY = location.top;
+  } else {
+    epositionX = null;
+    epositionY = null;
+  }
 }
 
 function initialOffset() {
   var strip = document.getElementsByClassName("comicstrip");
 
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    console.warn("Only touch events available; initialOffset() cannot be run.")
+  if (offsetstatus === "initialized") {
+    console.warn("initialOffset() has aleady been run and can only be run once.");
   } else {
-    console.log(strip);
-    console.log(epositionX);
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      console.warn("Only touch events available; initialOffset() cannot be run.");
+    } else {
+      console.log(strip);
+      console.log(epositionX);
 
-    for (var i = 0; i < strip.length; i++) {
-      var stripchild = strip[i].children[0];
+      for (var i = 0; i < strip.length; i++) {
+        var stripchild = strip[i].children[0];
+      }
+      console.log(stripchild);
+
+      var childleft = stripchild.getBoundingClientRect().left;
+      console.log(childleft);
+
+      var leftfactor = ((epositionX/childleft)/2.5)*childleft;
+      leftfactor = leftfactor/epositionX;
+      console.log(leftfactor);
+
+      for (var c = 0; c < strip.length; c++) {
+        strip[c].style.left = (epositionX * leftfactor) + "px";
+      }
+
+      offsetstatus = "initialized";
     }
-    console.log(stripchild);
-
-    var childleft = stripchild.getBoundingClientRect().left;
-    //var childleft = new Array(stripchild.length);
-    //console.log(childleft);
-
-    //for (var a = 0; a < stripchild.length; a++) {
-    //  childleft[a] = stripchild[a].getBoundingClientRect().left;
-    //}
-    console.log(childleft);
-
-    var leftfactor = ((epositionX/childleft)/2.5)*childleft;
-    //var leftfactor = new Array(childleft.length);
-    //console.log(leftfactor);
-
-    //for (var b = 0; b < childleft.length; b++) {
-    //  leftfactor[b] = ((logoleft/childleft[b])/2.5)*childleft[b];
-    //}
-    console.log(leftfactor);
-
-    for (var c = 0; c < strip.length; c++) {
-      strip[c].style.left = leftfactor + "px";
-    }
-
-    const status = "initialized";
   }
 }
 
@@ -97,8 +96,14 @@ function goLeftoRight(e) {
     var leftfactor = new Array(childleft.length);
     //console.log(leftfactor);
 
+    if (status == "initialized") {
+
+    } else {
+
+    }
     for (var b = 0; b < childleft.length; b++) {
       leftfactor[b] = ((logoleft/childleft[b])/2.5)*childleft[b];
+      leftfactor[b] = leftfactor[b]/epositionX;
     }
     //console.log(leftfactor);
   }

@@ -1,7 +1,18 @@
 var logo = document.getElementById("mainlogo");
 grabElemPosition(logo);
 initialOffset();
-//window.addEventListener("resize", initialOffset);
+var finishedresize = false;
+var timeoutnum = 500;
+
+//window.addEventListener("resize", function() {
+  //offsetstatus = null;
+
+  //if (finishedresize === false) {
+  //  setTimeout(resizedone, timeoutnum);
+  //}
+  //grabElemPosition(logo);
+  //initialOffset();
+//});
 //document.documentElement.addEventListener("wheel", goLeftoRight, {passive: false})
 
 /* Older Functions */
