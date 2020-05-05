@@ -27,19 +27,54 @@ function grabTouchPosition(e) {
 }
 
 function grabElemPosition(elem) {
-  if (epositionX === null || epositionY === null) {
-    var location = elem.getBoundingClientRect();
-    console.log("Location for " + elem.className + " is " + location.left + " pixels from the left and " + location.top + " pixels from the top.");
-    epositionX = location.left;
-    epositionY = location.top;
+  var location = elem.getBoundingClientRect();
+  console.log("Location for " + elem.className + " is " + location.left + " pixels from the left and " + location.top + " pixels from the top.");
+  epositionX = location.left;
+  epositionY = location.top;
+}
+
+function resizestatus(func) {
+  if (new Date() - starttime < timeoutnum) {
+    setTimeout(resizestatus, timeoutnum);
   } else {
-    epositionX = null;
-    epositionY = null;
+    resizing = false;
+    initialOffset();
   }
+}
+
+// remember to use onload anonymous function in next two functions for elements whose dimension and position info is needed
+function queueSeqForward(elemcollection, exceptionid) {
+  var upperbound = elemcollection.length - 1;
+  var lowerbound = 0;
+  var focused_num = new Array(1);
+  var after_num = new Array(1);
+  var unfocused_num = new Array();
+
+  for (var i = 0; i < elemcollection.length; i++) {
+    if (elemcollection[i].id == exceptionid) {
+      focused_num[0] = i;
+      if (i < upperbound) {
+        after_num[0] = i + 1;
+      } else {
+        after_num[0] = i;
+      }
+    } else {
+      unfocused_num.push(i);
+    }
+  }
+  unfocused_num.splice(0, 1);
+
+  var output = new Array();
+  output["focused"] = focused_num;
+  output["next"] = after_num;
+  output["unfocused"] = unfocused_num;
+
+  return output;
 }
 
 function initialOffset() {
   var strip = document.getElementsByClassName("comicstrip");
+  var panels = document.getElementsByClassName("comic panel");
 
   if (offsetstatus === "initialized") {
     console.warn("initialOffset() has aleady been run and can only be run once.");
@@ -47,71 +82,22 @@ function initialOffset() {
     if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
       console.warn("Only touch events available; initialOffset() cannot be run.");
     } else {
-      console.log(strip);
-      console.log(epositionX);
-
-      for (var i = 0; i < strip.length; i++) {
-        var stripchild = strip[i].children[0];
-      }
-      console.log(stripchild);
-
-      var childleft = stripchild.getBoundingClientRect().left;
-      console.log(childleft);
-
-      var leftfactor = ((epositionX/childleft)/2.5)*childleft;
-      leftfactor = leftfactor/epositionX;
-      console.log(leftfactor);
-
-      for (var c = 0; c < strip.length; c++) {
-        strip[c].style.left = (epositionX * leftfactor) + "px";
-      }
+      var seq = queueSeqForward(panels, "focus");
+      console.log(seq);
+      var focused_num = seq["focused"][0];
+      var next_num = seq["next"][0];
+      var unfocused_num = seq["unfocused"];
 
       offsetstatus = "initialized";
     }
   }
 }
 
-function goLeftoRight(e) {
-  var strip = document.getElementsByClassName("comicstrip");
-
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    console.warn("Only touch events available; goLeftoRight() cannot be run.")
-  } else {
-    console.log(strip);
-    console.log(epositionX);
-
-    for (var i = 0; i < strip.length; i++) {
-      var stripchild = strip[i].children;
-    }
-    console.log(stripchild);
-
-    var childleft = new Array(stripchild.length);
-    //console.log(childleft);
-
-    for (var a = 0; a < stripchild.length; a++) {
-      childleft[a] = stripchild[a].getBoundingClientRect().left;
-    }
-    //console.log(childleft);
-
-    var leftfactor = new Array(childleft.length);
-    //console.log(leftfactor);
-
-    if (status == "initialized") {
-
-    } else {
-
-    }
-    for (var b = 0; b < childleft.length; b++) {
-      leftfactor[b] = ((logoleft/childleft[b])/2.5)*childleft[b];
-      leftfactor[b] = leftfactor[b]/epositionX;
-    }
-    //console.log(leftfactor);
-  }
-}
+//function goLeftoRight(e) {}
 
 //
 
-function scrollVertoHoriz(e) {
+/*function scrollVertoHoriz(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
     console.warn("Only touch events available; scrollVertoHoriz() cannot be run.")
   } else {
@@ -201,13 +187,13 @@ function slider(e) {
 
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
       // rtl swipe
-      for (var i = 0; i < slide.length; i++) {
-        var slideClasses = slide[i].className.split(" ");
+      for (var f = 0; f < slide.length; f++) {
+        var slideClasses = slide[f].className.split(" ");
         if (slideClasses.includes("show")) {
-          shown.push(i);
-          shown.push(i + 1);
+          shown.push(f);
+          shown.push(f + 1);
         } else {
-          notshown.push(i);
+          notshown.push(f);
         }
         notshown.splice(0, 1);
       }
@@ -266,4 +252,4 @@ function slider(e) {
   pokecY = null;
   pokeXY = null;
   poke = null;
-}
+}*/
