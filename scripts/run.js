@@ -1,18 +1,18 @@
-var logo = document.getElementById("mainlogo");
-grabElemPosition(logo);
 initialOffset();
-var finishedresize = false;
-var timeoutnum = 500;
+var resizing = false;
+var timeoutnum = 100;
+var starttime;
 
-//window.addEventListener("resize", function() {
-  //offsetstatus = null;
+window.addEventListener("resize", function() {
+  offsetstatus = null;
+  starttime = new Date();
 
-  //if (finishedresize === false) {
-  //  setTimeout(resizedone, timeoutnum);
-  //}
-  //grabElemPosition(logo);
-  //initialOffset();
-//});
+  if (resizing === false) {
+    resizing = true;
+    setTimeout(resizestatus, timeoutnum);
+  }
+});
+
 //document.documentElement.addEventListener("wheel", goLeftoRight, {passive: false})
 
 /* Older Functions */
