@@ -308,6 +308,7 @@ footer::after {
 .comicstrip > img {
   max-height: 100%;
   width: auto;
+  display: block;
 }
 
 .comicstrip .panel {
