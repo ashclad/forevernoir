@@ -1,12 +1,20 @@
-initialOffset();
+var panels = document.getElementsByClassName("comic panel");
+var queuef = queueSeq(panels, "focus", "f");
+var focus = queuef["focused"][0];
+panels[focus].onload = offsetChange;
+
 var resizing = false;
-var timeoutnum = 100;
+var timeoutnum = 200;
 var starttime;
 
 window.addEventListener("resize", function() {
-  offsetstatus = null;
   starttime = new Date();
+  console.info("Window resize detected.");
+  console.info("Window resize occured on " + starttime);
+  //console.log("Resetting offsetstatus.");
+  //TrackedStatus.offset.status = false;
 
+  console.log("Logging window resize via 'resizing'.");
   if (resizing === false) {
     resizing = true;
     setTimeout(resizestatus, timeoutnum);
