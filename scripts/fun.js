@@ -1,49 +1,87 @@
-console.log("ROOT PROCESS");
+console.info("ROOT PROCESS initialized.");
+console.log("Checking for jQuery...");
 
 if (window.jQuery) {
-  console.log("> jQuery initialized.");
+  console.log("jQuery detected.");
 } else {
-  console.warn("JQuery not initialized.");
+  console.warn("No jQuery detected.");
 }
 
 /* global variables */
-var pokecX = null;
-var pokecY = null;
-var pokeXY = null;
-var poke = null;
-var epositionX = null;
-var epositionY = null;
-var offsetstatus = null;
+
+/* object definitions */
+let Poke = {
+  pokeX: null,
+  pokeY: null,
+  pokeXY: null
+};
+
+let TrackedStatus = {
+  offset: {status: false, degree: null},
+  seqfocus: {index: null}
+}
 
 /* class definitions */
 
 /* function definitions */
 function grabTouchPosition(e) {
+  console.info("grabTouchPosition() execution initialized.");
   console.info("Screen has been touched.");
-  pokecX = e.touches[0].clientX;
-  pokecY = e.touches[0].clientY;
-  pokeXY = pokecX/pokecY;
-  poke = [pokecX, pokecY, pokeXY];
+  Poke.pokeX = e.touches[0].clientX;
+  Poke.pokeY = e.touches[0].clientY;
+  Poke.pokeXY = Poke.pokeX/Poke.pokeY;
 }
 
 function grabElemPosition(elem) {
+  console.info("grabElemPosition() execution initiated.");
   var location = elem.getBoundingClientRect();
-  console.log("Location for " + elem.className + " is " + location.left + " pixels from the left and " + location.top + " pixels from the top.");
-  epositionX = location.left;
-  epositionY = location.top;
+  positionX = location.left;
+  positionY = location.top;
+  if (elem.id) {
+    var name = elem.id;
+    var info = "Location for " + name + " is " + positionX + " pixels from the left and " + positionY + " pixels from the top.";
+  } else {
+    var name = elem.className;
+    var info = "Location for " + name + " is " + positionX + " pixels from the left and " + positionY + " pixels from the top.";
+  }
+  console.info(info);
+  var located = {name: name, x: positionX, y: positionY};
+  console.log("Array for element coordinates relative to top-left has been produced: ");
+  console.log(located);
+  return located;
 }
 
-function resizestatus(func) {
+function resizestatus() {
   if (new Date() - starttime < timeoutnum) {
     setTimeout(resizestatus, timeoutnum);
   } else {
     resizing = false;
-    initialOffset();
+    offsetChange();
   }
 }
 
 // remember to use onload anonymous function in next two functions for elements whose dimension and position info is needed
+function queueSeq(elemcollection, exceptionid, direction="forward") {
+  console.info("queueSeq() execution initiated.");
+  var log;
+  if (direction == "back" || direction == "b" || direction == "backward" || direction == "B") {
+    var output = queueSeqBackward(elemcollection, exceptionid);
+    log = "Array for tracking a queue of elements in reverse sequential order has been produced: ";
+  } else if (direction == "forward" || direction == "f" || direction == "F") {
+    var output = queueSeqForward(elemcollection, exceptionid);
+    log = "Array for tracking a queue of elements in sequential order has been produced: ";
+  } else {
+    console.warn("Unargued necessary parameter; using default value.");
+    var output = queueSeqForward(elemcollection, exceptionid);
+    log = "Array for tracking a queue of elements in sequential order has been produced: ";
+  }
+  console.log(log);
+  console.log(output);
+  return output;
+}
+
 function queueSeqForward(elemcollection, exceptionid) {
+  console.info("queueSeqForward() execution initiated.");
   var upperbound = elemcollection.length - 1;
   var lowerbound = 0;
   var focused_num = new Array(1);
@@ -62,40 +100,104 @@ function queueSeqForward(elemcollection, exceptionid) {
       unfocused_num.push(i);
     }
   }
-  unfocused_num.splice(0, 1);
+  var afterindex = unfocused_num.indexOf(after_num[0]);
+  unfocused_num.splice(afterindex, 1);
 
   var output = new Array();
   output["focused"] = focused_num;
   output["next"] = after_num;
   output["unfocused"] = unfocused_num;
 
+  //console.log("Array for tracking a queue of elements has been produced: ");
+  //console.log(output);
   return output;
 }
 
-function initialOffset() {
-  var strip = document.getElementsByClassName("comicstrip");
-  var panels = document.getElementsByClassName("comic panel");
+function queueSeqBackward(elemcollection, exceptionid) {
+  console.info("queueSeqBackward() execution initiated.");
+  var upperbound = elemcollection.length - 1;
+  var lowerbound = 0;
+  var focused_num = new Array(1);
+  var after_num = new Array(1);
+  var unfocused_num = new Array();
 
-  if (offsetstatus === "initialized") {
-    console.warn("initialOffset() has aleady been run and can only be run once.");
-  } else {
-    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-      console.warn("Only touch events available; initialOffset() cannot be run.");
+  for (var i = 0; i < elemcollection.length; i++) {
+    var reversecount = upperbound - i;
+    if (elemcollection[reversecount].id == exceptionid) {
+      focused_num[0] = reversecount;
+      if (reversecount < upperbound && reversecount > 0) {
+        after_num[0] = reversecount - 1;
+      } else {
+        after_num[0] = reversecount;
+      }
     } else {
-      var seq = queueSeqForward(panels, "focus");
-      console.log(seq);
-      var focused_num = seq["focused"][0];
-      var next_num = seq["next"][0];
-      var unfocused_num = seq["unfocused"];
-
-      offsetstatus = "initialized";
+      unfocused_num.push(reversecount);
     }
   }
+  var afterindex = unfocused_num.indexOf(after_num[0]);
+  unfocused_num.splice(afterindex, 1);
+
+  var output = new Array();
+  output["focused"] = focused_num;
+  output["prev"] = after_num;
+  output["unfocused"] = unfocused_num;
+
+  //console.log("Array for tracking a queue of elements has been produced: ");
+  //console.log(output);
+  return output;
 }
 
-//function goLeftoRight(e) {}
+function offsetChange() {
+  var strip = document.getElementsByClassName("comicstrip")[0];
+  var panels = document.getElementsByClassName("comic panel");
+  var logo = document.getElementById("mainlogo");
 
-//
+  if (TrackedStatus.offset.status === true) {
+    //console.warn("offsetChange() has aleady been run and can only be run once.");
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      console.warn("Only touch events available; offsetChange() cannot be run.");
+    } else {
+      console.info("offsetChange() execution resumed based on last logged offset.");
+      // do something
+    }
+  } else {
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      console.warn("Only touch events available; offsetChange() cannot be run.");
+    } else {
+      console.info("offsetChange() execution initiated.");
+      var logoleft = grabElemPosition(logo).x;
+      var queuef = queueSeq(panels, "focus", "f");
+      var focus = queuef["focused"][0];
+      TrackedStatus.seqfocus.index = focus;
+      console.log(panels[focus]);
+
+      var stripwidth = strip.clientWidth;
+      var focuswidth = panels[focus].clientWidth;
+      var focuspad = (panels[focus].offsetWidth - focuswidth)/2;
+      var focushalf = focuswidth/2;
+      var focusleft = panels[focus].offsetLeft;
+      var focusabsleft = grabElemPosition(panels[focus]).x;
+      var stripleft = strip.offsetLeft;
+      /* maybe make conditional within else-clause primary conditional with
+      code of its parent conditional's first block as its else-block code? */
+      if (focus == 0) {
+        var leftover = stripleft + focusleft;
+        var leftfactor = (logoleft - leftover) - (focushalf - leftover);
+      } else {
+        if (focusabsleft >= window.innerWidth) {
+          var leftover = ((focusabsleft + focushalf) * -1);
+          console.log(leftover);
+          var leftfactor = logoleft + leftover;
+        }
+      }
+
+      strip.style.left = leftfactor + "px";
+      TrackedStatus.offset.degree = strip.style.left;
+      TrackedStatus.offset.status = true;
+    }
+  }
+  console.info("offsetChange() terminated.");
+}
 
 /*function scrollVertoHoriz(e) {
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
@@ -173,7 +275,7 @@ function arrowNav(e) {
 }
 
 function slider(e) {
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY !== null) {
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && Poke.pokeXY !== null) {
     var cX = e.touches[0].clientX;
     var cY = e.touches[0].clientY;
     console.info("Touch deviation detected in viewport: " + (cX/cY))
@@ -182,8 +284,8 @@ function slider(e) {
     var shown = new Array();
     var notshown = new Array();
 
-    var xDiff = pokecX - cX;
-    var yDiff = pokecY - cY;
+    var xDiff = Poke.pokeX - cX;
+    var yDiff = Poke.pokeY - cY;
 
     if (Math.abs(xDiff) > Math.abs(yDiff) && xDiff > 0) {
       // rtl swipe
@@ -242,14 +344,14 @@ function slider(e) {
       }
     }
     e.preventDefault();
-  } else if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && pokeXY === null) {
+  } else if (window.matchMedia("(hover: none) and (pointer: coarse)").matches && Poke.pokeXY === null) {
     console.info("Screen not yet touched.");
   } else {
     console.warn("Only mouse or stylus events available; slider() cannot be run.");
   }
 
-  pokecX = null;
-  pokecY = null;
-  pokeXY = null;
+  Poke.pokeX = null;
+  Poke.pokeY = null;
+  Poke.pokeXY = null;
   poke = null;
 }*/
