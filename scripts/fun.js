@@ -302,9 +302,16 @@ function doOffsetX(parentofslides, refpoint) {
     TrackedStatus.doOffsetX.status = true;
     console.info(doOffsetX.name + "() execution terminated.");
   } else if (slideshow.length == null && TrackedStatus.doOffsetX.status == true) {
-    console.warn("Element has already been moved.");
     /* without this case of the conditional, on window resize, left offset of slideshow is
     maintained */
+    console.warn("Element has already been moved.");
+    
+    if (TrackedStatus.resize.status == false) {
+      // do something
+    } else {
+      console.info("Waiting for window resize to finish.");
+    }
+
     // Ideas:
     /*
     Note: theoretically, logo's left offset should increase proportionately with window resize
