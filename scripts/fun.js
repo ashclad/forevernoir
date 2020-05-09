@@ -132,7 +132,6 @@ function resizestatus(func) {
       console.info("Resize finished.");
       console.log("Logging that resize has finished.");
       console.log("Done. Logging new window size.");
-      TrackedStatus.resize.size = window.innerWidth;
       console.log("Done.");
       TrackedStatus.resize.status = false;
       func;
@@ -277,6 +276,7 @@ function doOffsetX(parentofslides, refpoint) {
   var ref = refpoint;
 
   if (slideshow.length == null && TrackedStatus.doOffsetX.status == false) {
+    TrackedStatus.resize.size = window.innerWidth;
     TrackedStatus.doOffsetX.parent = slideshow;
     var queuef = queueSeq(slide, "focus", "f");
     console.log("Identifying currently active element in queue.");
