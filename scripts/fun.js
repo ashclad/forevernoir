@@ -8,7 +8,7 @@ var W = window;
 var TrackedStatus = {
   jquery: false,
   doOffsetX: {status: false},
-  resize: {status: false},
+  resize: {status: false, size: 0},
   poke: {x: 0, y: 0, z: 0}
 }
 
@@ -131,6 +131,9 @@ function resizestatus(func) {
     } else {
       console.info("Resize finished.");
       console.log("Logging that resize has finished.");
+      console.log("Done. Logging new window size.");
+      TrackedStatus.resize.size = window.innerWidth;
+      console.log("Done.");
       TrackedStatus.resize.status = false;
       func;
     }
@@ -274,6 +277,7 @@ function doOffsetX(parentofslides, refpoint) {
   var ref = refpoint;
 
   if (slideshow.length == null && TrackedStatus.doOffsetX.status == false) {
+    TrackedStatus.resize.size = window.innerWidth;
     TrackedStatus.doOffsetX.parent = slideshow;
     var queuef = queueSeq(slide, "focus", "f");
     console.log("Identifying currently active element in queue.");
@@ -305,8 +309,12 @@ function doOffsetX(parentofslides, refpoint) {
     /* without this case of the conditional, on window resize, left offset of slideshow is
     maintained */
     console.warn("Element has already been moved.");
-    
+
     if (TrackedStatus.resize.status == false) {
+      var oldwinsize = TrackedStatus.resize.size;
+      var newwinsize = window.innerWidth;
+      var resizediff = newwinsize - oldwinsize;
+
       // do something
     } else {
       console.info("Waiting for window resize to finish.");
