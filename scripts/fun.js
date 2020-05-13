@@ -124,20 +124,15 @@ function grabElemPosition(elem, index) {
 }
 
 function resizestatus(func) {
-  if (TrackedStatus.resize.status == true) {
-    if (new Date() - TrackedStatus.resize.began < EventStagger.postresize) {
-      console.info("Resize not yet finished.");
-      setTimeout(resizestatus, EventStagger.postresize);
-    } else {
-      console.info("Resize finished.");
-      console.log("Logging that resize has finished.");
-      console.log("Done. Logging new window size.");
-      console.log("Done.");
-      TrackedStatus.resize.status = false;
-      func;
-    }
+  if (new Date() - TrackedStatus.resize.began < EventStagger.postresize) {
+    console.info("Resize not yet finished.");
+    setTimeout(resizestatus, EventStagger.postresize);
   } else {
-    console.info("Waiting for resize event to fire.");
+    console.info("Resize finished.");
+    console.log("Logging that resize has finished.");
+    console.log("Done. Logging new window size.");
+    console.log("Done.");
+    func;
   }
 }
 
@@ -276,7 +271,7 @@ function doOffsetX(parentofslides, refpoint) {
   var ref = refpoint;
 
   if (slideshow.length == null && TrackedStatus.doOffsetX.status == false) {
-    TrackedStatus.resize.size = window.innerWidth;
+    //TrackedStatus.resize.size = window.innerWidth;
     TrackedStatus.doOffsetX.parent = slideshow;
     var queuef = queueSeq(slide, "focus", "f");
     console.log("Identifying currently active element in queue.");
@@ -294,7 +289,10 @@ function doOffsetX(parentofslides, refpoint) {
     var focushalf = focuswidth/2;
 
     console.log("Done. Subtracting " + slide[focus].id + "'s center's position from the left, from " + logo.id + "'s center's position from the left.");
-    var refslidediff = (refleft + refhalf) - (focusleft + focushalf);
+    var refdist = refleft + refhalf;
+    TrackedStatus.doOffsetX.refdist = refdist;
+    var focusdist = focusleft + focushalf;
+    var refslidediff = refdist - focusdist;
     var leftfactor = (focusleft + focuswidth >= window.innerWidth) ? refslidediff : refslidediff;
 
     console.log("Done. Initiating change of parent element's position.");
@@ -308,27 +306,32 @@ function doOffsetX(parentofslides, refpoint) {
     /* without this case of the conditional, on window resize, left offset of slideshow is
     maintained */
     console.warn("Element has already been moved.");
+    console.log(TrackedStatus.resize.status);
 
-    if (TrackedStatus.resize.status == false) {
-      var oldwinsize = TrackedStatus.resize.size;
-      var newwinsize = window.innerWidth;
-      var resizediff = newwinsize - oldwinsize;
+    var focus = TrackedStatus.doOffsetX.focus.index;
 
-      // do something
-    } else {
-      console.info("Waiting for window resize to finish.");
-    }
+    var refleft = grabElemPosition(ref).x;
+    var refwidth = ref.clientWidth;
+    var refhalf = refwidth/2;
+    var refdist = refleft + refhalf;
+    var oldrefdist = TrackedStatus.doOffsetX.refdist;
+    var refdiff = refdist - oldrefdist;
+    console.log(refdiff);
+    var focusleft = grabElemPosition(slide[focus]).x;
+    var focuswidth = slide[focus].clientWidth;
+    var focushalf = focuswidth/2;
+    var slideshowleft = TrackedStatus.doOffsetX.degree;
+    slideshowleft = parseFloat(slideshowleft);
+    console.log(slideshowleft);
 
-    // Ideas:
-    /*
-    Note: theoretically, logo's left offset should increase proportionately with window resize
-    * Log window.innerWidth in previous case, and subtract this from window.innerWidth under
-    this case
-    * If the result is a positive number and slideshow's left offset + half width is more
-    than new window.innerWidth, add this to slideshow's left offset + half width
-    * If the result is a negative number and slideshow's left offset + half width is more
-    than new window.innerWidth, add this to slideshow's left offset + half width
-    */
+    var refdist = refleft + refhalf;
+    var focusdist = focusleft + focushalf;
+    var refslidediff = refdist - focusdist;
+    var leftfactor = (focusleft + focuswidth >= window.innerWidth) ? refslidediff : refslidediff;
+    console.log(leftfactor);
+    slideshow.style.left = leftfactor + slideshowleft + "px";
+    TrackedStatus.doOffsetX.degree = slideshow.style.left;
+    TrackedStatus.doOffsetX.refdist = refdist;
   }
 }
 
