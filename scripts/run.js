@@ -19,8 +19,8 @@ window.addEventListener("resize", function() {
   TrackedStatus.resize.began = new Date();
   console.info("Window resize detected.");
   console.info("Window resize occured on " + TrackedStatus.resize.began + ".");
-  //console.log("Resetting offsetstatus.");
-  //TrackedStatus.offset.status = false;
+  console.log("Resetting resize status.");
+  TrackedStatus.resize.status = false;
 
   console.log("Logging window resize.");
   if (TrackedStatus.resize.status === false) {
