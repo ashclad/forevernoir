@@ -1,13 +1,26 @@
-/* logging data of relevant events */
-document.documentElement.addEventListener("wheel", grabWheelDirection, {passive: false});
-
-/* scripts */
+/* global variables */
 console.log("Preparing elements and related variables for input.");
-var comicstrip = document.getElementsByClassName("comicstrip");
-var logo = document.getElementById("mainlogo");
 var panels = document.getElementsByClassName("slide");
+var logo = document.getElementById("mainlogo");
 var queuef = queueSeq(panels, "focus", "f");
 var focus = queuef["focused"][0];
+var comicstrip = document.getElementsByClassName("comicstrip");
+
+/* logging data of relevant events */
+document.documentElement.addEventListener("wheel", function(e) {
+  if (Media.tablet.matches) {
+    console.warn("Only touch events available; cannot grab wheel scroll information.");
+  } else {
+    console.info("Acquiring event information.");
+    TrackedStatus.wheeling.x = e.deltaX;
+    TrackedStatus.wheeling.y = e.deltaY;
+    TrackedStatus.wheeling.z = e.deltaX/e.deltaY;
+
+    switchSlide(panels, "focus", logo);
+  }
+}, {passive: false});
+
+/* scripts */
 console.log("Done. Inserting prepared elements or related variables into function.");
 panels[focus].onload = function() {
   console.info(panels[focus].id + " has loaded.");
