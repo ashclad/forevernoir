@@ -7,9 +7,10 @@ var W = window;
 /* object definitions */
 var TrackedStatus = {
   jquery: false,
-  doOffsetX: {status: false},
+  doOffsetX: {status: false, focus: {index: 0}},
   resize: {status: false, size: 0},
-  poke: {x: 0, y: 0, z: 0}
+  poke: {x: 0, y: 0, z: 0},
+  wheeling: {x: 0, y: 0, z: 0}
 }
 
 var EventStagger = {
@@ -41,8 +42,36 @@ function grabTouchPosition(e) {
   console.info(grabTouchPosition.name + "() terminated.");
 }
 
-function grabWheelDirection(e) {
-  console.info("");
+function switchSlide(elemcollection, exceptionid, refpoint) {
+  var slides = elemcollection;
+  var excpt = exceptionid;
+  var ref = refpoint;
+  var verticalwheel = TrackedStatus.wheeling.y;
+  if (verticalwheel != 0) {
+    var direction = Math.sign(verticalwheel);
+    console.log(verticalwheel);
+    if (direction == 1) {
+      var queue = queueSeq(slides, excpt);
+      var focus = queue["focused"][0];
+      var next = queue["next"][0];
+
+      slides[focus].removeAttribute("id");
+      slides[next].setAttribute("id", "focus");
+      TrackedStatus.doOffsetX.focus.index = next;
+      TrackedStatus.doOffsetX.status = true;
+      doOffsetX(slides[0].parentElement, ref);
+    } else {
+      var queue = queueSeq(slides, excpt, "b");
+      var focus = queue["focused"][0];
+      var next = queue["prev"][0];
+
+      slides[focus].removeAttribute("id");
+      slides[next].setAttribute("id", "focus");
+      TrackedStatus.doOffsetX.focus.index = next;
+      TrackedStatus.doOffsetX.status = true;
+      doOffsetX(slides[0].parentElement, ref);
+    }
+  }
 }
 
 function grabElemPosition(elem, index) {
@@ -230,28 +259,6 @@ function queueSeqBackward(elemcollection, exceptionid) {
   }
 }
 
-function horizontalNav(type="scroll", elem, refpoint) {
-  if (type == "scroll") {
-    refpoint = undefined;
-  } else if (type == "position") {
-    if (parentofslides.length == null) {
-      var slideshow = parentofslides;
-      var slide = slideshow.children;
-    } else if (parentofslides.length == 1) {
-      var slideshow = parentofslides[0];
-      var slide = slideshow.children;
-    } else {
-      var slideshow = new Array();
-      var slide = new Array();
-      for (var i = 0; i < parentofslides.length; i++) {
-        slideshow.push(parentofslides[i]);
-        slide.push(slideshow[i].children);
-      }
-    }
-    var ref = refpoint;
-  }
-}
-
 function doOffsetX(parentofslides, refpoint) {
   console.info(doOffsetX.name + "() execution initiated.");
   if (parentofslides.length == null) {
@@ -271,13 +278,12 @@ function doOffsetX(parentofslides, refpoint) {
   var ref = refpoint;
 
   if (slideshow.length == null && TrackedStatus.doOffsetX.status == false) {
-    //TrackedStatus.resize.size = window.innerWidth;
+    TrackedStatus.resize.size = window.innerWidth;
     TrackedStatus.doOffsetX.parent = slideshow;
     var queuef = queueSeq(slide, "focus", "f");
     console.log("Identifying currently active element in queue.");
     var focus = queuef["focused"][0];
     console.log("Done. Logging the active element and its position in queue sequence.");
-    TrackedStatus.doOffsetX.focus = {index: 0};
     TrackedStatus.doOffsetX.focus.index = focus;
 
     console.log("Done. Acquiring information relevant to calculating change in parent element's position from the left.");
