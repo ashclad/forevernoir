@@ -46,6 +46,7 @@ function switchSlide(elemcollection, exceptionid, refpoint) {
   var slides = elemcollection;
   var excpt = exceptionid;
   var ref = refpoint;
+  var ceiling = slides.length - 1;
   var verticalwheel = TrackedStatus.wheeling.y;
   if (verticalwheel != 0) {
     var direction = Math.sign(verticalwheel);
@@ -64,6 +65,9 @@ function switchSlide(elemcollection, exceptionid, refpoint) {
       var queue = queueSeq(slides, excpt, "b");
       var focus = queue["focused"][0];
       var next = queue["prev"][0];
+      if (next == ceiling) {
+        next = next - 1;
+      }
 
       slides[focus].removeAttribute("id");
       slides[next].setAttribute("id", "focus");
