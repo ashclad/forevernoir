@@ -8,6 +8,7 @@ var W = window;
 var TrackedStatus = {
   jquery: false,
   doOffsetX: {status: false, focus: {index: 0}},
+  keying: {press: null},
   resize: {status: false, size: 0},
   poke: {x: 0, y: 0, z: 0},
   wheeling: {x: 0, y: 0, z: 0}
@@ -42,41 +43,6 @@ function grabTouchPosition(e) {
   console.info(grabTouchPosition.name + "() terminated.");
 }
 
-function switchSlide(elemcollection, exceptionid, refpoint) {
-  var slides = elemcollection;
-  var excpt = exceptionid;
-  var ref = refpoint;
-  var ceiling = slides.length - 1;
-  var verticalwheel = TrackedStatus.wheeling.y;
-  if (verticalwheel != 0) {
-    var direction = Math.sign(verticalwheel);
-    console.log(verticalwheel);
-    if (direction == 1) {
-      var queue = queueSeq(slides, excpt);
-      var focus = queue["focused"][0];
-      var next = queue["next"][0];
-
-      slides[focus].removeAttribute("id");
-      slides[next].setAttribute("id", "focus");
-      TrackedStatus.doOffsetX.focus.index = next;
-      TrackedStatus.doOffsetX.status = true;
-      doOffsetX(slides[0].parentElement, ref);
-    } else {
-      var queue = queueSeq(slides, excpt, "b");
-      var focus = queue["focused"][0];
-      var next = queue["prev"][0];
-      if (next == ceiling) {
-        next = next - 1;
-      }
-
-      slides[focus].removeAttribute("id");
-      slides[next].setAttribute("id", "focus");
-      TrackedStatus.doOffsetX.focus.index = next;
-      TrackedStatus.doOffsetX.status = true;
-      doOffsetX(slides[0].parentElement, ref);
-    }
-  }
-}
 
 function grabElemPosition(elem, index) {
   console.info(grabElemPosition.name + "() execution initiated.");
@@ -353,6 +319,75 @@ function offsetChangeX(parentofslides, refpoint) {
       doOffsetX(parentofslides, refpoint);
     }
   console.info(offsetChangeX.name + "() terminated.");
+}
+
+function switchSlide(elemcollection, exceptionid, refpoint) {
+  var slides = elemcollection;
+  var excpt = exceptionid;
+  var ref = refpoint;
+  var ceiling = slides.length - 1;
+  var verticalwheel = TrackedStatus.wheeling.y;
+  if (verticalwheel != 0) {
+    var direction = Math.sign(verticalwheel);
+    console.log(verticalwheel);
+    if (direction == 1) {
+      var queue = queueSeq(slides, excpt);
+      var focus = queue["focused"][0];
+      var next = queue["next"][0];
+
+      slides[focus].removeAttribute("id");
+      slides[next].setAttribute("id", "focus");
+      TrackedStatus.doOffsetX.focus.index = next;
+      TrackedStatus.doOffsetX.status = true;
+      doOffsetX(slides[0].parentElement, ref);
+    } else {
+      var queue = queueSeq(slides, excpt, "b");
+      var focus = queue["focused"][0];
+      var next = queue["prev"][0];
+      if (next == ceiling) {
+        next = next - 1;
+      }
+
+      slides[focus].removeAttribute("id");
+      slides[next].setAttribute("id", "focus");
+      TrackedStatus.doOffsetX.focus.index = next;
+      TrackedStatus.doOffsetX.status = true;
+      doOffsetX(slides[0].parentElement, ref);
+    }
+  }
+}
+
+function arrowSlide(elemcollection, exceptionid, refpoint) {
+  var slides = elemcollection;
+  var excpt = exceptionid;
+  var ref = refpoint;
+  var ceiling = slides.length - 1;
+  var press = TrackedStatus.keying.press;
+  console.log(press);
+  if (press == "ArrowRight") {
+    var queue = queueSeq(slides, excpt);
+    var focus = queue["focused"][0];
+    var next = queue["next"][0];
+
+    slides[focus].removeAttribute("id");
+    slides[next].setAttribute("id", "focus");
+    TrackedStatus.doOffsetX.focus.index = next;
+    TrackedStatus.doOffsetX.status = true;
+    doOffsetX(slides[0].parentElement, ref);
+  } else if (press == "ArrowLeft") {
+    var queue = queueSeq(slides, excpt, "b");
+    var focus = queue["focused"][0];
+    var next = queue["prev"][0];
+    if (next == ceiling) {
+      next = next - 1;
+    }
+
+    slides[focus].removeAttribute("id");
+    slides[next].setAttribute("id", "focus");
+    TrackedStatus.doOffsetX.focus.index = next;
+    TrackedStatus.doOffsetX.status = true;
+    doOffsetX(slides[0].parentElement, ref);
+  }
 }
 
 /*
