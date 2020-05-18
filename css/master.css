@@ -143,6 +143,10 @@ footer::after {
 }
 
 /* class-started */
+.home {
+  overflow-x: hidden;
+}
+
 .home body {
   background-color: var(--mid);
   color: var(--basel);
