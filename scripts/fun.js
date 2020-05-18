@@ -355,40 +355,7 @@ function offsetChangeX(parentofslides, refpoint) {
   console.info(offsetChangeX.name + "() terminated.");
 }
 
-/*function scrollVertoHoriz(e) {
-  if (Media.tablet.matches) {
-    console.warn("Only touch events available; scrollVertoHoriz() cannot be run.")
-  } else {
-    console.info("Detected mousewheel event.");
-    console.log("Executing scrollVertoHoriz().");
-    var horizontalscroll = document.getElementsByClassName("horizontalscroll");
-    var subelem;
-    var childnum;
-
-    for (var i = 0; i < horizontalscroll.length; i++) {
-      console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      subelem = document.getElementsByClassName("comicstrip");
-      for (var f = 0; f < subelem.length; f++) {
-        childnum = subelem[f].children.length;
-      }
-      console.info("Number of .horizontallscroll child elements: " + childnum);
-      var widthperchild = horizontalscroll[i].scrollWidth / childnum;
-      console.info("Scroll width per child: " + widthperchild);
-      var step = widthperchild / 5;
-      console.info("Ideal scroll steps: " + step);
-
-      if (e.deltaY != 0) {
-        console.info("Wheeling detected to deviate from original value.");
-        var direction = Math.sign(e.deltaY);
-        // scrollLeft comparison to value rather than variable is temporary
-        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + e.deltaY + step * direction, horizontalscroll[i].scrollTop);
-        console.log("Scroll position changed to: " + horizontalscroll[i].scrollLeft);
-      }
-    }
-    e.preventDefault();
-  }
-}
-
+/*
 function arrowNav(e) {
   if (Media.tablet.matches) {
     console.warn("No physical keyboard likely to be in use; arrowNav() cannot be run.");
