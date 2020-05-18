@@ -5,13 +5,14 @@ var logo = document.getElementById("mainlogo");
 var queuef = queueSeq(panels, "focus", "f");
 var focus = queuef["focused"][0];
 var comicstrip = document.getElementsByClassName("comicstrip");
+var home = document.getElementsByClassName("home");
 
 /* logging data of relevant events */
 document.documentElement.addEventListener("wheel", function(e) {
   if (Media.tablet.matches) {
     console.warn("Only touch events available; cannot grab wheel scroll information.");
   } else {
-    console.info("Acquiring event information.");
+    console.info("Acquiring wheelscroll event information.");
     TrackedStatus.wheeling.x = e.deltaX;
     TrackedStatus.wheeling.y = e.deltaY;
     TrackedStatus.wheeling.z = e.deltaX/e.deltaY;
@@ -19,6 +20,24 @@ document.documentElement.addEventListener("wheel", function(e) {
     switchSlide(panels, "focus", logo);
   }
 }, {passive: false});
+
+window.addEventListener("keydown", function(e) {
+  if (Media.tablet.matches) {
+    console.warn("Only touch events available; cannot grab physical keyboard information.");
+  } else {
+    console.info("Acquiring keypress event information.");
+    TrackedStatus.keying.press = e.key;
+
+    arrowSlide(panels, "focus", logo);
+  }
+}, {passive: false})
+
+window.addEventListener("scroll", function(e) {
+  if (home != null) {
+    window.scrollTo(0, 0);
+    e.preventDefault();
+  }
+}, {passive: false})
 
 /* scripts */
 console.log("Done. Inserting prepared elements or related variables into function.");
