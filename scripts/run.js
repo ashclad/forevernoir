@@ -22,24 +22,24 @@ var accesslnkthird = document.getElementById("accesslnkthird");
 /* checking if things have loaded */
 
 if (panels[next] != null) {
-  panels[next].onload = function() {
+  panels[next].addEventListener("load", function() {
     var classofslide = panels[next].className.indexOf("slide");
     classofslide = panels[next].className.slice(classofslide, 5);
     TrackedStatus.slides.status = "loaded";
     console.info(classofslide.charAt(0).toUpperCase() + classofslide.slice(1) + "s have loaded.");
     offsetChangeX(comicstrip, logo);
-  };
+  });
 } else {
   console.info("There are no slides on current page.");
 }
 
 if (patchild != null) {
-  patchild.onload = function() {
+  patchild.addEventListener("load", function() {
     var classofslide = patchild.className.indexOf("slide");
     classofslide = patchild.className.slice(classofslide, 5);
-    TrackedStatus.slides.status = "loaded";
+    TrackedStatus.cats.status = "loaded";
     console.info(classofslide + "ions have loaded.");
-  };
+  });
 } else {
   console.info("This is not the inventory page, so corresponding menu was not acquired.");
 }
