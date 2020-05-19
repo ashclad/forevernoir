@@ -137,12 +137,12 @@ function resizestatus(func) {
 }
 
 function removeElem(elem, animate=false, animation=undefined) {
-  // TrackedStatus.removeElem = {};
+  TrackedStatus.removeElem = null;
   if (animate == false) {
     console.info(removeElem.name + "() execution initiated.");
     if (elem.length == null) {
       TrackedStatus.removeElem += {obj: elem, type: elem.id};
-      console.log("Removing " + elem.id + " element.")
+      console.log("Removing " + elem.id + " element.");
       elem.remove();
     } else if (elem.length == 1) {
       elem = elem[0];
@@ -158,7 +158,27 @@ function removeElem(elem, animate=false, animation=undefined) {
     }
   }
   console.info(removeElem.name + "() terminated.");
-  return false;
+}
+
+function addElem(elem, where=document.documentElement) {
+  TrackedStatus.addElem = {};
+  console.info(addElem.name + "() execution initiated.");
+  if (elem.length == null) {
+    TrackedStatus.addElem += {obj: elem, type: elem.id};
+    console.log("Adding " + elem.id + " element.");
+    where.appendChild(elem);
+  } else if (elem.length == 1) {
+    elem = elem[0];
+    TrackedStatus.addElem += {obj: elem, type: elem.className.split(" ")[0]};
+    console.log("Adding " + elem.className.split(" ")[0] + " element.");
+    where.appendChild(elem);
+  } else {
+    console.log("Adding " + elem.className.split(" ")[0] + " element.");
+    for (var i = 0; i < elem.length; i++) {
+      where.appendChild(elem[i]);
+    }
+  }
+  console.info(addElem.name + "() terminated.");
 }
 
 function queueSeq(elemcollection, exceptionid, direction="forward") {
