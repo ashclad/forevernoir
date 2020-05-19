@@ -11,7 +11,9 @@ var TrackedStatus = {
   keying: {press: null},
   resize: {status: false, size: 0},
   poke: {x: 0, y: 0, z: 0},
-  wheeling: {x: 0, y: 0, z: 0}
+  wheeling: {x: 0, y: 0, z: 0},
+  slides: {status: ""},
+  removeElem: {}
 }
 
 var EventStagger = {
@@ -42,7 +44,6 @@ function grabTouchPosition(e) {
   TrackedStatus.poke.z = TrackedStatus.poke.x/TrackedStatus.poke.y;
   console.info(grabTouchPosition.name + "() terminated.");
 }
-
 
 function grabElemPosition(elem, index) {
   console.info(grabElemPosition.name + "() execution initiated.");
@@ -133,6 +134,31 @@ function resizestatus(func) {
     console.log("Done.");
     func;
   }
+}
+
+function removeElem(elem, animate=false, animation=undefined) {
+  // TrackedStatus.removeElem = {};
+  if (animate == false) {
+    console.info(removeElem.name + "() execution initiated.");
+    if (elem.length == null) {
+      TrackedStatus.removeElem += {obj: elem, type: elem.id};
+      console.log("Removing " + elem.id + " element.")
+      elem.remove();
+    } else if (elem.length == 1) {
+      elem = elem[0];
+      TrackedStatus.removeElem += {obj: elem, type: elem.className.split(" ")[0]};
+      console.log("Removing " + elem.className.split(" ")[0] + " element.");
+      elem.remove();
+    } else {
+      console.log("Removing " + elem.className.split(" ")[0] + " element.");
+      for (var j = 0; j < elem.length; j++) {
+        TrackedStatus.removeElem += {obj: elem[j], type: elem[j].className.split(" ")[0]};
+        elem[j].remove();
+      }
+    }
+  }
+  console.info(removeElem.name + "() terminated.");
+  return false;
 }
 
 function queueSeq(elemcollection, exceptionid, direction="forward") {
