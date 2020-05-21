@@ -1,4 +1,4 @@
-class Aisle {
+/*class Aisle {
   constructor(id, elemcollection=null) {
     this.name = id;
     this.attachment = elemcollection;
@@ -8,11 +8,20 @@ class Aisle {
     var aisle = document.createElement("DIV");
     aisle.setAttribute("CLASS", "menu aisle");
     aisle.setAttribute("ID", this.name);
+    aisle.style.display = "flex";
+    aisle.style.flexWrap = "wrap";
+    aisle.style.flexDirection = "row";
     if (this.attachment != null) {
-      aisle.appendChild(elemcollection);
+      aisle.appendChild(this.attachment);
     }
     return aisle;
   }
 }
 
-var mensaisle = new Aisle("menaisle");
+class Shelf {
+  constructor(id, class="shelf", ) {
+    // do something
+  }
+}
+
+var mensaisle = new Aisle("menaisle");*/
