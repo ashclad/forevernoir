@@ -85,14 +85,17 @@ window.addEventListener("scroll", function(e) {
 if (inventory != null) {
   menslnkfirst.addEventListener("click", function(e) {
     displayToggle(patmenu);
+    //displayToggle(menaisle, false);
   }, {passive: false});
 
   womenslnksecond.addEventListener("click", function(e) {
     displayToggle(patmenu);
+    //displayToggle(womenaisle, false);
   }, {passive: false});
 
   accesslnkthird.addEventListener("click", function(e) {
     displayToggle(patmenu);
+    //displayToggle(accessaisle, false);
   }, {passive: false});
 }
 
