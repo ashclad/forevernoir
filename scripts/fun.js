@@ -13,6 +13,7 @@ var TrackedStatus = {
   poke: {x: 0, y: 0, z: 0},
   wheeling: {x: 0, y: 0, z: 0},
   slides: {status: ""},
+  addElem: {},
   removeElem: {}
 }
 
@@ -137,48 +138,146 @@ function resizestatus(func) {
 }
 
 function removeElem(elem, animate=false, animation=undefined) {
-  TrackedStatus.removeElem = null;
   if (animate == false) {
     console.info(removeElem.name + "() execution initiated.");
     if (elem.length == null) {
-      TrackedStatus.removeElem += {obj: elem, type: elem.id};
+      TrackedStatus.removeElem = {};
+      TrackedStatus.removeElem = {obj: elem, type: elem.id};
       console.log("Removing " + elem.id + " element.");
       elem.remove();
     } else if (elem.length == 1) {
+      TrackedStatus.removeElem = {};
       elem = elem[0];
-      TrackedStatus.removeElem += {obj: elem, type: elem.className.split(" ")[0]};
+      TrackedStatus.removeElem = {obj: elem, type: elem.className.split(" ")[0]};
       console.log("Removing " + elem.className.split(" ")[0] + " element.");
       elem.remove();
     } else {
-      console.log("Removing " + elem.className.split(" ")[0] + " element.");
       for (var j = 0; j < elem.length; j++) {
-        TrackedStatus.removeElem += {obj: elem[j], type: elem[j].className.split(" ")[0]};
-        elem[j].remove();
+        TrackedStatus.removeElem["obj-" + j] = elem[j];
+        TrackedStatus.removeElem["type"] = elem[j].className.split(" ")[0]};
+      }
+      console.log("Removing " + elem.className.split(" ")[0] + " element.");
+
+      for (var i = 0; i < elem.length; i++) {
+        elem[i].remove();
       }
     }
-  }
   console.info(removeElem.name + "() terminated.");
 }
 
 function addElem(elem, where=document.documentElement) {
-  TrackedStatus.addElem = {};
-  console.info(addElem.name + "() execution initiated.");
   if (elem.length == null) {
-    TrackedStatus.addElem += {obj: elem, type: elem.id};
+    TrackedStatus.addElem = {};
+    TrackedStatus.addElem = {obj: elem, type: elem.id};
     console.log("Adding " + elem.id + " element.");
     where.appendChild(elem);
   } else if (elem.length == 1) {
+    TrackedStatus.addElem = {};
     elem = elem[0];
-    TrackedStatus.addElem += {obj: elem, type: elem.className.split(" ")[0]};
+    TrackedStatus.addElem = {obj: elem, type: elem.className.split(" ")[0]};
     console.log("Adding " + elem.className.split(" ")[0] + " element.");
     where.appendChild(elem);
   } else {
+    TrackedStatus.addElem = {};
+    for (var j = 0; j < elem.length; j++) {
+      TrackedStatus.addElem["obj-" + j] = elem[j];
+      TrackedStatus.addElem["type-" + j] = elem[j].className.split(" ")[0];
+    }
     console.log("Adding " + elem.className.split(" ")[0] + " element.");
+
     for (var i = 0; i < elem.length; i++) {
       where.appendChild(elem[i]);
     }
   }
   console.info(addElem.name + "() terminated.");
+}
+
+function displayToggle(elem) {
+  console.info(displayToggle.name + "() execution initiated.");
+
+  function createGlobalObj(name) {
+    window.TrackedStatus.display = {};
+    window.TrackedStatus.display[name] = {};
+    window.TrackedStatus.display[name].status = true;
+    window.TrackedStatus.display[name].inittype = "";
+  }
+
+  if (elem.length == null) {
+    createGlobalObj(elem.id);
+    var superstyle = window.getComputedStyle(elem);
+    var superdisplay = superstyle.getPropertyValue("display");
+
+    console.log("Toggling display of " + elem.id + " element.");
+    if (TrackedStatus.display[elem.id].status == false || elem.style.display == "none") {
+      console.warn("Element has already been made hidden.");
+      console.log("Revealing element.");
+      elem.style.display = TrackedStatus.display[elem.id].inittype;
+      console.log("Done. Logging that element has been revealed.");
+      TrackedStatus.display[elem.id].status = true;
+    } else if (TrackedStatus.display[elem.id].status == true) {
+      console.warn("Element has already been revealed.");
+      console.log("Logging how the element is displayed.");
+      TrackedStatus.display[elem.id].inittype = superdisplay;
+      console.log("Done. Hiding element.");
+      elem.style.display = "none";
+      console.log("Done. Logging that element has been hidden.");
+      TrackedStatus.display[elem.id].status = false;
+    }
+  } else if (elem.length == 1) {
+    elem = elem[0];
+    createGlobalObj(elem.id);
+    var superstyle = window.getComputedStyle(elem);
+    var superdisplay = superstyle.getPropertyValue("display");
+    var elemclass = elem.className.split(" ")[0];
+
+    console.log("Toggling display of " + elemclass + " element.");
+    if (TrackedStatus.display[elemclass].status == false || elem.display.style == "none") {
+      console.warn("Element has already been made hidden.");
+      console.log("Revealing element.");
+      elem.style.display = TrackedStatus.display[elemclass].inittype;
+      console.log("Done. Logging that element has been revealed.");
+      TrackedStatus.display[elemclass].status = true;
+    } else if (TrackedStatus.display[elemclass].status == true) {
+      console.warn("Element has already been revealed.");
+      console.log("Logging how the element is displayed.");
+      TrackedStatus.display[elemclass].inittype = superdisplay;
+      console.log("Done. Hiding element.");
+      elem.style.display = "none";
+      console.log("Done. Logging that element has been hidden.");
+      TrackedStatus.display[elemclass].status = false;
+    }
+  } else {
+    var superstyle = new Array();
+    var superdisplay = new Array();
+    var elemclass = elem[0].className.split(" ")[0];
+    createGlobalObj(elemclass);
+    delete window.TrackedStatus.display[elemclass].inittype;
+    for (var j = 0; j < elem.length; j++) {
+      window.TrackedStatus.display["inittype-" + j] = "";
+      superstyle = window.getComputedStyle(elem[j]);
+      superdisplay = superstyle[j].getPropertyValue("display");
+    }
+
+    console.log("Toggling display of " + elemclass + " element.");
+    for (var i = 0; i < elem.length; i++) {
+      if (TrackedStatus.display[elemclass].status == false || elem[i].style.display == "none") {
+        console.warn("Element has already been made hidden.");
+        console.log("Revealing element.");
+        elem[i].style.display = TrackedStatus.display[elemclass].inittype;
+        console.log("Done. Logging that element has been revealed.");
+        TrackedStatus.display[elemclass].status = true;
+      } else if (TrackedStatus.display[elemclass].status == true) {
+        console.warn("Element has already been revealed.");
+        console.log("Logging how the element is displayed.");
+        TrackedStatus.display["inittype-" + i] = superdisplay[i];
+        console.log("Done. Hiding element.");
+        elem[i].style.display = "none";
+        console.log("Done. Logging that element has been hidden.");
+        TrackedStatus.display.status = false;
+      }
+    }
+  }
+  console.info(displayToggle.name + "() execution terminated.");
 }
 
 function queueSeq(elemcollection, exceptionid, direction="forward") {
@@ -328,32 +427,36 @@ function doOffsetX(parentofslides, refpoint) {
     /* without this case of the conditional, on window resize, left offset of slideshow is
     maintained */
     console.warn("Element has already been moved.");
-    console.log(TrackedStatus.resize.status);
 
     var focus = TrackedStatus.doOffsetX.focus.index;
 
+    console.log("Acquiring relevant information of reference element.");
     var refleft = grabElemPosition(ref).x;
     var refwidth = ref.clientWidth;
     var refhalf = refwidth/2;
     var refdist = refleft + refhalf;
+    console.log("Done. Finding difference between this reference element's and old reference element's positioning.");
     var oldrefdist = TrackedStatus.doOffsetX.refdist;
     var refdiff = refdist - oldrefdist;
-    console.log(refdiff);
+    console.log("Acquiring relevant information of element to be repositioned.");
     var focusleft = grabElemPosition(slide[focus]).x;
     var focuswidth = slide[focus].clientWidth;
     var focushalf = focuswidth/2;
+    console.log("Done. Finding old repositioning distance of to-be-repositioned element.");
     var slideshowleft = TrackedStatus.doOffsetX.degree;
     slideshowleft = parseFloat(slideshowleft);
-    console.log(slideshowleft);
 
+    console.log("Done. Performing relevant calculations.");
     var refdist = refleft + refhalf;
     var focusdist = focusleft + focushalf;
     var refslidediff = refdist - focusdist;
     var leftfactor = (focusleft + focuswidth >= window.innerWidth) ? refslidediff : refslidediff;
-    console.log(leftfactor);
+    console.log("Done. Moving element in alignment with reference element.");
     slideshow.style.left = leftfactor + slideshowleft + "px";
+    console.log("Done. Logging new positioning of element and current positioning of reference element.");
     TrackedStatus.doOffsetX.degree = slideshow.style.left;
     TrackedStatus.doOffsetX.refdist = refdist;
+    console.info(doOffsetX.name + "() execution terminated.");
   }
 }
 
@@ -368,6 +471,7 @@ function offsetChangeX(parentofslides, refpoint) {
 }
 
 function switchSlide(elemcollection, exceptionid, refpoint) {
+  console.info(switchSlide.name + "() execution initiated.");
   var slides = elemcollection;
   var excpt = exceptionid;
   var ref = refpoint;
@@ -375,18 +479,22 @@ function switchSlide(elemcollection, exceptionid, refpoint) {
   var verticalwheel = TrackedStatus.wheeling.y;
   if (verticalwheel != 0) {
     var direction = Math.sign(verticalwheel);
-    console.log(verticalwheel);
     if (direction == 1) {
+      console.info("Downward direction detected.");
       var queue = queueSeq(slides, excpt);
       var focus = queue["focused"][0];
       var next = queue["next"][0];
 
+      console.log("Change id of next element so it may be focused.");
       slides[focus].removeAttribute("id");
       slides[next].setAttribute("id", "focus");
+      console.log("Done. Logging newly to-be-focused element and feigning that element was already moved.");
       TrackedStatus.doOffsetX.focus.index = next;
       TrackedStatus.doOffsetX.status = true;
+      console.log("Done. Now focusing the element.");
       doOffsetX(slides[0].parentElement, ref);
     } else {
+      console.info("Upward direction detected.");
       var queue = queueSeq(slides, excpt, "b");
       var focus = queue["focused"][0];
       var next = queue["prev"][0];
@@ -394,33 +502,42 @@ function switchSlide(elemcollection, exceptionid, refpoint) {
         next = next - 1;
       }
 
+      console.log("Change id of previous element so it may be focused.");
       slides[focus].removeAttribute("id");
       slides[next].setAttribute("id", "focus");
+      console.log("Done. Logging newly to-be-focused element and feigning that element was already moved.");
       TrackedStatus.doOffsetX.focus.index = next;
       TrackedStatus.doOffsetX.status = true;
+      console.log("Done. Now focusing the element.");
       doOffsetX(slides[0].parentElement, ref);
     }
   }
+  console.info(switchSlide.name + "() execution terminated.");
 }
 
 function arrowSlide(elemcollection, exceptionid, refpoint) {
+  console.info(arrowSlide.name + "() execution initiated.");
   var slides = elemcollection;
   var excpt = exceptionid;
   var ref = refpoint;
   var ceiling = slides.length - 1;
   var press = TrackedStatus.keying.press;
-  console.log(press);
   if (press == "ArrowRight") {
+    console.info("Right arrow key has been pressed.");
     var queue = queueSeq(slides, excpt);
     var focus = queue["focused"][0];
     var next = queue["next"][0];
 
+    console.log("Change id of next element so it may be focused.");
     slides[focus].removeAttribute("id");
     slides[next].setAttribute("id", "focus");
+    console.log("Done. Logging newly to-be-focused element and feigning that element was already moved.");
     TrackedStatus.doOffsetX.focus.index = next;
     TrackedStatus.doOffsetX.status = true;
+    console.log("Done. Now focusing the element.");
     doOffsetX(slides[0].parentElement, ref);
   } else if (press == "ArrowLeft") {
+    console.info("Left arrow key has been pressed.");
     var queue = queueSeq(slides, excpt, "b");
     var focus = queue["focused"][0];
     var next = queue["prev"][0];
@@ -428,57 +545,19 @@ function arrowSlide(elemcollection, exceptionid, refpoint) {
       next = next - 1;
     }
 
+    console.log("Change id of previous element so it may be focused.");
     slides[focus].removeAttribute("id");
     slides[next].setAttribute("id", "focus");
+    console.log("Done. Logging newly to-be-focused element and feigning that element was already moved.");
     TrackedStatus.doOffsetX.focus.index = next;
     TrackedStatus.doOffsetX.status = true;
+    console.log("Done. Now focusing the element.");
     doOffsetX(slides[0].parentElement, ref);
   }
+  console.info(arrowSlide.name + "() execution terminated.");
 }
 
-/*
-function arrowNav(e) {
-  if (Media.tablet.matches) {
-    console.warn("No physical keyboard likely to be in use; arrowNav() cannot be run.");
-  } else {
-    console.log(e);
-    var horizontalscroll = document.getElementsByClassName("horizontalscroll");
-    var childnum;
-    var subelem;
-
-    for (var i = 0; i < horizontalscroll.length; i++) {
-      console.info("The width that can be scrolled for .horizontallscroll: " + horizontalscroll[i].scrollWidth);
-      subelem = document.getElementsByClassName("comicstrip");
-      for (var f = 0; f < subelem.length; f++) {
-        childnum = subelem[f].children.length;
-      }
-      console.info("Number of .horizontallscroll child elements: " + childnum);
-      var widthperchild = horizontalscroll[i].scrollWidth / childnum;
-      console.info("Scroll width per child: " + widthperchild);
-      var step = widthperchild / 4;
-      console.info("Ideal scroll steps: " + step);
-
-      if (e.key == "ArrowRight" && horizontalscroll[i].scrollLeft >= 0 && horizontalscroll[i].scrollLeft < horizontalscroll[i].scrollWidth) {
-        console.info("Right arrow key press detected while rightward movement has not been exhausted.");
-        console.log("Initiating rightward scroll.");
-        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + step, horizontalscroll[i].scrollTop);
-      } else if (e.key == "ArrowLeft" && horizontalscroll[i].scrollLeft != 0) {
-        console.info("Left arrow key press detected while leftward movement has not been exhausted.");
-        console.log("Initiating leftward scroll.");
-        horizontalscroll[i].scrollTo(horizontalscroll[i].scrollLeft + (step * -1), horizontalscroll[i].scrollTop);
-      } else if (e.key == "ArrowRight" && horizontalscroll[i].scrollLeft == horizontalscroll[i].scrollWidth) {
-        console.info("Right arrow key press detected while rightward movement has been exhausted.");
-        console.info("Cannot scroll further right.");
-      } else if (e.key == "ArrowLeft" && horizontalscroll[i].scrollLeft == 0) {
-        console.info("Left arrow key press detected while leftward movement has been exhausted.");
-        console.info("Cannot scroll further left.");
-      }
-    }
-    e.preventDefault();
-  }
-}
-
-function slider(e) {
+/*function slider(e) {
   if (Media.tablet.matches && TrackedStatus.poke.z !== null) {
     var cX = e.touches[0].clientX;
     var cY = e.touches[0].clientY;
