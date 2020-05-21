@@ -82,17 +82,19 @@ window.addEventListener("scroll", function(e) {
   }
 }, {passive: false});
 
-menslnkfirst.addEventListener("click", function(e) {
-  removeElem(patmenu);
-}, {passive: false});
+if (inventory != null) {
+  menslnkfirst.addEventListener("click", function(e) {
+    displayToggle(patmenu);
+  }, {passive: false});
 
-womenslnksecond.addEventListener("click", function(e) {
-  removeElem(patmenu);
-}, {passive: false});
+  womenslnksecond.addEventListener("click", function(e) {
+    displayToggle(patmenu);
+  }, {passive: false});
 
-accesslnkthird.addEventListener("click", function(e) {
-  removeElem(patmenu);
-}, {passive: false});
+  accesslnkthird.addEventListener("click", function(e) {
+    displayToggle(patmenu);
+  }, {passive: false});
+}
 
 EventStagger.postresize = 200;
 window.addEventListener("resize", function() {
