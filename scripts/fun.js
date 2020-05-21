@@ -192,13 +192,13 @@ function addElem(elem, where=document.documentElement) {
   console.info(addElem.name + "() terminated.");
 }
 
-function displayToggle(elem) {
+function displayToggle(elem, initial=true) {
   console.info(displayToggle.name + "() execution initiated.");
 
   function createGlobalObj(name) {
     window.TrackedStatus.display = {};
     window.TrackedStatus.display[name] = {};
-    window.TrackedStatus.display[name].status = true;
+    window.TrackedStatus.display[name].status = initial;
     window.TrackedStatus.display[name].inittype = "";
   }
 
