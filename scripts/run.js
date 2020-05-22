@@ -1,4 +1,5 @@
 /* global variables */
+var cook = document.cookie;
 console.log("Preparing elements and related variables for input.");
 var panels = document.getElementsByClassName("slide");
 var logo = document.getElementById("mainlogo");
@@ -15,9 +16,12 @@ if (patmenu != null) {
 }
 var primarynav = document.getElementsByClassName("primarynav");
 var inventory = document.getElementsByClassName("inventory")[0];
+
 var menslnkfirst = document.getElementById("menslnkfirst");
 var womenslnksecond = document.getElementById("womenslnksecond");
 var accesslnkthird = document.getElementById("accesslnkthird");
+var selectprice = document.getElementsByClassName("pricechoice");
+var selectsize = document.getElementsByClassName("sizechoice");
 
 /* checking if things have loaded */
 
@@ -73,7 +77,6 @@ window.addEventListener("keydown", function(e) {
   }
 }, {passive: false});
 
-
 window.addEventListener("scroll", function(e) {
   console.log("Acquiring scroll event information.");
   if (home != null) {
@@ -84,19 +87,41 @@ window.addEventListener("scroll", function(e) {
 
 if (inventory != null) {
   menslnkfirst.addEventListener("click", function(e) {
-    displayToggle(patmenu);
+    displayToggle(patmenu, true, "flex");
     //displayToggle(menaisle, false);
   }, {passive: false});
 
   womenslnksecond.addEventListener("click", function(e) {
-    displayToggle(patmenu);
+    displayToggle(patmenu, true, "flex");
     //displayToggle(womenaisle, false);
   }, {passive: false});
 
   accesslnkthird.addEventListener("click", function(e) {
-    displayToggle(patmenu);
+    displayToggle(patmenu, true, "flex");
     //displayToggle(accessaisle, false);
   }, {passive: false});
+}
+
+var selectpriceof = selectprice.parentElement.className.indexOf("sidebar");
+if (selectpriceof > -1) {
+  // look over: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+  selectprice.addEventListener("change", function(e) {
+    if (window.QueryShop != null && window.QueryShop.price == e.target.value) {
+      manageData(displayShopItems, "shoplist.php", window.QueryShop, true);
+    } else if (window.QueryShop != null && window.QueryShop.price != e.target.value) {
+      window.QueryShop.price = e.target.value;
+      manageData(displayShopItems, "shoplist.php", window.QueryShop, true);
+    } else {
+      window.QueryShop = {};
+      window.QueryShop.price = e.target.value;
+      manageData(displayShopItems, "shoplist.php", window.QueryShop, true);
+    }
+  });
+}
+
+var selectsizeof = selectsize.parentElement.className.indexOf("sidebar");
+if (selectsizeof > -1) {
+  // do something
 }
 
 EventStagger.postresize = 200;
