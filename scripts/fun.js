@@ -4,6 +4,8 @@ console.log("Checking for jQuery...");
 /* global variables */
 var W = window;
 
+var QueryShop = {}
+
 /* object definitions */
 var TrackedStatus = {
   jquery: false,
@@ -37,6 +39,27 @@ if (window.jQuery) {
 }
 
 /* function definitions */
+function manageData(func, target=window.location.href, queries="?", asobj=false) {
+  var xmlobj = new XMLHttpRequest();
+  // check if query is an object, and if its an object, create array from its properties
+  // join those properties into a string
+
+  xmlobj.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200) {
+      if (asobj == false) {
+        var response = xmlobj.responseText;
+      } else {
+        var response = xmlobj.responseXML;
+      }
+    }
+
+    func(response);
+  }
+  xmlobj.open("POST", target, true);
+  xmlobj.send(queries);
+}
+
 function grabTouchPosition(e) {
   console.info(grabTouchPosition.name + "() execution initiated.");
   console.info("Screen has been touched.");
@@ -137,6 +160,30 @@ function resizestatus(func) {
   }
 }
 
+function readCookie(cookie) {
+  var pairs = cookie.split("; ");
+  var obj = {};
+  for (var i = 0; i < pairs.length; i++) {
+    var keyvalues = pairs[i].split("=");
+    obj[keyvalues[0]] = keyvalues[1];
+  }
+  return obj;
+}
+
+function updateCookie(cookie, key, value) {
+  var obj = readCookie(cookie);
+  obj[key] = value;
+  var keyarr = Object.keys(obj);
+  var ceiling = keyarr.length - 1;
+  var floor = ceiling - ceiling;
+  var str;
+  for (var i = 0; i < keyarr.length; i++) {
+    var keyvalue = obj[keyarr[i]];
+    document.cookie += keyarr[i] + "=" + keyvalue + "; ";
+    str += keyarr[i] + "=" + keyvalue + "; ";
+  }
+}
+
 function removeElem(elem, animate=false, animation=undefined) {
   if (animate == false) {
     console.info(removeElem.name + "() execution initiated.");
@@ -192,20 +239,20 @@ function addElem(elem, where=document.documentElement) {
   console.info(addElem.name + "() terminated.");
 }
 
-function displayToggle(elem, initial=true) {
+function displayToggle(elem, initial=true, displaytype="block") {
   console.info(displayToggle.name + "() execution initiated.");
 
   function createGlobalObj(name) {
     window.TrackedStatus.display = {};
     window.TrackedStatus.display[name] = {};
     window.TrackedStatus.display[name].status = initial;
-    window.TrackedStatus.display[name].inittype = "";
+    window.TrackedStatus.display[name].inittype = displaytype;
   }
 
   if (elem.length == null) {
-    createGlobalObj(elem.id);
     var superstyle = window.getComputedStyle(elem);
     var superdisplay = superstyle.getPropertyValue("display");
+    createGlobalObj(elem.id);
 
     console.log("Toggling display of " + elem.id + " element.");
     if (TrackedStatus.display[elem.id].status == false || elem.style.display == "none") {
@@ -214,21 +261,24 @@ function displayToggle(elem, initial=true) {
       elem.style.display = TrackedStatus.display[elem.id].inittype;
       console.log("Done. Logging that element has been revealed.");
       TrackedStatus.display[elem.id].status = true;
+      window.TrackedStatus.display[elem.id].status = true;
     } else if (TrackedStatus.display[elem.id].status == true) {
       console.warn("Element has already been revealed.");
       console.log("Logging how the element is displayed.");
       TrackedStatus.display[elem.id].inittype = superdisplay;
+      window.TrackedStatus.display[elem.id].inittype = superdisplay;
       console.log("Done. Hiding element.");
       elem.style.display = "none";
       console.log("Done. Logging that element has been hidden.");
       TrackedStatus.display[elem.id].status = false;
+      window.TrackedStatus.display[elem.id].status = false;
     }
   } else if (elem.length == 1) {
     elem = elem[0];
-    createGlobalObj(elem.id);
     var superstyle = window.getComputedStyle(elem);
     var superdisplay = superstyle.getPropertyValue("display");
     var elemclass = elem.className.split(" ")[0];
+    createGlobalObj(elemclass);
 
     console.log("Toggling display of " + elemclass + " element.");
     if (TrackedStatus.display[elemclass].status == false || elem.display.style == "none") {
@@ -237,14 +287,17 @@ function displayToggle(elem, initial=true) {
       elem.style.display = TrackedStatus.display[elemclass].inittype;
       console.log("Done. Logging that element has been revealed.");
       TrackedStatus.display[elemclass].status = true;
+      window.TrackedStatus.display[elemclass].status = true;
     } else if (TrackedStatus.display[elemclass].status == true) {
       console.warn("Element has already been revealed.");
       console.log("Logging how the element is displayed.");
       TrackedStatus.display[elemclass].inittype = superdisplay;
+      window.TrackedStatus.display[elemclass].inittype = superdisplay;
       console.log("Done. Hiding element.");
       elem.style.display = "none";
       console.log("Done. Logging that element has been hidden.");
       TrackedStatus.display[elemclass].status = false;
+      window.TrackedStatus.display[elemclass].status = false;
     }
   } else {
     var superstyle = new Array();
@@ -266,18 +319,26 @@ function displayToggle(elem, initial=true) {
         elem[i].style.display = TrackedStatus.display[elemclass].inittype;
         console.log("Done. Logging that element has been revealed.");
         TrackedStatus.display[elemclass].status = true;
+        window.TrackedStatus.display[elemclass].status = true;
       } else if (TrackedStatus.display[elemclass].status == true) {
         console.warn("Element has already been revealed.");
         console.log("Logging how the element is displayed.");
         TrackedStatus.display["inittype-" + i] = superdisplay[i];
+        window.TrackedStatus.display["inittype-" + i] = superdisplay[i];
         console.log("Done. Hiding element.");
         elem[i].style.display = "none";
         console.log("Done. Logging that element has been hidden.");
-        TrackedStatus.display.status = false;
+        TrackedStatus.display[elemclass].status = false;
+        window.TrackedStatus.display[elemclass].status = false;
       }
     }
   }
   console.info(displayToggle.name + "() execution terminated.");
+}
+
+function displayShopItems(xmldata) {
+  console.warn("Incomplete function.");
+  // do something
 }
 
 function queueSeq(elemcollection, exceptionid, direction="forward") {
