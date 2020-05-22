@@ -26,6 +26,7 @@
     </header>
     <main class="collection">
       <!-- making a gallery using flex: https://www.taniarascia.com/how-to-build-a-responsive-image-gallery-with-flexbox/ -->
+      <!-- php form handling: https://www.w3schools.com/php/php_forms.asp -->
         <nav class="menu patterns">
           <nav class="menu secondarynav">
             <div id="inventorygroup" class="linkgrouping">
@@ -45,6 +46,32 @@
           <a id="womenslnk" class="opt query" href="category.php?s=women"><img class="pattern" src="assets/cat_men.jpg"></a>
           <a id="accesslnk" class="opt query" href="category.php?s=children"><img class="pattern" src="assets/cat_men.jpg"></a>
         </nav>
+        <div class="storefront mens">
+          <nav class="sidebar menu mens">
+            <div class="price mens">
+              <label for="price">Price Range</label>
+              <select class="pricechoice" name="pricetiers">
+                <option value="floor">$</option>
+                <option value="median">$$</option>
+                <option value="ceiling">$$$</option>
+              </select>
+            </div>
+            <div class="size mens">
+              <label for="size">Price Range</label>
+              <select class="sizechoice" name="sizetiers">
+                <option value="t">Tiny</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+              </select>
+            </div>
+          </nav>
+          <div class="aisle">
+            <!-- content -->
+          </div>
+        </div>
     </main>
     <footer id="mainfooter">
       <!--<span class="gallery">
