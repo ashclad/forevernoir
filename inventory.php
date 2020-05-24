@@ -19,9 +19,9 @@
       <a id="cartlnk" class="page" href="_cart.html"><img id="maincart" class="cart" src="assets/cart.png"></a>
       <a id="indexlnk" class="page" href="inventory.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
       <nav class="primarynav">
-        <a id="menslnkfirst" class="opt page">Men's</a>
-        <a id="womenslnksecond" class="opt page">Women's</a>
-        <a id="accesslnkthird" class="opt page">Accessories</a>
+        <a id="menslnk" class="opt page">Men's</a>
+        <a id="womenslnk" class="opt page">Women's</a>
+        <a id="accesslnk" class="opt page">Accessories</a>
       </nav>
     </header>
     <main class="collection">
@@ -42,23 +42,25 @@
               <a id="contactlnk" class="opt page" href="_contact.html"><span>Contact Us</span></a>
             </div>
           </nav>
-          <a id="menslnk" class="opt query" href="category.php?s=men"><img class="pattern" src="assets/cat_men.jpg"></a>
-          <a id="womenslnk" class="opt query" href="category.php?s=women"><img class="pattern" src="assets/cat_men.jpg"></a>
-          <a id="accesslnk" class="opt query" href="category.php?s=children"><img class="pattern" src="assets/cat_men.jpg"></a>
+          <a id="menslnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a>
+          <a id="womenslnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a>
+          <a id="accesslnksecond" class="opt query"><img class="pattern" src="assets/cat_men.jpg"></a>
         </nav>
         <div class="storefront mens">
           <nav class="sidebar menu mens">
             <div class="price mens">
-              <label for="price">Price Range</label>
+              <label for="price">Price Ranges</label>
               <select class="pricechoice" name="pricetiers">
+                <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
                 <option value="ceiling">$$$</option>
               </select>
             </div>
             <div class="size mens">
-              <label for="size">Price Range</label>
+              <label for="size">Sizes</label>
               <select class="sizechoice" name="sizetiers">
+                <option value="all">All</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
                 <option value="m">M</option>
@@ -66,6 +68,276 @@
                 <option value="xl">XL</option>
                 <option value="xxl">XXL</option>
               </select>
+            </div>
+            <div class="piece mens">
+              <legend>Pieces</legend>
+              <select class="piecechoice" name="piecetypes">
+                <option name="piece" value="all">All</option>
+                <option name="piece" value="top">Tops</option>
+                <option name="piece" value="one">One-Pieces</option>
+                <option name="piece" value="bottom">Bottoms</option>
+                <option name="piece" value="under">Underclothes</option>
+                <option name="piece" value="foot">Footwear</option>
+              </select>
+              <fieldset class="piecelist">
+                <legend class="piecelist toppiece">Tops</legend>
+                <input type="radio" name="top" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="top" value="tshirt">
+                <label for="piece">T-Shirt</label><br>
+                <input type="radio" name="top" value="ashirt">
+                <label for="piece">A-Shirt</label><br>
+                <input type="radio" name="top" value="dshirt">
+                <label for="piece">Dress Shirts</label><br>
+                <input type="radio" name="top" value="jacket">
+                <label for="piece">Jackets</label><br>
+                <input type="radio" name="top" value="vest">
+                <label for="piece">Vests</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist onepiece">One-Pieces</legend>
+                <input type="radio" name="one" value="all">
+                <label for="piece">All</label>
+                <input type="radio" name="one" value="overall">
+                <label for="piece">Overalls</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="bottompiece">Bottoms</legend>
+                <input type="radio" name="bottom" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="bottom" value="ltrouser">
+                <label for="piece">Long Trousers</label><br>
+                <input type="radio" name="bottom" value="strouser">
+                <label for="piece">Short Trousers</label><br>
+                <input type="radio" name="bottom" value="dtrouser">
+                <label for="piece">Dress Trousers</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist underpiece">Underclothes</legend>
+                <input type="radio" name="under" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="under" value="boxer">
+                <label for="piece">Boxer Shorts</label><br>
+                <input type="radio" name="under" value="brief">
+                <label for="piece">Boxer Briefs</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist footpiece">Footwear</legend>
+                <input type="radio" name="foot" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="foot" value="sneaker">
+                <label for="piece">Sneakers</label><br>
+                <input type="radio" name="foot" value="boot">
+                <label for="piece">Boots</label><br>
+                <input type="radio" name="foot" value="shoe">
+                <label for="piece">Dress Shoes</label><br>
+                <input type="radio" name="foot" value="sock">
+                <label for="piece">Socks</label>
+              </fieldset>
+            </div>
+          </nav>
+          <div class="aisle">
+            <!-- content -->
+          </div>
+        </div>
+        <div class="storefront womens">
+          <nav class="sidebar menu womens">
+            <div class="price womens">
+              <label for="price">Price Ranges</label>
+              <select class="pricechoice" name="pricetiers">
+                <option value="all">∞</option>
+                <option value="floor">$</option>
+                <option value="median">$$</option>
+                <option value="ceiling">$$$</option>
+              </select>
+            </div>
+            <div class="size womens">
+              <label for="size">Sizes</label>
+              <select class="sizechoice" name="sizetiers">
+                <option value="all">all</option>
+                <option value="t">Tiny</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+              </select>
+            </div>
+            <div class="piece womens">
+              <legend>Pieces</legend>
+              <select class="piecechoice" name="piecetypes">
+                <option name="piece" value="all">All</option>
+                <option name="piece" value="top">Tops</option>
+                <option name="piece" value="one">One-Pieces</option>
+                <option name="piece" value="bottom">Bottoms</option>
+                <option name="piece" value="under">Underclothes</option>
+                <option name="piece" value="foot">Footwear</option>
+              </select>
+              <fieldset class="piecelist">
+                <legend class="piecelist toppiece">Tops</legend>
+                <input type="radio" name="top" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="top" value="tshirt">
+                <label for="piece">T-Shirt</label><br>
+                <input type="radio" name="top" value="ashirt">
+                <label for="piece">A-Shirt</label><br>
+                <input type="radio" name="top" value="dshirt">
+                <label for="piece">Dress Shirts</label><br>
+                <input type="radio" name="top" value="jacket">
+                <label for="piece">Jackets</label><br>
+                <input type="radio" name="top" value="vest">
+                <label for="piece">Vests</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist onepiece">One-Pieces</legend>
+                <input type="radio" name="one" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="one" value="jump">
+                <label for="piece">Jumpers</label><br>
+                <input type="radio" name="one" value="dress">
+                <label for="piece">Dresses</label><br>
+                <input type="radio" name="one" value="overall">
+                <label for="piece">Overalls</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="bottompiece">Bottoms</legend>
+                <input type="radio" name="bottom" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="bottom" value="ltrouser">
+                <label for="piece">Long Trousers</label><br>
+                <input type="radio" name="bottom" value="strouser">
+                <label for="piece">Short Trousers</label><br>
+                <input type="radio" name="bottom" value="dtrouser">
+                <label for="piece">Dress Trousers</label><br>
+                <input type="radio" name="bottom" value="skirt">
+                <label for="piece">Skirts</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist underpiece">Underclothes</legend>
+                <input type="radio" name="under" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="under" value="boxer">
+                <label for="piece">Boxer Shorts</label><br>
+                <input type="radio" name="under" value="brief">
+                <label for="piece">Boxer Briefs</label><br>
+                <input type="radio" name="under" value="panty">
+                <label for="piece">Panties</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist footpiece">Footwear</legend>
+                <input type="radio" name="foot" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="foot" value="sneaker">
+                <label for="piece">Sneakers</label><br>
+                <input type="radio" name="foot" value="boot">
+                <label for="piece">Boots</label><br>
+                <input type="radio" name="foot" value="shoe">
+                <label for="piece">Dress Shoes</label><br>
+                <input type="radio" name="foot" value="sock">
+                <label for="piece">Socks</label>
+              </fieldset>
+            </div>
+          </nav>
+          <div class="aisle">
+            <!-- content -->
+          </div>
+        </div>
+        <div class="storefront access">
+          <nav class="sidebar menu access">
+            <div class="price access">
+              <label for="price">Price Ranges</label>
+              <select class="pricechoice" name="pricetiers">
+                <option value="all">∞</option>
+                <option value="floor">$</option>
+                <option value="median">$$</option>
+                <option value="ceiling">$$$</option>
+              </select>
+            </div>
+            <div class="size access">
+              <label for="size">Sizes</label>
+              <select class="sizechoice" name="sizetiers">
+                <option value="all">∞</option>
+                <option value="t">Tiny</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+              </select>
+            </div>
+            <div class="piece access">
+              <legend>Pieces</legend>
+              <select class="piecechoice" name="piecetypes">
+                <option name="piece" value="all">All</option>
+                <option name="piece" value="top">Tops</option>
+                <option name="piece" value="one">One-Pieces</option>
+                <option name="piece" value="bottom">Bottoms</option>
+                <option name="piece" value="under">Underclothes</option>
+                <option name="piece" value="foot">Footwear</option>
+              </select>
+              <fieldset class="piecelist">
+                <legend class="piecelist toppiece">Tops</legend>
+                <input type="radio" name="top" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="top" value="tshirt">
+                <label for="piece">T-Shirt</label><br>
+                <input type="radio" name="top" value="ashirt">
+                <label for="piece">A-Shirt</label><br>
+                <input type="radio" name="top" value="dshirt">
+                <label for="piece">Dress Shirts</label><br>
+                <input type="radio" name="top" value="jacket">
+                <label for="piece">Jackets</label><br>
+                <input type="radio" name="top" value="vest">
+                <label for="piece">Vests</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist onepiece">One-Pieces</legend>
+                <input type="radio" name="one" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="one" value="jump">
+                <label for="piece">Jumpers</label><br>
+                <input type="radio" name="one" value="dress">
+                <label for="piece">Dresses</label><br>
+                <input type="radio" name="one" value="overall">
+                <label for="piece">Overalls</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="bottompiece">Bottoms</legend>
+                <input type="radio" name="bottom" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="bottom" value="ltrouser">
+                <label for="piece">Long Trousers</label><br>
+                <input type="radio" name="bottom" value="strouser">
+                <label for="piece">Short Trousers</label><br>
+                <input type="radio" name="bottom" value="dtrouser">
+                <label for="piece">Dress Trousers</label><br>
+                <input type="radio" name="bottom" value="skirt">
+                <label for="piece">Skirts</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist underpiece">Underclothes</legend>
+                <input type="radio" name="under" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="under" value="boxer">
+                <label for="piece">Boxer Shorts</label><br>
+                <input type="radio" name="under" value="brief">
+                <label for="piece">Boxer Briefs</label><br>
+                <input type="radio" name="under" value="panty">
+                <label for="piece">Panties</label>
+              </fieldset>
+              <fieldset class="piecelist">
+                <legend class="piecelist footpiece">Footwear</legend>
+                <input type="radio" name="foot" value="all">
+                <label for="piece">All</label><br>
+                <input type="radio" name="foot" value="sneaker">
+                <label for="piece">Sneakers</label><br>
+                <input type="radio" name="foot" value="boot">
+                <label for="piece">Boots</label><br>
+                <input type="radio" name="foot" value="shoe">
+                <label for="piece">Dress Shoes</label><br>
+                <input type="radio" name="foot" value="sock">
+                <label for="piece">Socks</label>
+              </fieldset>
             </div>
           </nav>
           <div class="aisle">
