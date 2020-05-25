@@ -50,7 +50,7 @@
           <nav class="sidebar menu mens">
             <div class="price mens">
               <label for="price">Price Ranges</label>
-              <select class="pricechoice" name="pricetiers">
+              <select class="dropdown pricechoice" name="pricetiers">
                 <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
@@ -59,7 +59,7 @@
             </div>
             <div class="size mens">
               <label for="size">Sizes</label>
-              <select class="sizechoice" name="sizetiers">
+              <select class="dropdown sizechoice" name="sizetiers">
                 <option value="all">All</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
@@ -71,7 +71,7 @@
             </div>
             <div class="piece mens">
               <legend>Pieces</legend>
-              <select class="piecechoice" name="piecetypes">
+              <select class="dropdown piecechoice" name="piecetypes">
                 <option name="piece" value="all">All</option>
                 <option name="piece" value="top">Tops</option>
                 <option name="piece" value="one">One-Pieces</option>
@@ -80,7 +80,7 @@
                 <option name="piece" value="foot">Footwear</option>
               </select>
               <fieldset class="piecelist">
-                <legend class="piecelist toppiece">Tops</legend>
+                <legend class="toppiece">Tops</legend>
                 <input type="radio" name="top" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="top" value="tshirt">
@@ -95,7 +95,7 @@
                 <label for="piece">Vests</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist onepiece">One-Pieces</legend>
+                <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label>
                 <input type="radio" name="one" value="overall">
@@ -113,7 +113,7 @@
                 <label for="piece">Dress Trousers</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist underpiece">Underclothes</legend>
+                <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="under" value="boxer">
@@ -122,7 +122,7 @@
                 <label for="piece">Boxer Briefs</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist footpiece">Footwear</legend>
+                <legend class="footpiece">Footwear</legend>
                 <input type="radio" name="foot" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="foot" value="sneaker">
@@ -174,7 +174,7 @@
                 <option name="piece" value="foot">Footwear</option>
               </select>
               <fieldset class="piecelist">
-                <legend class="piecelist toppiece">Tops</legend>
+                <legend class="toppiece">Tops</legend>
                 <input type="radio" name="top" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="top" value="tshirt">
@@ -189,7 +189,7 @@
                 <label for="piece">Vests</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist onepiece">One-Pieces</legend>
+                <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="one" value="jump">
@@ -213,7 +213,7 @@
                 <label for="piece">Skirts</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist underpiece">Underclothes</legend>
+                <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="under" value="boxer">
@@ -224,7 +224,7 @@
                 <label for="piece">Panties</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist footpiece">Footwear</legend>
+                <legend class="footpiece">Footwear</legend>
                 <input type="radio" name="foot" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="foot" value="sneaker">
@@ -276,7 +276,7 @@
                 <option name="piece" value="foot">Footwear</option>
               </select>
               <fieldset class="piecelist">
-                <legend class="piecelist toppiece">Tops</legend>
+                <legend class="toppiece">Tops</legend>
                 <input type="radio" name="top" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="top" value="tshirt">
@@ -291,7 +291,7 @@
                 <label for="piece">Vests</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist onepiece">One-Pieces</legend>
+                <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="one" value="jump">
@@ -315,7 +315,7 @@
                 <label for="piece">Skirts</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist underpiece">Underclothes</legend>
+                <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="under" value="boxer">
@@ -326,7 +326,7 @@
                 <label for="piece">Panties</label>
               </fieldset>
               <fieldset class="piecelist">
-                <legend class="piecelist footpiece">Footwear</legend>
+                <legend class="footpiece">Footwear</legend>
                 <input type="radio" name="foot" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="foot" value="sneaker">
