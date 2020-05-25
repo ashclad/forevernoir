@@ -16,7 +16,9 @@ var TrackedStatus = {
   wheeling: {x: 0, y: 0, z: 0},
   slides: {status: ""},
   addElem: {},
-  removeElem: {}
+  removeElem: {},
+  clicked: false,
+  querystring: "?"
 }
 
 var EventStagger = {
@@ -168,9 +170,34 @@ function resolveQuery(string, appendname, value=null) {
   if (string.indexOf("?") <= -1 && string.indexOf("&") <= -1) {
     (value != null) ? (string = "?" + appendname + "=" + value) : (string = "?" + appendname + "=");
   } else if (string.indexOf("?") > -1) {
-    (value != null) ? (string += "&" + appendname + "=" + value) : (string += "&" + appendname + "=");
+    if (string.indexOf(appendname) > -1) {
+      string = string.slice(1, string.length);
+      string = string.split("&");
+      for (var i = 0; i < string.length; i++) {
+        if (string[i].indexOf(appendname) > -1) {
+          var keyvalue = string[i].split("=");
+          keyvalue[0] = appendname;
+          (value != null) ? (keyvalue[1] = value) : (keyvalue[1] = "");
+          keyvalue = keyvalue.join("=");
+          string[i] = keyvalue;
+        }
+      }
+      string = "?" + string.join("&");
+    } else {
+      (value != null) ? (string += "&" + appendname + "=" + value) : (string += "&" + appendname + "=");
+    }
   }
   return string;
+}
+
+function queryFromSelect(elem={}, qparam="", url="") {
+  if (elem != null) {
+    elem.addEventListener("change", function(e) {
+      console.log("Option for " + elem.className.split(" ")[0] + " has been changed to " + e.target.value + ".");
+      TrackedStatus.querystring = resolveQuery(TrackedStatus.querystring, qparam, e.target.value);
+      console.log(TrackedStatus.querystring);
+    });
+  }
 }
 
 function removeElem(elem, animate=false, animation=undefined) {
@@ -198,7 +225,11 @@ function addElem(elem, where=document.documentElement, animate=false, animation=
   console.info(addElem.name + "() initiated.");
   if (animate == false) {
     if (elem.length == null) {
-      console.log("Adding " + elem.id + " element.");
+      if (elem.id != null) {
+        console.log("Adding " + elem.id + " element.");
+      } else {
+        console.log("Adding " + elem.className.split(" ")[0] + "element.");
+      }
       where.appendChild(elem);
     } else if (elem.length == 1) {
       elem = elem[0];
@@ -317,12 +348,19 @@ function displayToggle(elem, initial=true, displaytype="block") {
 function altDisplayToggle(notdisplayed, displayed, notdisplayeddefault, displayeddefault) {
   var notdisplayedinit = window.getComputedStyle(notdisplayed).getPropertyValue("display");
   var displayedinit = window.getComputedStyle(displayed).getPropertyValue("display");
+  console.log([notdisplayedinit, displayedinit]);
   if (notdisplayedinit == "none" && displayedinit != "none") {
     displayToggle(displayed, true, displayeddefault);
     displayToggle(notdisplayed, false, notdisplayeddefault);
   } else if (notdisplayedinit != "none" && displayedinit == "none") {
     displayToggle(displayed, false, displayeddefault);
     displayToggle(notdisplayed, true, notdisplayeddefault);
+  } else if (notdisplayedinit != "none" && displayedinit != "none") {
+    displayToggle(displayed, true, displayeddefault);
+    displayToggle(notdisplayed, true, notdisplayeddefault);
+  } else if (notdisplayedinit == "none" && displayedinit == "none") {
+    displayToggle(displayed, false, displayeddefault);
+    displayToggle(notdisplayed, false, notdisplayeddefault);
   }
 }
 
@@ -568,6 +606,7 @@ function arrowSlide(elemcollection, exceptionid, refpoint) {
   var ref = refpoint;
   var ceiling = slides.length - 1;
   var press = TrackedStatus.keying.press;
+  console.log(press);
   if (press == "ArrowRight") {
     console.info("Right arrow key has been pressed.");
     var queue = queueSeq(slides, excpt);
