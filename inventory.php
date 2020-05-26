@@ -47,10 +47,10 @@
           <a id="accesslnksecond" class="opt query"><img class="pattern" src="assets/cat_men.jpg"></a>
         </nav>
         <div class="storefront mens">
-          <nav class="sidebar menu mens">
+          <nav class="sidebar menu">
             <div class="price mens">
               <label for="price">Price Ranges</label>
-              <select class="dropdown pricechoice" name="pricetiers">
+              <select class="dropdown pricechoice mens" name="pricetiers">
                 <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
@@ -59,7 +59,7 @@
             </div>
             <div class="size mens">
               <label for="size">Sizes</label>
-              <select class="dropdown sizechoice" name="sizetiers">
+              <select class="dropdown sizechoice mens" name="sizetiers">
                 <option value="all">All</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
@@ -71,7 +71,7 @@
             </div>
             <div class="piece mens">
               <legend>Pieces</legend>
-              <select class="dropdown piecechoice" name="piecetypes">
+              <select class="dropdown piecechoice mens" name="piecetypes">
                 <option name="piece" value="all">All</option>
                 <option name="piece" value="top">Tops</option>
                 <option name="piece" value="one">One-Pieces</option>
@@ -141,10 +141,10 @@
           </div>
         </div>
         <div class="storefront womens">
-          <nav class="sidebar menu womens">
+          <nav class="sidebar menu">
             <div class="price womens">
               <label for="price">Price Ranges</label>
-              <select class="pricechoice" name="pricetiers">
+              <select class="dropdown pricechoice womens" name="pricetiers">
                 <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
@@ -153,8 +153,8 @@
             </div>
             <div class="size womens">
               <label for="size">Sizes</label>
-              <select class="sizechoice" name="sizetiers">
-                <option value="all">all</option>
+              <select class="dropdown sizechoice womens" name="sizetiers">
+                <option value="all">All</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
                 <option value="m">M</option>
@@ -165,7 +165,7 @@
             </div>
             <div class="piece womens">
               <legend>Pieces</legend>
-              <select class="piecechoice" name="piecetypes">
+              <select class="dropdown piecechoice womens" name="piecetypes">
                 <option name="piece" value="all">All</option>
                 <option name="piece" value="top">Tops</option>
                 <option name="piece" value="one">One-Pieces</option>
@@ -243,10 +243,10 @@
           </div>
         </div>
         <div class="storefront access">
-          <nav class="sidebar menu access">
+          <nav class="sidebar menu">
             <div class="price access">
               <label for="price">Price Ranges</label>
-              <select class="pricechoice" name="pricetiers">
+              <select class="dropdown pricechoice access" name="pricetiers">
                 <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
@@ -255,7 +255,7 @@
             </div>
             <div class="size access">
               <label for="size">Sizes</label>
-              <select class="sizechoice" name="sizetiers">
+              <select class="dropdown sizechoice access" name="sizetiers">
                 <option value="all">∞</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
@@ -267,7 +267,7 @@
             </div>
             <div class="piece access">
               <legend>Pieces</legend>
-              <select class="piecechoice" name="piecetypes">
+              <select class="dropdown piecechoice access" name="piecetypes">
                 <option name="piece" value="all">All</option>
                 <option name="piece" value="top">Tops</option>
                 <option name="piece" value="one">One-Pieces</option>
