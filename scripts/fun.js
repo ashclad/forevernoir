@@ -200,6 +200,41 @@ function queryFromSelect(elem={}, qparam="", url="") {
   }
 }
 
+function togglePieceList(elemcollection, value, forelem, exception=undefined) {
+  if (TrackedStatus.selection.value == value) {
+    for (var i = 0; i < elemcollection.length; i++) {
+      var haveparent = elemcollection[i].parentElement.className.indexOf(forelem);
+      var havechild = elemcollection[i].children[0].className.indexOf(value);
+      var piecelistdisplay = window.getComputedStyle(elemcollection[i]).getPropertyValue("display");
+      if (piecelistdisplay != "none") {
+        elemcollection[i].style.display = "none";
+      }
+      if (haveparent > -1 && havechild > -1 && value != exception) {
+        elemcollection[i].style.display = "block";
+      }
+    }
+  }
+}
+
+function displayFromSelect(arr, forelem, exceptionfromarr=null) {
+  HTMLTargets.select[forelem].piece.addEventListener("change", function(e) {
+    TrackedStatus.selection = {};
+    TrackedStatus.selection.value = e.target.value;
+
+    if (forelem.indexOf(" ") <= -1 || forelem.indexOf(" ") > 1) {
+      forelem = " " + forelem;
+    }
+
+    for (var i = 0; i < arr.length; i++) {
+      if (exceptionfromarr != null) {
+        togglePieceList(HTMLTargets.piecelist, arr[i], forelem, exceptionfromarr);
+      } else {
+        togglePieceList(HTMLTargets.piecelist, arr[i], forelem, arr[0]);
+      }
+    }
+  });
+}
+
 function removeElem(elem, animate=false, animation=undefined) {
   console.info(removeElem.name + "() initiated.");
   if (animate == false) {
