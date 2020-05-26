@@ -18,10 +18,32 @@ var HTMLTargets = new function() {
   this.storefrontwomens = document.getElementsByClassName("storefront womens");
   this.storefrontaccess = document.getElementsByClassName("storefront access");
   this.aisle = document.getElementsByClassName("aisle");
-  this.select = document.getElementsByClassName("dropdown");
-  this.selectprice = this.select[0];
-  this.selectsize = this.select[1];
-  this.selectpiece = this.select[2];
+  this.selectmens = document.getElementsByClassName("dropdown mens");
+  this.selectwomens = document.getElementsByClassName("dropdown womens");
+  this.selectaccess = document.getElementsByClassName("dropdown access");
+  this.select = {};
+  if (this.selectmens != null) {
+    this.select.mens = {
+      price: this.selectmens[0],
+      size: this.selectmens[1],
+      piece: this.selectmens[2]
+    }
+  }
+  if (this.selectwomens != null) {
+    this.select.womens = {
+      price: this.selectwomens[0],
+      size: this.selectwomens[1],
+      piece: this.selectwomens[2]
+    }
+  }
+  if (this.selectaccess != null) {
+    this.select.access = {
+      price: this.selectaccess[0],
+      size: this.selectaccess[1],
+      piece: this.selectaccess[2]
+    }
+  }
+  this.piecelist = document.getElementsByClassName("piecelist");
 }
 
 if (HTMLTargets.panels[1] != null) {
@@ -151,131 +173,124 @@ window.addEventListener("keydown", function(e) {
 }, {passive: false});
 
 if (HTMLTargets.inventory != null) {
-  var navs = [HTMLTargets.primarylinks, HTMLTargets.patlinks];
+  var navs = {primary: HTMLTargets.primarylinks, tertiary: HTMLTargets.patlinks};
 
-  navs[0][0].addEventListener("click", function() {
+  navs["primary"][0].addEventListener("click", function() {
     altDisplayToggle(HTMLTargets.storefrontmens[0], HTMLTargets.patmenu, "block", "flex");
     TrackedStatus.querystring = "?cat=mens";
-    displayToggle(navs[0][1], true);
-    displayToggle(navs[0][2], true);
+    displayToggle(navs["primary"][1], true);
+    displayToggle(navs["primary"][2], true);
     if (TrackedStatus.clicked == true) {
-      navs[0][0].innerHTML = "Men's";
+      navs["primary"][0].innerHTML = "Men's";
       TrackedStatus.clicked = false;
     } else {
-      navs[0][0].innerHTML = "Back";
+      navs["primary"][0].innerHTML = "Back";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 
-  navs[1][1].addEventListener("click", function() {
+  navs["tertiary"][1].addEventListener("click", function() {
     altDisplayToggle(HTMLTargets.storefrontmens[0], HTMLTargets.primarynav, "block", "flex");
     TrackedStatus.querystring = "?cat=mens";
-    displayToggle(navs[1][0], true);
-    displayToggle(navs[1][2], true);
-    displayToggle(navs[1][3], true);
+    displayToggle(navs["tertiary"][0], true);
+    displayToggle(navs["tertiary"][2], true);
+    displayToggle(navs["tertiary"][3], true);
     if (TrackedStatus.clicked == true) {
-      navs[1][1].style.maxWidth = "25%";
-      navs[1][1].style.margin = "0 0 0 0.5%";
-      navs[1][1].parentElement.style.padding = "5% 0";
+      navs["tertiary"][1].style.maxWidth = "25%";
+      navs["tertiary"][1].style.margin = "0 0 0 0.5%";
+      navs["tertiary"][1].parentElement.style.padding = "5% 0";
       TrackedStatus.clicked = false;
     } else {
-      navs[1][1].style.maxWidth = "33%";
-      navs[1][1].style.margin = "0 auto";
-      navs[1][1].parentElement.style.padding = "3% 0";
+      navs["tertiary"][1].style.maxWidth = "33%";
+      navs["tertiary"][1].style.margin = "0 auto";
+      navs["tertiary"][1].parentElement.style.padding = "3% 0";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 
-  navs[0][1].addEventListener("click", function(e) {
+  navs["primary"][1].addEventListener("click", function(e) {
     altDisplayToggle(HTMLTargets.storefrontwomens[0], HTMLTargets.patmenu, "block", "flex");
     TrackedStatus.querystring = "?cat=womens";
-    displayToggle(navs[0][0], true);
-    displayToggle(navs[0][2], true);
+    displayToggle(navs["primary"][0], true);
+    displayToggle(navs["primary"][2], true);
     if (TrackedStatus.clicked == true) {
-      navs[0][1].innerHTML = "Women's";
+      navs["primary"][1].innerHTML = "Women's";
       TrackedStatus.clicked = false;
     } else {
-      navs[0][1].innerHTML = "Back";
+      navs["primary"][1].innerHTML = "Back";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 
-  navs[1][2].addEventListener("click", function(e) {
+  navs["tertiary"][2].addEventListener("click", function(e) {
     altDisplayToggle(HTMLTargets.storefrontwomens[0], HTMLTargets.primarynav, "block", "flex");
     TrackedStatus.querystring = "?cat=womens";
-    displayToggle(navs[1][0], true);
-    displayToggle(navs[1][1], true);
-    displayToggle(navs[1][3], true);
+    displayToggle(navs["tertiary"][0], true);
+    displayToggle(navs["tertiary"][1], true);
+    displayToggle(navs["tertiary"][3], true);
     if (TrackedStatus.clicked == true) {
-      navs[1][2].style.maxWidth = "25%";
-      navs[1][2].style.margin = "0 0 0 0.5%";
-      navs[1][2].parentElement.style.padding = "5% 0";
+      navs["tertiary"][2].style.maxWidth = "25%";
+      navs["tertiary"][2].style.margin = "0 0 0 0.5%";
+      navs["tertiary"][2].parentElement.style.padding = "5% 0";
       TrackedStatus.clicked = false;
     } else {
-      navs[1][2].style.maxWidth = "33%";
-      navs[1][2].style.margin = "0 auto";
-      navs[1][2].parentElement.style.padding = "3% 0";
+      navs["tertiary"][2].style.maxWidth = "33%";
+      navs["tertiary"][2].style.margin = "0 auto";
+      navs["tertiary"][2].parentElement.style.padding = "3% 0";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 
-  navs[0][2].addEventListener("click", function(e) {
+  navs["primary"][2].addEventListener("click", function(e) {
     altDisplayToggle(HTMLTargets.storefrontaccess[0], HTMLTargets.patmenu, "block", "flex");
     TrackedStatus.querystring = "?cat=access";
-    displayToggle(navs[0][0], true);
-    displayToggle(navs[0][1], true);
+    displayToggle(navs["primary"][0], true);
+    displayToggle(navs["primary"][1], true);
     if (TrackedStatus.clicked == true) {
-      navs[0][2].innerHTML = "Accessories";
+      navs["primary"][2].innerHTML = "Accessories";
       TrackedStatus.clicked = false;
     } else {
-      navs[0][2].innerHTML = "Back";
+      navs["primary"][2].innerHTML = "Back";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 
-  navs[1][3].addEventListener("click", function(e) {
+  navs["tertiary"][3].addEventListener("click", function(e) {
     altDisplayToggle(HTMLTargets.storefrontaccess[0], HTMLTargets.primarynav, "block", "flex");
     TrackedStatus.querystring = "?cat=access";
-    displayToggle(navs[1][0], true);
-    displayToggle(navs[1][1], true);
-    displayToggle(navs[1][2], true);
+    displayToggle(navs["tertiary"][0], true);
+    displayToggle(navs["tertiary"][1], true);
+    displayToggle(navs["tertiary"][2], true);
     if (TrackedStatus.clicked == true) {
-      navs[1][3].style.maxWidth = "25%";
-      navs[1][3].style.margin = "0 0 0 0.5%";
-      navs[1][3].parentElement.style.padding = "5% 0";
+      navs["tertiary"][3].style.maxWidth = "25%";
+      navs["tertiary"][3].style.margin = "0 0 0 0.5%";
+      navs["tertiary"][3].parentElement.style.padding = "5% 0";
       TrackedStatus.clicked = false;
     } else {
-      navs[1][3].style.maxWidth = "33%";
-      navs[1][3].style.margin = "0 auto";
-      navs[1][3].parentElement.style.padding = "3% 0";
+      navs["tertiary"][3].style.maxWidth = "33%";
+      navs["tertiary"][3].style.margin = "0 auto";
+      navs["tertiary"][3].parentElement.style.padding = "3% 0";
       TrackedStatus.clicked = true;
     }
   }, {passive: false});
 }
 
 if (HTMLTargets.inventory != null) {
-  queryFromSelect(HTMLTargets.selectprice, "price");
-  queryFromSelect(HTMLTargets.selectsize, "size");
-  queryFromSelect(HTMLTargets.selectpiece, "piece");
-  if (HTMLTargets.selectpiece != null) {
-    HTMLTargets.selectpiece.addEventListener("change", function(e) {
-      // write a function for code below
-      var menspieces = document.getElementsByClassName("piece mens")[0];
-      if (e.target.value = "top") {
-        //var menlen = menspieces.children.length - 1;
-        //var menarr = new Array(menlen);
-        /*menarr.forEach((item, i) => {
-          item = i + 2;
-        });*/
-        console.log(menspieces.children[2]);
-        for (var i = 0; i < menspieces.children.length; i++) {
-          menspieces.children[i].style.display = "none";
-        }
-        menspieces.children[0].style.display = "block";
-        menspieces.children[1].style.display = "block";
-        menspieces.children[2].style.display = "block";
-      }
-    });
+  var selectprice = [HTMLTargets.select.mens.price, HTMLTargets.select.womens.price, HTMLTargets.select.access.price];
+  var selectsize = [HTMLTargets.select.mens.size, HTMLTargets.select.womens.size, HTMLTargets.select.access.size];
+  var selectpiece = [HTMLTargets.select.mens.piece, HTMLTargets.select.womens.piece, HTMLTargets.select.access.piece];
+  var totals = new Array(3);
+  for (var b = 0; b < totals.length; b++) {
+    queryFromSelect(selectprice[b], "price");
+    queryFromSelect(selectsize[b], "size");
+    queryFromSelect(selectpiece[b], "piece");
+  }
+  var piecearr = ["all", "top", "one", "bottom", "under", "foot"];
+
+  if (HTMLTargets.select != null) {
+    displayFromSelect(piecearr, "mens", piecearr[0]);
+    displayFromSelect(piecearr, "womens", piecearr[0]);
+    displayFromSelect(piecearr, "access", piecearr[0]);
   }
 }
 
