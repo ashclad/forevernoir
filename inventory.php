@@ -79,7 +79,7 @@
                 <option name="piece" value="under">Underclothes</option>
                 <option name="piece" value="foot">Footwear</option>
               </select>
-              <fieldset class="piecelist">
+              <fieldset class="piecelist mens">
                 <legend class="toppiece">Tops</legend>
                 <input type="radio" name="top" value="all">
                 <label for="piece">All</label><br>
@@ -94,14 +94,14 @@
                 <input type="radio" name="top" value="vest">
                 <label for="piece">Vests</label>
               </fieldset>
-              <fieldset class="piecelist">
+              <fieldset class="piecelist mens">
                 <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label>
                 <input type="radio" name="one" value="overall">
                 <label for="piece">Overalls</label>
               </fieldset>
-              <fieldset class="piecelist">
+              <fieldset class="piecelist mens">
                 <legend class="bottompiece">Bottoms</legend>
                 <input type="radio" name="bottom" value="all">
                 <label for="piece">All</label><br>
@@ -112,7 +112,7 @@
                 <input type="radio" name="bottom" value="dtrouser">
                 <label for="piece">Dress Trousers</label>
               </fieldset>
-              <fieldset class="piecelist">
+              <fieldset class="piecelist mens">
                 <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
@@ -121,7 +121,7 @@
                 <input type="radio" name="under" value="brief">
                 <label for="piece">Boxer Briefs</label>
               </fieldset>
-              <fieldset class="piecelist">
+              <fieldset class="piecelist mens">
                 <legend class="footpiece">Footwear</legend>
                 <input type="radio" name="foot" value="all">
                 <label for="piece">All</label><br>
