@@ -44,6 +44,10 @@ var HTMLTargets = new function() {
     }
   }
   this.piecelist = document.getElementsByClassName("piecelist");
+  this.piece = {};
+  this.piece.mens = document.getElementsByClassName("piecelist mens");
+  this.piece.womens = document.getElementsByClassName("piecelist womens");
+  this.piece.access = document.getElementsByClassName("piecelist womens");
 }
 
 
