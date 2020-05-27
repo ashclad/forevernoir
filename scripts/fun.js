@@ -200,6 +200,16 @@ function queryFromSelect(elem={}, qparam="", url="") {
   }
 }
 
+function queryFromRadio(elem={}, qparam="", url="") {
+  if (elem != null) {
+    elem.addEventListener("click", function() {
+      console.log("Radio option has been changed to " + this.value + ".");
+      TrackedStatus.querystring = resolveQuery(TrackedStatus.querystring, qparam, this.value);
+      console.log(TrackedStatus.querystring);
+    });
+  }
+}
+
 function togglePieceList(elemcollection, value, forelem, exception=undefined) {
   if (TrackedStatus.selection.value == value) {
     for (var i = 0; i < elemcollection.length; i++) {
