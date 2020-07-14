@@ -14,28 +14,28 @@ var HTMLTargets = new function() {
   if (this.patmenu != null) {
     this.patlinks = this.patmenu.children;
   }
-  this.storefrontmens = document.getElementsByClassName("storefront mens");
-  this.storefrontwomens = document.getElementsByClassName("storefront womens");
+  this.storefrontunisex = document.getElementsByClassName("storefront unisex");
+  /* this.storefrontwomens = document.getElementsByClassName("storefront womens"); */
   this.storefrontaccess = document.getElementsByClassName("storefront access");
   this.aisle = document.getElementsByClassName("aisle");
-  this.selectmens = document.getElementsByClassName("dropdown mens");
-  this.selectwomens = document.getElementsByClassName("dropdown womens");
+  this.selectunisex = document.getElementsByClassName("dropdown unisex");
+  /* this.selectwomens = document.getElementsByClassName("dropdown womens"); */
   this.selectaccess = document.getElementsByClassName("dropdown access");
   this.select = {};
-  if (this.selectmens != null) {
-    this.select.mens = {
-      price: this.selectmens[0],
-      size: this.selectmens[1],
-      piece: this.selectmens[2]
+  if (this.selectunisex != null) {
+    this.select.unisex = {
+      price: this.selectunisex[0],
+      size: this.selectunisex[1],
+      piece: this.selectunisex[2]
     }
   }
-  if (this.selectwomens != null) {
+  /*if (this.selectwomens != null) {
     this.select.womens = {
       price: this.selectwomens[0],
       size: this.selectwomens[1],
       piece: this.selectwomens[2]
     }
-  }
+  }*/
   if (this.selectaccess != null) {
     this.select.access = {
       price: this.selectaccess[0],
@@ -45,16 +45,16 @@ var HTMLTargets = new function() {
   }
   this.piecelist = document.getElementsByClassName("piecelist");
   this.piece = {};
-  this.piece.mens = document.getElementsByClassName("piecelist mens");
-  this.piece.womens = document.getElementsByClassName("piecelist womens");
-  this.piece.access = document.getElementsByClassName("piecelist womens");
+  this.piece.unisex = document.getElementsByClassName("piecelist unisex");
+  /* this.piece.womens = document.getElementsByClassName("piecelist womens"); */
+  this.piece.access = document.getElementsByClassName("piecelist access");
 }
 
 
 if (HTMLTargets.inventory != null) {
-  var selectprice = [HTMLTargets.select.mens.price, HTMLTargets.select.womens.price, HTMLTargets.select.access.price];
-  var selectsize = [HTMLTargets.select.mens.size, HTMLTargets.select.womens.size, HTMLTargets.select.access.size];
-  var selectpiece = [HTMLTargets.select.mens.piece, HTMLTargets.select.womens.piece, HTMLTargets.select.access.piece];
+  var selectprice = [HTMLTargets.select.unisex.price, /* HTMLTargets.select.womens.price, */HTMLTargets.select.access.price];
+  var selectsize = [HTMLTargets.select.unisex.size, /* HTMLTargets.select.womens.size, */HTMLTargets.select.access.size];
+  var selectpiece = [HTMLTargets.select.unisex.piece, /* HTMLTargets.select.womens.piece, */HTMLTargets.select.access.piece];
 }
 
 if (HTMLTargets.primarylinks != null && HTMLTargets.patlinks != null) {
@@ -96,7 +96,7 @@ if (patchild != null) {
 
 /* initial scripts */
 if (HTMLTargets.inventory != null) {
-  TrackedStatus.querystring = "?cat=mens";
+  TrackedStatus.querystring = "?cat=unisex";
   fetch("shoplist.php" + TrackedStatus.querystring)
   .then((response) => {
     return response.text();
@@ -113,7 +113,7 @@ if (HTMLTargets.inventory != null) {
       addElem(elem, HTMLTargets.aisle[0]);
   });
 
-  TrackedStatus.querystring = "?cat=womens";
+  /* TrackedStatus.querystring = "?cat=womens";
   fetch("shoplist.php" + TrackedStatus.querystring)
   .then((response) => {
     return response.text();
@@ -128,7 +128,7 @@ if (HTMLTargets.inventory != null) {
     return doc;})
     .then((elem) => {
       addElem(elem, HTMLTargets.aisle[1]);
-  });
+  }); */
 
   TrackedStatus.querystring = "?cat=access";
   fetch("shoplist.php" + TrackedStatus.querystring)
@@ -144,7 +144,7 @@ if (HTMLTargets.inventory != null) {
     doc.removeAttribute("ID");
     return doc;})
     .then((elem) => {
-      addElem(elem, HTMLTargets.aisle[2]);
+      addElem(elem, HTMLTargets.aisle[1]);
     });
 } else {
   console.info("Not on inventiry page. No need to append list of shop items.");
@@ -188,14 +188,14 @@ window.addEventListener("keydown", function(e) {
 
 if (HTMLTargets.inventory != null) {
   navs["primary"][0].addEventListener("click", function() {
-    altDisplayToggle(HTMLTargets.storefrontmens[0], HTMLTargets.patmenu, "block", "flex");
-    TrackedStatus.querystring = "?cat=mens";
+    altDisplayToggle(HTMLTargets.storefrontunisex[0], HTMLTargets.patmenu, "block", "flex");
+    TrackedStatus.querystring = "?cat=unisex";
     displayToggle(navs["primary"][1], true);
-    displayToggle(navs["primary"][2], true);
+    /* displayToggle(navs["primary"][2], true); */
     if (TrackedStatus.clicked == true) {
-      navs["primary"][0].innerHTML = "Men's";
-      for (var i = 0; i < HTMLTargets.selectmens.length; i++) {
-        HTMLTargets.selectmens[i].selectedIndex = 0;
+      navs["primary"][0].innerHTML = "Unisex";
+      for (var i = 0; i < HTMLTargets.selectunisex.length; i++) {
+        HTMLTargets.selectunisex[i].selectedIndex = 0;
       }
       for (var j = 0; j < HTMLTargets.piecelist.length; j++) {
         HTMLTargets.piecelist[j].style.display = "none";
@@ -208,17 +208,17 @@ if (HTMLTargets.inventory != null) {
   }, {passive: false});
 
   navs["tertiary"][1].addEventListener("click", function() {
-    altDisplayToggle(HTMLTargets.storefrontmens[0], HTMLTargets.primarynav, "block", "flex");
-    TrackedStatus.querystring = "?cat=mens";
+    altDisplayToggle(HTMLTargets.storefrontunisex[0], HTMLTargets.primarynav, "block", "flex");
+    TrackedStatus.querystring = "?cat=unisex";
     displayToggle(navs["tertiary"][0], true);
     displayToggle(navs["tertiary"][2], true);
-    displayToggle(navs["tertiary"][3], true);
+    /* displayToggle(navs["tertiary"][3], true); */
     if (TrackedStatus.clicked == true) {
       navs["tertiary"][1].style.maxWidth = "25%";
       navs["tertiary"][1].style.margin = "0 0 0 0.5%";
       navs["tertiary"][1].parentElement.style.padding = "5% 0";
-      for (var i = 0; i < HTMLTargets.selectmens.length; i++) {
-        HTMLTargets.selectmens[i].selectedIndex = 0;
+      for (var i = 0; i < HTMLTargets.selectunisex.length; i++) {
+        HTMLTargets.selectunisex[i].selectedIndex = 0;
       }
       for (var j = 0; j < HTMLTargets.piecelist.length; j++) {
         HTMLTargets.piecelist[j].style.display = "none";
@@ -233,14 +233,14 @@ if (HTMLTargets.inventory != null) {
   }, {passive: false});
 
   navs["primary"][1].addEventListener("click", function(e) {
-    altDisplayToggle(HTMLTargets.storefrontwomens[0], HTMLTargets.patmenu, "block", "flex");
-    TrackedStatus.querystring = "?cat=womens";
+    altDisplayToggle(HTMLTargets.storefrontaccess[0], HTMLTargets.patmenu, "block", "flex");
+    TrackedStatus.querystring = "?cat=access";
     displayToggle(navs["primary"][0], true);
-    displayToggle(navs["primary"][2], true);
+    /* displayToggle(navs["primary"][2], true); */
     if (TrackedStatus.clicked == true) {
-      navs["primary"][1].innerHTML = "Women's";
-      for (var i = 0; i < HTMLTargets.selectwomens.length; i++) {
-        HTMLTargets.selectwomens[i].selectedIndex = 0;
+      navs["primary"][1].innerHTML = "Accessories";
+      for (var i = 0; i < HTMLTargets.selectaccess.length; i++) {
+        HTMLTargets.selectaccess[i].selectedIndex = 0;
       }
       for (var j = 0; j < HTMLTargets.piecelist.length; j++) {
         HTMLTargets.piecelist[j].style.display = "none";
@@ -253,17 +253,17 @@ if (HTMLTargets.inventory != null) {
   }, {passive: false});
 
   navs["tertiary"][2].addEventListener("click", function(e) {
-    altDisplayToggle(HTMLTargets.storefrontwomens[0], HTMLTargets.primarynav, "block", "flex");
-    TrackedStatus.querystring = "?cat=womens";
+    altDisplayToggle(HTMLTargets.storefrontaccess[0], HTMLTargets.primarynav, "block", "flex");
+    TrackedStatus.querystring = "?cat=access";
     displayToggle(navs["tertiary"][0], true);
     displayToggle(navs["tertiary"][1], true);
-    displayToggle(navs["tertiary"][3], true);
+    /* displayToggle(navs["tertiary"][3], true); */
     if (TrackedStatus.clicked == true) {
       navs["tertiary"][2].style.maxWidth = "25%";
       navs["tertiary"][2].style.margin = "0 0 0 0.5%";
       navs["tertiary"][2].parentElement.style.padding = "5% 0";
-      for (var i = 0; i < HTMLTargets.selectwomens.length; i++) {
-        HTMLTargets.selectwomens[i].selectedIndex = 0;
+      for (var i = 0; i < HTMLTargets.selectaccess.length; i++) {
+        HTMLTargets.selectaccess[i].selectedIndex = 0;
       }
       for (var j = 0; j < HTMLTargets.piecelist.length; j++) {
         HTMLTargets.piecelist[j].style.display = "none";
@@ -277,7 +277,7 @@ if (HTMLTargets.inventory != null) {
     }
   }, {passive: false});
 
-  navs["primary"][2].addEventListener("click", function(e) {
+  /* navs["primary"][2].addEventListener("click", function(e) {
     altDisplayToggle(HTMLTargets.storefrontaccess[0], HTMLTargets.patmenu, "block", "flex");
     TrackedStatus.querystring = "?cat=access";
     displayToggle(navs["primary"][0], true);
@@ -320,7 +320,7 @@ if (HTMLTargets.inventory != null) {
       navs["tertiary"][3].parentElement.style.padding = "3% 0";
       TrackedStatus.clicked = true;
     }
-  }, {passive: false});
+  }, {passive: false}); */
 }
 
 if (HTMLTargets.inventory != null) {
@@ -333,8 +333,8 @@ if (HTMLTargets.inventory != null) {
   var piecearr = ["all", "top", "one", "bottom", "under", "foot"];
 
   if (HTMLTargets.select != null) {
-    displayFromSelect(piecearr, "mens", piecearr[0]);
-    displayFromSelect(piecearr, "womens", piecearr[0]);
+    displayFromSelect(piecearr, "unisex", piecearr[0]);
+    /* displayFromSelect(piecearr, "womens", piecearr[0]); */
     displayFromSelect(piecearr, "access", piecearr[0]);
   }
 }
