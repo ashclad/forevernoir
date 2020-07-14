@@ -19,8 +19,8 @@
       <a id="cartlnk" class="page" href="_cart.html"><img id="maincart" class="cart" src="assets/cart.png"></a>
       <a id="indexlnk" class="page" href="inventory.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
       <nav class="primarynav">
-        <a id="menslnk" class="opt page">Men's</a>
-        <a id="womenslnk" class="opt page">Women's</a>
+        <a id="unisexlnk" class="opt page">Unisex</a>
+        <!-- <a id="womenslnk" class="opt page">Women's</a> -->
         <a id="accesslnk" class="opt page">Accessories</a>
       </nav>
     </header>
@@ -42,24 +42,24 @@
               <a id="contactlnk" class="opt page" href="_contact.html"><span>Contact Us</span></a>
             </div>
           </nav>
-          <a id="menslnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a>
-          <a id="womenslnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a>
+          <a id="unisexlnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a>
+          <!-- <a id="womenslnksecond" class="opt query" ><img class="pattern" src="assets/cat_men.jpg"></a> -->
           <a id="accesslnksecond" class="opt query"><img class="pattern" src="assets/cat_men.jpg"></a>
         </nav>
-        <div class="storefront mens">
+        <div class="storefront unisex">
           <nav class="sidebar menu">
-            <div class="price mens">
+            <div class="price unisex">
               <label for="price">Price Ranges</label>
-              <select class="dropdown pricechoice mens" name="pricetiers">
+              <select class="dropdown pricechoice unisex" name="pricetiers">
                 <option value="all">∞</option>
                 <option value="floor">$</option>
                 <option value="median">$$</option>
                 <option value="ceiling">$$$</option>
               </select>
             </div>
-            <div class="size mens">
+            <div class="size unisex">
               <label for="size">Sizes</label>
-              <select class="dropdown sizechoice mens" name="sizetiers">
+              <select class="dropdown sizechoice unisex" name="sizetiers">
                 <option value="all">All</option>
                 <option value="t">Tiny</option>
                 <option value="s">S</option>
@@ -69,9 +69,9 @@
                 <option value="xxl">XXL</option>
               </select>
             </div>
-            <div class="piece mens">
+            <div class="piece unisex">
               <legend>Pieces</legend>
-              <select class="dropdown piecechoice mens" name="piecetypes">
+              <select class="dropdown piecechoice unisex" name="piecetypes">
                 <option name="piece" value="all">All</option>
                 <option name="piece" value="top">Tops</option>
                 <option name="piece" value="one">One-Pieces</option>
@@ -79,14 +79,14 @@
                 <option name="piece" value="under">Underclothes</option>
                 <option name="piece" value="foot">Footwear</option>
               </select>
-              <fieldset class="piecelist mens">
+              <fieldset class="piecelist unisex">
                 <legend class="toppiece">Tops</legend>
                 <input type="radio" name="top" value="all">
                 <label for="piece">All</label><br>
                 <input type="radio" name="top" value="tshirt">
-                <label for="piece">T-Shirt</label><br>
+                <label for="piece">T-Shirts</label><br>
                 <input type="radio" name="top" value="ashirt">
-                <label for="piece">A-Shirt</label><br>
+                <label for="piece">A-Shirts</label><br>
                 <input type="radio" name="top" value="dshirt">
                 <label for="piece">Dress Shirts</label><br>
                 <input type="radio" name="top" value="jacket">
@@ -94,14 +94,14 @@
                 <input type="radio" name="top" value="vest">
                 <label for="piece">Vests</label>
               </fieldset>
-              <fieldset class="piecelist mens">
+              <fieldset class="piecelist unisex">
                 <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label>
                 <input type="radio" name="one" value="overall">
                 <label for="piece">Overalls</label>
               </fieldset>
-              <fieldset class="piecelist mens">
+              <fieldset class="piecelist unisex">
                 <legend class="bottompiece">Bottoms</legend>
                 <input type="radio" name="bottom" value="all">
                 <label for="piece">All</label><br>
@@ -112,7 +112,7 @@
                 <input type="radio" name="bottom" value="dtrouser">
                 <label for="piece">Dress Trousers</label>
               </fieldset>
-              <fieldset class="piecelist mens">
+              <fieldset class="piecelist unisex">
                 <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
@@ -121,7 +121,7 @@
                 <input type="radio" name="under" value="brief">
                 <label for="piece">Boxer Briefs</label>
               </fieldset>
-              <fieldset class="piecelist mens">
+              <fieldset class="piecelist unisex">
                 <legend class="footpiece">Footwear</legend>
                 <input type="radio" name="foot" value="all">
                 <label for="piece">All</label><br>
@@ -140,7 +140,7 @@
             <!-- content -->
           </div>
         </div>
-        <div class="storefront womens">
+        <!-- <div class="storefront womens">
           <nav class="sidebar menu">
             <div class="price womens">
               <label for="price">Price Ranges</label>
@@ -239,9 +239,9 @@
             </div>
           </nav>
           <div class="aisle">
-            <!-- content -->
+            sample
           </div>
-        </div>
+        </div> -->
         <div class="storefront access">
           <nav class="sidebar menu">
             <div class="price access">
