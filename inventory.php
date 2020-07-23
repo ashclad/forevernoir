@@ -85,34 +85,40 @@
                 <label for="piece">All</label><br>
                 <input type="radio" name="top" value="tshirt">
                 <label for="piece">T-Shirts</label><br>
-                <input type="radio" name="top" value="ashirt">
+                <!-- <input type="radio" name="top" value="ashirt">
                 <label for="piece">A-Shirts</label><br>
                 <input type="radio" name="top" value="dshirt">
-                <label for="piece">Dress Shirts</label><br>
+                <label for="piece">Dress Shirts</label><br> -->
                 <input type="radio" name="top" value="jacket">
                 <label for="piece">Jackets</label><br>
-                <input type="radio" name="top" value="vest">
-                <label for="piece">Vests</label>
+                <input type="radio" name="top" value="hoodies">
+                <label for="piece">Hoodies</label><br>
+                <input type="radio" name="top" value="drop">
+                <label for="piece">Dropsleeves</label><br>
+                <!-- <input type="radio" name="top" value="vest">
+                <label for="piece">Vests</label> -->
               </fieldset>
-              <fieldset class="piecelist unisex">
+              <!-- <fieldset class="piecelist unisex">
                 <legend class="onepiece">One-Pieces</legend>
                 <input type="radio" name="one" value="all">
                 <label for="piece">All</label>
                 <input type="radio" name="one" value="overall">
                 <label for="piece">Overalls</label>
-              </fieldset>
+              </fieldset> -->
               <fieldset class="piecelist unisex">
                 <legend class="bottompiece">Bottoms</legend>
                 <input type="radio" name="bottom" value="all">
                 <label for="piece">All</label><br>
-                <input type="radio" name="bottom" value="ltrouser">
+                <input type="radio" name="bottom" value="pants">
+                <label for="piece">Pants</label><br>
+                <!-- <input type="radio" name="bottom" value="ltrouser">
                 <label for="piece">Long Trousers</label><br>
                 <input type="radio" name="bottom" value="strouser">
                 <label for="piece">Short Trousers</label><br>
                 <input type="radio" name="bottom" value="dtrouser">
-                <label for="piece">Dress Trousers</label>
+                <label for="piece">Dress Trousers</label> -->
               </fieldset>
-              <fieldset class="piecelist unisex">
+              <!-- <fieldset class="piecelist unisex">
                 <legend class="underpiece">Underclothes</legend>
                 <input type="radio" name="under" value="all">
                 <label for="piece">All</label><br>
@@ -133,6 +139,15 @@
                 <label for="piece">Dress Shoes</label><br>
                 <input type="radio" name="foot" value="sock">
                 <label for="piece">Socks</label>
+              </fieldset> -->
+              <fieldset class="piecelist unisex">
+                <legend class="headpiece">Headwear</legend>
+                <input type="radio" name="head" value="all">
+                <label for="piece">All</label>
+                <input type="radio" name="head" value="beanies">
+                <label for="piece">Beanies</label>
+                <input type="radio" name="head" value="hats">
+                <label for="piece">Hats</label>
               </fieldset>
             </div>
           </nav>
