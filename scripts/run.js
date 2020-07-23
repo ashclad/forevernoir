@@ -324,18 +324,40 @@ if (HTMLTargets.inventory != null) {
 }
 
 if (HTMLTargets.inventory != null) {
-  var totals = new Array(3);
+  var totals = new Array(2);
   for (var b = 0; b < totals.length; b++) {
     queryFromSelect(selectprice[b], "price");
     queryFromSelect(selectsize[b], "size");
     queryFromSelect(selectpiece[b], "piece");
   }
-  var piecearr = ["all", "top", "one", "bottom", "under", "foot"];
+  var piecearr = ["all", "top", "bottom", "head"];
 
   if (HTMLTargets.select != null) {
     displayFromSelect(piecearr, "unisex", piecearr[0]);
     /* displayFromSelect(piecearr, "womens", piecearr[0]); */
     displayFromSelect(piecearr, "access", piecearr[0]);
+  }
+
+  for (var c = 0; c < HTMLTargets.piece.unisex.length; c++) {
+    var unisexpieces = HTMLTargets.piece.unisex
+    if (unisexpieces[c] != null) {
+      for (var d = 0; d < unisexpieces[c].children.length; d++) {
+        if (unisexpieces[c].children[d].tagName == "INPUT") {
+          queryFromRadio(unisexpieces[c].children[d], "type");
+        }
+      }
+    }
+  }
+
+  for (var c = 0; c < HTMLTargets.piece.access.length; c++) {
+    var accesspieces = HTMLTargets.piece.access
+    if (accesspieces[c] != null) {
+      for (var d = 0; d < accesspieces[c].children.length; d++) {
+        if (accesspieces[c].children[d].tagName == "INPUT") {
+          queryFromRadio(accesspieces[c].children[d], "type");
+        }
+      }
+    }
   }
 }
 
