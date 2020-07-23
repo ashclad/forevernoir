@@ -203,9 +203,10 @@ function queryFromSelect(elem={}, qparam="", url="") {
 function queryFromRadio(elem={}, qparam="", url="") {
   if (elem != null) {
     elem.addEventListener("click", function() {
-      console.log("Radio option has been changed to " + this.value + ".");
-      TrackedStatus.querystring = resolveQuery(TrackedStatus.querystring, qparam, this.value);
+      console.log("Radio option has been changed to " + elem.value + ".");
+      TrackedStatus.querystring = resolveQuery(TrackedStatus.querystring, qparam, elem.value);
       console.log(TrackedStatus.querystring);
+      /*console.log(e); */
     });
   }
 }
