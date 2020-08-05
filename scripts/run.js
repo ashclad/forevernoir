@@ -165,16 +165,12 @@ document.documentElement.addEventListener("wheel", function(e) {
   }
 }, {passive: false});
 
-function disableScroll(e) {
+window.addEventListener("scroll", function(e) {
   console.log("Acquiring scroll event information.");
   if (HTMLTargets.home != null) {
     window.scrollTo(0, 0);
     e.preventDefault();
   }
-}
-
-window.addEventListener("scroll", function(e) {
-  disableScroll(e);
 }, {passive: false});
 
 window.addEventListener("keydown", function(e) {
@@ -184,18 +180,11 @@ window.addEventListener("keydown", function(e) {
     console.info("Acquiring keypress event information.");
     TrackedStatus.keying.press = e.key;
 
-    window.removeEventListener("scroll", function(e) {
-        disableScroll(e);
-    }, {passive: false});
+    window.removeEventListener("scroll");
 
     if (HTMLTargets.home != null) {
       arrowSlide(HTMLTargets.panels, "focus", HTMLTargets.logo);
     }
-
-    window.addEventListener("scroll", function(e) {
-      console.log("Acquiring scroll event information.");
-      disableScroll(e);
-    }, {passive: false});
   }
 }, {passive: false});
 
