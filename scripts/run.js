@@ -180,8 +180,6 @@ window.addEventListener("keydown", function(e) {
     console.info("Acquiring keypress event information.");
     TrackedStatus.keying.press = e.key;
 
-    window.removeEventListener("scroll");
-
     if (HTMLTargets.home != null) {
       arrowSlide(HTMLTargets.panels, "focus", HTMLTargets.logo);
     }
