@@ -622,6 +622,7 @@ function switchSlide(elemcollection, exceptionid, refpoint) {
       TrackedStatus.doOffsetX.focus.index = next;
       TrackedStatus.doOffsetX.status = true;
       console.log("Done. Now focusing the element.");
+      console.log(TrackedStatus.doOffsetX.focus.index);
       doOffsetX(slides[0].parentElement, ref);
     } else {
       console.info("Upward direction detected.");
