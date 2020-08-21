@@ -106,8 +106,7 @@ if (HTMLTargets.inventory != null) {
     return text;
   })
   .then((doc) => {
-    doc = doc.getElementById("target");
-    doc.removeAttribute("ID");
+    doc = doc.children;
     return doc;})
     .then((elem) => {
       addElem(elem, HTMLTargets.aisle[0]);
@@ -140,8 +139,7 @@ if (HTMLTargets.inventory != null) {
     return text;
   })
   .then((doc) => {
-    doc = doc.getElementById("target");
-    doc.removeAttribute("ID");
+    doc = doc.children;
     return doc;})
     .then((elem) => {
       addElem(elem, HTMLTargets.aisle[1]);
