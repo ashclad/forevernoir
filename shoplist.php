@@ -3,7 +3,6 @@
 require 'fun.php';
 use fun\apiQuery as queryapi;
 
-$_GET['cat'] = 'unisex';
 $API = parse_ini_file('api/api.ini',true)['API'];
 $shopify = new queryapi();
 $shopify->set_api($API['scheme'],$API['hostname'],$API['endpoint'],$API['username'],$API['password']);
@@ -24,9 +23,11 @@ if ($_GET["cat"] == "unisex") {
   echo "<h1>Unisex Clothing</h1>\n";
   echo "<div>\n";
   foreach ($products as $product) {
+    $newwidth = (int)$product['image']['width'] / 3;
+    $newheight = (int)$product['image']['height'] / 3;
     echo "\t<div id=\"" . $product['id'] . "\" class=\"product " . $product['handle'] . " " . $product['product_type'] . "\">\n";
     echo "\t\t<span>" . $product['title'] . "</span>\n";
-    echo "\t\t<img src=\"" . $product['image']['src'] . "\" alt=\"" . $product['image']['alt'] . "\" />\n";
+    echo "\t\t<img width=\"" . $newwidth . "px\" height=\"" . $newheight . "px\" src=\"" . $product['image']['src'] . "\" alt=\"" . $product['image']['alt'] . "\" />\n";
     echo "\t</div>\n";
   }
   echo "</div>";
