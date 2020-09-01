@@ -356,6 +356,33 @@ footer::after {
   margin: 0 1em 0 1em;
 }
 
+.stock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product{
+  width: 25%;
+  padding: 5%;
+}
+
+.product img {
+  max-width: 100%;
+}
+
+.product .productit {
+  display: block;
+  text-align: center;
+  font-size: 18pt;
+}
+
+.product .productprice {
+  display: block;
+  text-align: center;
+  font-size: 14pt;
+}
+
 /* id-started */
 #mainhead .primarynav > a {
   /* color: var(--ext); */
