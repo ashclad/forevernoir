@@ -36,7 +36,7 @@ if ($_GET["cat"] == "unisex") {
         $pricearr[$x] = $variant['price'];
       }
     }
-    print_r($pricearr);
+    #print_r($pricearr);
     if ((float)$pricearr[0] == (float)$pricearr[count($pricearr) - 1]) {
       echo "\t\t<span class=\"productprice\">$" . $pricearr[0] . "</span>\n";
     } else {
