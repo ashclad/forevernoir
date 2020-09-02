@@ -362,6 +362,10 @@ footer::after {
   justify-content: flex-start;
 }
 
+.stock img {
+  filter: none;
+}
+
 .product{
   width: 25%;
   padding: 5%;
@@ -381,6 +385,18 @@ footer::after {
   display: block;
   text-align: center;
   font-size: 14pt;
+  font-weight: bold;
+}
+
+.product button {
+  background-color: var(--basel);
+  border: solid 2px var(--based);
+  border-radius: 10%;
+  display: block;
+  font-size: 12pt;
+  margin: 3% auto 3% auto;
+  padding: 2%;
+  text-align: center;
 }
 
 /* id-started */
