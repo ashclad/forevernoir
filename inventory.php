@@ -19,7 +19,7 @@
       <a id="cartlnk" class="page" href="_cart.html"><img id="maincart" class="cart" src="assets/cart.png"></a>
       <a id="indexlnk" class="page" href="inventory.html"><img id="mainlogo" class="logo" src="assets/logo.png"></a>
       <nav class="primarynav">
-        <a id="unisexlnk" class="opt page">Unisex</a>
+        <a id="unisexlnk" class="opt page">Clothing</a>
         <!-- <a id="womenslnk" class="opt page">Women's</a> -->
         <a id="accesslnk" class="opt page">Accessories</a>
       </nav>
@@ -92,7 +92,9 @@
                 <label for="piece">Dress Shirts</label><br> -->
                 <input type="radio" name="top" value="jacket">
                 <label for="piece">Jackets</label><br>
-                <input type="radio" name="top" value="hoodies">
+                <input type="radio" name="top" value="sweatshirt">
+                <label for="piece">Sweatshirts</label><br>
+                <input type="radio" name="top" value="hoodie">
                 <label for="piece">Hoodies</label><br>
                 <input type="radio" name="top" value="drop">
                 <label for="piece">Dropsleeves</label>
@@ -145,9 +147,9 @@
                 <legend class="headpiece">Headwear</legend>
                 <input type="radio" name="head" value="all">
                 <label for="piece">All</label>
-                <input type="radio" name="head" value="beanies">
+                <input type="radio" name="head" value="beanie">
                 <label for="piece">Beanies</label>
-                <input type="radio" name="head" value="hats">
+                <input type="radio" name="head" value="hat">
                 <label for="piece">Hats</label>
               </fieldset>
             </div>
@@ -273,7 +275,8 @@
               <label for="size">Sizes</label>
               <select class="dropdown access" name="sizetiers">
                 <option value="all">∞</option>
-                <option value="t">Tiny</option>
+                <option value="xxs">Tiny</option>
+                <option value="xs">Tiny</option>
                 <option value="s">S</option>
                 <option value="m">M</option>
                 <option value="l">L</option>
