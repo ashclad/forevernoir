@@ -195,6 +195,21 @@ function queryFromSelect(elem={}, qparam="", url="") {
     elem.addEventListener("change", function(e) {
       console.log("Option for " + elem.className.split(" ")[0] + " has been changed to " + e.target.value + ".");
       TrackedStatus.querystring = resolveQuery(TrackedStatus.querystring, qparam, e.target.value);
+      removeElem(HTMLTargets.aisle[0].children);
+      fetch("shoplist.php" + TrackedStatus.querystring)
+      .then((response) => {
+        return response.text();
+      })
+      .then((text) => {
+        text = parser.parseFromString(text, 'text/html');
+        return text;
+      })
+      .then((doc) => {
+        doc = doc.children;
+        return doc;})
+        .then((elem) => {
+          addElem(elem, HTMLTargets.aisle[0]);
+      });
       console.log(TrackedStatus.querystring);
     });
   }
