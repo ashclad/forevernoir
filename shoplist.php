@@ -6,6 +6,7 @@ use fun as q;
 // order matters--how to specify priority?
 $_GET["cat"] = "unisex";
 $_GET["piece"] = "top";
+$_GET["type"] = "tshirt";
 #$_GET["size"] = "m";
 #$_GET["price"] = "ceiling";
 $API = parse_ini_file('api/api.ini',TRUE)['API'];
@@ -68,6 +69,7 @@ if (isset($_GET['piece']) and !isset($_GET['type'])) {
   }
 }
 
+// test getSizes function for proper rewriting
 if (isset($_GET['size'])) {
   if (gettype($result) == "array") {
     $result = q\getSizes($_GET['size'], q\allProducts($_GET['cat']));

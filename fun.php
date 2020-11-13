@@ -215,31 +215,29 @@ function getPieces($what, $pre=allProducts) {
   function top() {
     global $shopify;
     $output = [];
-    if (!isset($_GET['type'])) {
-      $shopify->query("collections/168202535009/products.json");
-      $shirts = $shopify->get();
-      $shirts = $shirts['products'];
-      foreach ($shirts as $shirt) {
-        array_push($output, $shirt);
-      }
-      $shopify->query("collections/168202895457/products.json");
-      $jackets = $shopify->get();
-      $jackets = $jackets['products'];
-      foreach ($jackets as $jacket) {
-        array_push($output, $jacket);
-      }
-      $shopify->query("collections/168202698849/products.json");
-      $hoodies = $shopify->get();
-      $hoodies = $hoodies['products'];
-      foreach ($hoodies as $hoodie) {
-        array_push($output, $hoodie);
-      }
-      $shopify->query("collections/168202666081/products.json");
-      $sleeves = $shopify->get();
-      $sleeves = $sleeves['products'];
-      foreach ($sleeves as $sleeve) {
-        array_push($output, $sleeve);
-      }
+    $shopify->query("collections/168202535009/products.json");
+    $shirts = $shopify->get();
+    $shirts = $shirts['products'];
+    foreach ($shirts as $shirt) {
+      array_push($output, $shirt);
+    }
+    $shopify->query("collections/168202895457/products.json");
+    $jackets = $shopify->get();
+    $jackets = $jackets['products'];
+    foreach ($jackets as $jacket) {
+      array_push($output, $jacket);
+    }
+    $shopify->query("collections/168202698849/products.json");
+    $hoodies = $shopify->get();
+    $hoodies = $hoodies['products'];
+    foreach ($hoodies as $hoodie) {
+      array_push($output, $hoodie);
+    }
+    $shopify->query("collections/168202666081/products.json");
+    $sleeves = $shopify->get();
+    $sleeves = $sleeves['products'];
+    foreach ($sleeves as $sleeve) {
+      array_push($output, $sleeve);
     }
 
     return $output;
@@ -285,7 +283,7 @@ function getPieces($what, $pre=allProducts) {
     return $output;
   }
 
-  function all() {
+  function pieceall() {
     global $shopify;
     if (isset($_GET['type'])) {
       unset($_GET['type']);
@@ -309,7 +307,7 @@ function getPieces($what, $pre=allProducts) {
   $optmatrix = [["top",top()],
   ["bottom",bottom()],
   ["head",head()],
-  ["all",all()]];
+  ["all",pieceall()]];
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0) {
@@ -616,21 +614,23 @@ function getPrices($whatprice, $pre=getSizes) {
 }
 
 function getTops($whattop, $pre=getPieces) {
+  global $shopify;
   if (is_callable($pre)) {
     $pre = $pre();
   }
   $output = ["run" => "started"];
   $output["status"] = null;
-  $available_tops = ["tshirt","drop","sweatshirt","hoodie","jacket"];
 
   function shirts($type) {
+    global $shopify;
+    $output = [];
     if (gettype($type) == "string") {
-      if ($type == $available_tops[0]) {
-        $shopify->query("collections/168202535009.json");
+      if ($type == "tshirt") {
+        $shopify->query("collections/168202535009/products.json");
         $output = $shopify->get();
         $output = $output['products'];
-      } else if ($type == $available_tops[1]) {
-        $shopify->query("collections/168202666081.json");
+      } else if ($type == "drop") {
+        $shopify->query("collections/168202666081/products.json");
         $output = $shopify->get();
         $output = $output['products'];
       }
@@ -640,17 +640,20 @@ function getTops($whattop, $pre=getPieces) {
   }
 
   function coldies($type) {
+    global $shopify;
+    $output = [];
     if (gettype($type) == "string") {
-      if ($type == $available_tops[2]) {
-        $shopify->query(); // see Shopify API dox for proper query string
+      /* if ($type == "sweatshirt") {
+        $shopify->query();
         $output = $shopify->get();
         $output = $output['products'];
-      } else if ($type == $available_tops[3]) {
-        $shopify->query("collections/168202698849.json");
+      } else */
+      if ($type == "hoodie") {
+        $shopify->query("collections/168202698849/products.json");
         $output = $shopify->get();
         $output = $output['products'];
-      } else if ($type == $available_tops[4]) {
-        $shopify->query("collections/168202895457.json");
+      } else if ($type == "jacket") {
+        $shopify->query("collections/168202895457/products.json");
         $output = $shopify->get();
         $output = $output['products'];
       }
@@ -659,7 +662,9 @@ function getTops($whattop, $pre=getPieces) {
     return $output;
   }
 
-  function all() {
+  function typeall() {
+    global $whattop;
+    $available_tops = ["tshirt","drop","sweatshirt","hoodie","jacket"];
     if (gettype($whattop) == "string") {
       $output = [];
       $result = [];
@@ -685,14 +690,14 @@ function getTops($whattop, $pre=getPieces) {
       ["sweatshirt",coldies($whattop)],
       ["hoodie",coldies($whattop)],
       ["jacket",coldies($whattop)],
-      ["all",all]];
+      ["all",typeall()]];
   }
 
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0 and $_GET['piece'] == "top") {
       foreach ($optmatrix as list($txt, $func)) {
-        $output = doQueryValues($func, 'type', $txt, $optmatrix);
+        $output = doQueryValues('type', $optmatrix, $whattop);
       }
     } else {
       $output['status'] = "unresponsive";
