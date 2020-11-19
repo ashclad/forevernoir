@@ -285,9 +285,6 @@ function getPieces($what, $pre=allProducts) {
 
   function pieceall() {
     global $shopify;
-    if (isset($_GET['type'])) {
-      unset($_GET['type']);
-    }
     $output = [];
     $top = top();
     foreach ($top as $ontop) {
@@ -311,9 +308,7 @@ function getPieces($what, $pre=allProducts) {
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0) {
-      foreach ($optmatrix as list($txt, $func)) {
-        $output = doQueryValues('piece', $optmatrix, $what);
-      }
+      $output = doQueryValues('piece', $optmatrix, $what);
     } else {
       $output['status'] = "unresponsive";
       $output['run'] = "stopped";
@@ -330,151 +325,131 @@ function getPieces($what, $pre=allProducts) {
   return $stock;
 }
 
-function getSizes($what, $pre=getPieces) {
+function getSizes($whatsize, $pre) {
   if (is_callable($pre)) {
     $pre = $pre();
   }
   $output = ["run" => "started"];
   $output["status"] = null;
-  $available_sizes = ["s","m","l","xl","xxl"];
+  // $available_sizes = ["s","m","l","xl","xxl"];
 
-  function small() {
-    global $pre;
+  /* change internals of these subfunctions to compare
+  if a matching variant from all products matches id of
+  a product from query-narrowed results */
+  function small($input) {
+    global $whatsize;
     $output = [];
-    if (gettype($pre) == "array") {
-      foreach ($pre as &$product) {
+    if (gettype($input) == "array") {
+      foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
-          if ($product['variants'][$i]['option1'] != $available_sizes[0]) {
-            unset($product['variants'][$i]);
-          }
-          if ($product['variants'][$i]['option1'] == $available_sizes[0]) {
-            array_push($output, $product);
+          if ($product['variants'][$i]['option1'] == "s") {
+            array_push($output, $product['variants'][$i]);
           }
         }
       }
-      unset($product);
 
-      foreach ($output as &$out) {
-        $newvariants = rekey($out['variants']);
-        $out['variants'] = $newvariants;
-      }
-      unset($out);
+      // foreach ($output as &$out) {
+      //   $newvariants = rekey($out['variants']);
+      //   $out['variants'] = $newvariants;
+      // }
+      // unset($out);
     } else {
       die();
     }
     return $output;
   }
 
-  function medium() {
-    global $pre;
+  function medium($input) {
+    global $whatsize;
     $output = [];
-    if (gettype($pre) == "array") {
-      foreach ($pre as &$product) {
+    if (gettype($input) == "array") {
+      foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
-          if ($product['variants'][$i]['option1'] != $available_sizes[1]) {
-            unset($product['variants'][$i]);
-          }
-          if ($product['variants'][$i]['option1'] == $available_sizes[1]) {
-            array_push($output, $product);
+          if ($product['variants'][$i]['option1'] == "medium") {
+            array_push($output, $product['variants'][$i]);
           }
         }
       }
-      unset($product);
 
-      foreach ($output as &$out) {
-        $newvariants = rekey($out['variants']);
-        $out['variants'] = $newvariants;
-      }
-      unset($out);
+      // foreach ($output as &$out) {
+      //   $newvariants = rekey($out['variants']);
+      //   $out['variants'] = $newvariants;
+      // }
+      // unset($out);
     } else {
       die();
     }
     return $output;
   }
 
-  function big() {
-    global $pre;
-    if ($_GET['size'] == $available_sizes[2] and gettype($pre) == "array") {
-      foreach ($pre as &$product) {
+  function big($input) {
+    global $whatsize;
+    if ($whatsize == "l" and gettype($input) == "array") {
+      foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
-          if ($product['variants'][$i]['option1'] != $available_sizes[2]) {
-            unset($product['variants'][$i]);
+          if ($product['variants'][$i]['option1'] == "l") {
+            array_push($output, $product['variants'][$i]);
           }
-          if ($product['variants'][$i]['option1'] == $available_sizes[2]) {
+        }
+      }
+
+      // foreach ($output as &$out) {
+      //   $newvariants = rekey($out['variants']);
+      //   $out['variants'] = $newvariants;
+      // }
+      // unset($out);
+    } else if ($whatsize == "xl" and gettype($input) == "array") {
+      foreach ($input as $product) {
+        for ($i = 0; $i < count($product['variants']); $i++) {
+          if ($product['variants'][$i]['option1'] == "xl") {
+            array_push($output, $product['variants'][$i]);
+          }
+        }
+      }
+
+      // foreach ($output as &$out) {
+      //   $newvariants = rekey($out['variants']);
+      //   $out['variants'] = $newvariants;
+      // }
+      // unset($out);
+    } else if ($whatsize == "xxl" and gettype($input) == "array") {
+      foreach ($input as $product) {
+        for ($i = 0; $i < count($product['variants']); $i++) {
+          if ($product['variants'][$i]['option1'] == "xxl") {
             array_push($output, $product);
           }
         }
       }
-      unset($product);
 
-      foreach ($output as &$out) {
-        $newvariants = rekey($out['variants']);
-        $out['variants'] = $newvariants;
-      }
-      unset($out);
-    } else if ($_GET['size'] == $available_sizes[3] and gettype($pre) == "array") {
-      foreach ($pre as &$product) {
-        for ($i = 0; $i < count($product['variants']); $i++) {
-          if ($product['variants'][$i]['option1'] != $available_sizes[3]) {
-            unset($product['variants'][$i]);
-          }
-          if ($product['variants'][$i]['option1'] == $available_sizes[3]) {
-            array_push($output, $product);
-          }
-        }
-      }
-      unset($product);
-
-      foreach ($output as &$out) {
-        $newvariants = rekey($out['variants']);
-        $out['variants'] = $newvariants;
-      }
-      unset($out);
-    } else if ($_GET['size'] == $available_sizes[4] and gettype($pre) == "array") {
-      foreach ($pre as &$product) {
-        for ($i = 0; $i < count($product['variants']); $i++) {
-          if ($product['variants'][$i]['option1'] != $available_sizes[4]) {
-            unset($product['variants'][$i]);
-          }
-          if ($product['variants'][$i]['option1'] == $available_sizes[4]) {
-            array_push($output, $product);
-          }
-        }
-      }
-      unset($product);
-
-      foreach ($output as &$out) {
-        $newvariants = rekey($out['variants']);
-        $out['variants'] = $newvariants;
-      }
-      unset($out);
+      // foreach ($output as &$out) {
+      //   $newvariants = rekey($out['variants']);
+      //   $out['variants'] = $newvariants;
+      // }
+      // unset($out);
     }
     return $output;
   }
 
-  function allsizes() {
-    global $pre;
+  function allsizes($input) {
     $output = [];
-    if (gettype($pre) == "array") {
-      $output = $pre;
+    if (gettype($input) == "array") {
+      $output = $input;
     } else {
       die();
     }
     return $output;
   }
 
-  $optmatrix = [["s",small()],
-  ["m",medium()],
-  ["l",big()],
-  ["xl",big()],
-  ["xxl",big()],
-  ["all",allsizes()]];
+  $optmatrix = [["s",small($pre)],
+  ["m",medium($pre)],
+  ["l",big($pre)],
+  ["xl",big($pre)],
+  ["xxl",big($pre)],
+  ["all",allsizes($pre)]];
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0) {
-      foreach ($optmatrix as list($txt, $func)) {
-        $output = doQueryValues('piece', $optmatrix, $what);
-      }
+      $output = doQueryValues('size', $optmatrix, $whatsize);
     } else {
       $output['status'] = "unresponsive";
       $output['run'] = "stopped";
@@ -629,6 +604,7 @@ function getTops($whattop, $pre=getPieces) {
         $shopify->query("collections/168202535009/products.json");
         $output = $shopify->get();
         $output = $output['products'];
+        #print_r($output);
       } else if ($type == "drop") {
         $shopify->query("collections/168202666081/products.json");
         $output = $shopify->get();
@@ -693,12 +669,9 @@ function getTops($whattop, $pre=getPieces) {
       ["all",typeall()]];
   }
 
-
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0 and $_GET['piece'] == "top") {
-      foreach ($optmatrix as list($txt, $func)) {
-        $output = doQueryValues('type', $optmatrix, $whattop);
-      }
+      $output = doQueryValues('type', $optmatrix, $whattop);
     } else {
       $output['status'] = "unresponsive";
       $output['run'] = "stopped";
