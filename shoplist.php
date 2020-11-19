@@ -7,7 +7,7 @@ use fun as q;
 $_GET["cat"] = "unisex";
 $_GET["piece"] = "top";
 $_GET["type"] = "tshirt";
-#$_GET["size"] = "m";
+$_GET["size"] = "s";
 #$_GET["price"] = "ceiling";
 $API = parse_ini_file('api/api.ini',TRUE)['API'];
 $shopify = new q\apiQuery();
@@ -69,9 +69,9 @@ if (isset($_GET['piece']) and !isset($_GET['type'])) {
   }
 }
 
-// test getSizes function for proper rewriting
 if (isset($_GET['size'])) {
   if (gettype($result) == "array") {
+    #print_r($result);
     $result = q\getSizes($_GET['size'], q\allProducts($_GET['cat']));
   }
 }
