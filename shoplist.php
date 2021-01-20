@@ -8,7 +8,7 @@ $_GET["cat"] = "unisex";
 $_GET["piece"] = "top";
 $_GET["type"] = "tshirt";
 $_GET["size"] = "s";
-#$_GET["price"] = "ceiling";
+$_GET["price"] = "ceiling";
 $API = parse_ini_file('api/api.ini',TRUE)['API'];
 $shopify = new q\apiQuery();
 $shopify->set_api($API['scheme'],$API['hostname'],$API['endpoint'],$API['username'],$API['password']);
@@ -71,17 +71,18 @@ if (isset($_GET['piece']) and !isset($_GET['type'])) {
 
 if (isset($_GET['size'])) {
   if (gettype($result) == "array") {
-    #print_r($result);
-    $result = q\getSizes($_GET['size'], q\allProducts($_GET['cat']));
+    $result = q\getSizes($_GET['size'], q\allProducts($_GET['cat']), $result);
   }
 }
 
-print_r($result);
+print_r($result[0]);
 
 if (isset($_GET['price'])) {
   if (gettype($result) == "array") {
-    $result = q\getPrices($result);
+    $result = q\getPrices($_GET['price'], $result);
   }
 }
+
+#print_r($result[0]);
 
 ?>

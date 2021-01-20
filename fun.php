@@ -325,7 +325,7 @@ function getPieces($what, $pre=allProducts) {
   return $stock;
 }
 
-function getSizes($whatsize, $pre) {
+function getSizes($whatsize, $pre, $comparon) {
   if (is_callable($pre)) {
     $pre = $pre();
   }
@@ -336,96 +336,120 @@ function getSizes($whatsize, $pre) {
   /* change internals of these subfunctions to compare
   if a matching variant from all products matches id of
   a product from query-narrowed results */
-  function small($input) {
+  function small($input, $comparator) {
     global $whatsize;
     $output = [];
+    $newarray = [];
     if (gettype($input) == "array") {
       foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
           if ($product['variants'][$i]['option1'] == "s") {
-            array_push($output, $product['variants'][$i]);
+            array_push($newarray, $product);
           }
         }
       }
 
-      // foreach ($output as &$out) {
-      //   $newvariants = rekey($out['variants']);
-      //   $out['variants'] = $newvariants;
-      // }
-      // unset($out);
+      foreach ($newarray as $arritem) {
+        for ($i = 0; $i < count($arritem['variants']); $i++) {
+          for ($b = 0; $b < count($comparator); $b++) {
+            if ($arritem['variants'][$i]['product_id'] == $comparator[$b]['id']) {
+              array_push($output, $arritem);
+            }
+          }
+        }
+      }
     } else {
       die();
     }
     return $output;
   }
 
-  function medium($input) {
+  function medium($input, $comparator) {
     global $whatsize;
     $output = [];
+    $newarray = [];
     if (gettype($input) == "array") {
       foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
           if ($product['variants'][$i]['option1'] == "medium") {
-            array_push($output, $product['variants'][$i]);
+            array_push($newarray, $product);
           }
         }
       }
 
-      // foreach ($output as &$out) {
-      //   $newvariants = rekey($out['variants']);
-      //   $out['variants'] = $newvariants;
-      // }
-      // unset($out);
+      foreach ($newarray as $arritem) {
+        for ($i = 0; $i < count($arritem['variants']); $i++) {
+          for ($b = 0; $b < count($comparator); $b++) {
+            if ($arritem['variants'][$i]['product_id'] == $comparator[$b]['id']) {
+              array_push($output, $arritem);
+            }
+          }
+        }
+      }
     } else {
       die();
     }
     return $output;
   }
 
-  function big($input) {
+  function big($input, $comparator) {
     global $whatsize;
+    $output = [];
+    $newarray = [];
     if ($whatsize == "l" and gettype($input) == "array") {
       foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
           if ($product['variants'][$i]['option1'] == "l") {
-            array_push($output, $product['variants'][$i]);
+            array_push($newarray, $product);
           }
         }
       }
 
-      // foreach ($output as &$out) {
-      //   $newvariants = rekey($out['variants']);
-      //   $out['variants'] = $newvariants;
-      // }
-      // unset($out);
+      foreach ($newarray as $arritem) {
+        for ($i = 0; $i < count($arritem['variants']); $i++) {
+          for ($b = 0; $b < count($comparator); $b++) {
+            if ($arritem['variants'][$i]['product_id'] == $comparator[$b]['id']) {
+              array_push($output, $arritem);
+            }
+          }
+        }
+      }
     } else if ($whatsize == "xl" and gettype($input) == "array") {
       foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
           if ($product['variants'][$i]['option1'] == "xl") {
-            array_push($output, $product['variants'][$i]);
+            array_push($newarray, $product);
           }
         }
       }
 
-      // foreach ($output as &$out) {
-      //   $newvariants = rekey($out['variants']);
-      //   $out['variants'] = $newvariants;
-      // }
-      // unset($out);
+      foreach ($newarray as $arritem) {
+        for ($i = 0; $i < count($arritem['variants']); $i++) {
+          for ($b = 0; $b < count($comparator); $b++) {
+            if ($arritem['variants'][$i]['product_id'] == $comparator[$b]['id']) {
+              array_push($output, $arritem);
+            }
+          }
+        }
+      }
     } else if ($whatsize == "xxl" and gettype($input) == "array") {
       foreach ($input as $product) {
         for ($i = 0; $i < count($product['variants']); $i++) {
           if ($product['variants'][$i]['option1'] == "xxl") {
-            array_push($output, $product);
+            array_push($newarray, $product);
           }
         }
       }
 
-      // foreach ($output as &$out) {
-      //   $newvariants = rekey($out['variants']);
-      //   $out['variants'] = $newvariants;
-      // }
-      // unset($out);
+      foreach ($newarray as $arritem) {
+        for ($i = 0; $i < count($arritem['variants']); $i++) {
+          for ($b = 0; $b < count($comparator); $b++) {
+            if ($arritem['variants'][$i]['product_id'] == $comparator[$b]['id']) {
+              array_push($output, $arritem);
+            }
+          }
+        }
+      }
     }
     return $output;
   }
@@ -440,12 +464,12 @@ function getSizes($whatsize, $pre) {
     return $output;
   }
 
-  $optmatrix = [["s",small($pre)],
-  ["m",medium($pre)],
-  ["l",big($pre)],
-  ["xl",big($pre)],
-  ["xxl",big($pre)],
-  ["all",allsizes($pre)]];
+  $optmatrix = [["s",small($pre, $comparon)],
+  ["m",medium($pre, $comparon)],
+  ["l",big($pre, $comparon)],
+  ["xl",big($pre, $comparon)],
+  ["xxl",big($pre, $comparon)],
+  ["all",allsizes($pre, $comparon)]];
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0) {
@@ -473,105 +497,19 @@ function getPrices($whatprice, $pre=getSizes) {
   $output = ["run" => "started"];
   $output["status"] = null;
 
-  $shopify->query("products.json");
-  $stock = $shopify->get();
-  $stock = $stock['products'];
-  $prices = [];
-  $sumprice = 0;
-
-  foreach ($stock as $item) {
-    for ($i = 0; $i < count($item['variants']); $i++) {
-      $sumprice += (float)$item['variants'][$i]['price'];
-      array_push($prices, (float)$item['variants'][$i]['price']);
-    }
-  }
-
-  sort($prices);
-  $avgprice = $sumprice / count($prices);
-  if (count($prices) & 1) {
-    $index = (count($prices) / 2)-1;
-    $medianprice = $prices[$index];
-  } else {
-    $flooredindex = floor((count($prices) / 2)-1);
-    $medianprice = ($prices[$flooredindex-1] + $prices[$flooredindex]) / 2;
-  }
-  $step = abs($avgprice - $medianprice);
-  $stepwise = $sumprice / abs($avgprice - $medianprice);
-  if ($step == 0 or ($stepwise & 1)) {
-    $step = $sumprice / 2;
-  } else if ($step > 0 and !($stepwise & 1)) {
-    $step = $sumprice / 3;
-  }
-
-  function pricestimate($type, $maxprice=null) {
-    if (gettype($type) == "string") {
-      if ($type == "floor") {
-        if ($maxprice == null) {
-          if ($stepwise & 1) {
-            $maxprice = $step / 2;
-          } else {
-            $maxprice = $step;
-          }
-        } else if (gettype($maxprice) != "double") {
-          $maxprice = (float)$maxprice;
-        }
-      } else if ($type == "mid") {
-        if ($maxprice == null) {
-          if ($stepwise & 1) {
-            $maxprice = $step + ($step / 2);
-          } else {
-            $maxprice = $step * 2;
-          }
-         } else if (gettype($maxprice) != "double") {
-           $maxprice = (float)$maxprice;
-         }
-      } else if ($type == "ceiling") {
-        if ($maxprice == null) {
-          if ($stepwise & 1) {
-            $maxprice = $step * 2;
-          } else {
-            $maxprice = $step * 3;
-          }
-        } else if (gettype($maxprice) != "double") {
-          $maxprice = (float)$maxprice;
-        }
-      }
-    }
-
-    $output = [];
-    if (gettype($pre) == "array") {
-      foreach ($pre as &$product) {
-        for ($i = 0; $i < count($product['variants']); $i++) {
-          if ((float)$product['variants'][$i]['price'] <= $maxprice) {
-            array_push($output, $product);
-          } else {
-            unset($product);
-          }
-        }
-      }
-    }
-
-    return $output;
-  }
-
-  function all() {
-    $output = array_merge(pricestimate("floor"), pricestimate("mid"), pricestimate("ceiling"));
-    return $output;
-  }
+  // rewrite functions
 
   if (gettype($whatprice) == "string") {
     $optmatrix = [["floor",pricestimate($whatprice)],
       ["mid",pricestimate($whatprice)],
       ["ceiling",pricestimate($whatprice)],
-      ["all",all]]; // 2-dimensional array
+      ["all",all()]]; // 2-dimensional array
   }
 
 
   if (gettype($pre) == "array" and $output['run'] == "started") {
     if (count($pre) > 0) {
-      foreach ($optmatrix as list($txt, $func)) {
-        $output = doQueryValues($func, 'piece', $txt, $optmatrix);
-      }
+      $output = doQueryValues('price', $optmatrix, $whatprice);
     } else {
       $output['status'] = "unresponsive";
       $output['run'] = "stopped";
